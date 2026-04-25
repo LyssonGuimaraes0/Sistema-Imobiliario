@@ -1,0 +1,15 @@
+{
+    "name": "lysso/imobiliaria-fa",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alysson Andrade",
+            "email": "alyssonandrade186@gmail.com"
+        }
+    ],
+    "require": {}
+}
