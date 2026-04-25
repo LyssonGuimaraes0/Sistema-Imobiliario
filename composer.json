@@ -2,7 +2,7 @@
     "name": "lysso/imobiliaria-fa",
     "autoload": {
         "psr-4": {
-            "app\\": "app"
+            "app\\": "app/"
         }
     },
     "authors": [
@@ -11,5 +11,7 @@
             "email": "alyssonandrade186@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
