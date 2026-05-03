@@ -1,4 +1,4 @@
-# Sistema de Imobiliaria - Francisco Alexandre
+# Sistema de Imobiliario
 
 ## 📌 Descrição
 Sistema para cadastro e listagem de imóveis.
@@ -18,4 +18,5 @@ Sistema para cadastro e listagem de imóveis.
 ## 📷 Funcionalidades
 - Cadastro de imóveis
 - Filtro por preço/localização
+- Sistema de Gerenciamento de conteúdo
 - Upload de imagens
