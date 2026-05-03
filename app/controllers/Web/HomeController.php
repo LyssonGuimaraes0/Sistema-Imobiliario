@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\Web;
 
 
 class HomeController{
-    public function Home(){
+    public function index(){
         require_once VIEW_PATH . "\home.php";
     }
 }
