@@ -1,9 +1,9 @@
 <?php
-
-function loadRouter(string $controller, string $action)
+//Sistema de que separa rotas
+function loadRouter(string $type,string $controller, string $action)
 {
     try {
-        $controllerNameSpace = "app\\controllers\\{$controller}";
+        $controllerNameSpace = "app\\controllers\\{$type}\\{$controller}";
 
         if (!class_exists($controllerNameSpace)) {
             throw new Exception("controller não encontrado");
@@ -22,9 +22,22 @@ function loadRouter(string $controller, string $action)
     }
 }
 
+//Função que realiza a separação de WEB e
+function web($controller, $action) {
+    return fn() => loadRouter('Web', $controller, $action);
+}
+
+function api($controller, $action) {
+    return fn() => loadRouter('Api', $controller, $action);
+}
+
 $router = [
     'GET' => [
-        '/' =>  fn() => loadRouter('HomeController', 'Home'),
+        '/' => web('HomeController', 'index'),
+        '/catalog' => web('CatalogController', 'index'),
+
+        //Sessão de Chamadas API GET
+        '/api/imoveis' => api('ImoveisApiController','index')
     ],
     'POST' => [],
 
