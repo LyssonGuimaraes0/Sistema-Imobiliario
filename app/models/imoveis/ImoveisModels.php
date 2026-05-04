@@ -26,10 +26,20 @@ class ImoveisModels
 
 
 
-    /*     public function getTotalImoveis($offset){
+   public function getImoveis($offset,$limit){
         $conn = Database::connect();
         //Preparação do SQL
-        $sql = "SELECT * FROM imovel limit 15 offset {$offset}";
+        $sql = "SELECT i.nome_imovel,
+                i.dimensao,
+                c.quarto,
+                c.bunheiro,
+                c.sala_de_estar,
+                c.suit,
+                v.preco
+                FROM imovel AS i
+                LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+                LEFT JOIN  valor AS v ON i.id = v.fk_imovel
+                LIMIT {$limit} offset {$offset}";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -38,5 +48,5 @@ class ImoveisModels
 
         return $dados;
     
-    } */
+    } 
 }
