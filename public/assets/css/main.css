@@ -1,0 +1,19 @@
+@import './card.css';
+
+
+/*Configurações Root*/
+
+
+h3 {
+    font-size: 24px;
+    margin: 5px 0;
+}
+
+ul {
+    list-style: none;
+}
+
+span {
+    margin: 5px 0;
+    color: #788896;
+}
