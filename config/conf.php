@@ -30,6 +30,12 @@ define('PUBLIC_PATH', BASE_PATH . '/public');
 // Configurações Subpasta
 
 define('VIEW_PATH', APP_PATH . '/view');
+define('COMPONENTS_PATH', VIEW_PATH . '/components');
+define('ASSETS_PATH', PUBLIC_PATH . '/assets');
+
+//Caminho URL
+define('BASE_URL', '/trabalhos/imobiliaria/public');
+define('IMAGEM_URL', '/trabalhos/imobiliaria/public/assets/images');
 
 
 

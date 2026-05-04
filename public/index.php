@@ -21,6 +21,6 @@ $router[$request][$uri]();
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<?php include(VIEW_PATH . "/include/head.php") ?>
+<?php include(VIEW_PATH . "/components/head.php") ?>
 
 </html>
