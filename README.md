@@ -16,13 +16,13 @@ Aplicação web desenvolvida para gerenciamento e exibição de imóveis, permit
 4. Rodar o projeto localmente
 
 ## 📷 Funcionalidades
-🏡 - Cadastro e gerenciamento de imóveis (em evolução)
-🔎 - Sistema de busca com filtros dinâmicos (preço, localização, etc.)
-⚡ - Renderização assíncrona com AJAX (sem reload de página)
-🖼️ - Upload e manipulação de imagens
-📇 - Exibição de dados do proprietário (cartão de contato)
-📄 - Paginação dinâmica no front-end
-🔗 - API REST própria para comunicação entre front e back
+- Cadastro e gerenciamento de imóveis (em evolução)
+- Sistema de busca com filtros dinâmicos (preço, localização, etc.)
+- Renderização assíncrona com AJAX (sem reload de página)
+- Upload e manipulação de imagens
+- Exibição de dados do proprietário (cartão de contato)
+- Paginação dinâmica no front-end
+- API REST própria para comunicação entre front e back
 
 🧠 Decisões Técnicas
 - Estrutura baseada em MVC, separando regras de negócio, controle e apresentação
