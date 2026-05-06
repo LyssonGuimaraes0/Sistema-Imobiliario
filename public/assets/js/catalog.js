@@ -2,14 +2,19 @@ import { formatTextForMoney } from "./utils/format.js";
 import { request } from "./service/ajax.js";
 
 
+
 //Coleta de dados de Páginação na primeira recarga
+
+const queryParams = window.location.search;
+
 
 let totalPaginas = 0;
 //Ver url e busca informação de page, caso n tenha torna pagina 1
 const params = new URLSearchParams(window.location.search);
 let paginaAtual = parseInt(params.get('page')) || 1;
 
-request('http://localhost/trabalhos/imobiliaria/api/imoveis')
+
+request('http://localhost/trabalhos/imobiliaria/api/imoveis/'+ queryParams)
     .then(response => {
         totalPaginas = response.data.pagination.total_paginas;
 
@@ -20,8 +25,11 @@ request('http://localhost/trabalhos/imobiliaria/api/imoveis')
 
 
 //Segunda recarga da Página atraves de clique
-function carregarImoveis(page = 1) {
-    request(`http://localhost/trabalhos/imobiliaria/api/imoveis?page=${page}`)
+function carregarImoveis(pagina) {
+    // Captura os parâmetros da URL atual (ex: ?municipio=sao_paulo)
+    const queryParams = window.location.search;
+    params.set('page', pagina);
+    request('http://localhost/trabalhos/imobiliaria/api/imoveis/?' + params.toString())
         .then(response => {
             const dadosImovel = response.data.data;
 
@@ -41,6 +49,8 @@ const ulCatalogo = document.querySelector('.container-botoes-paginacao');
 
 //função de Geração de Páginação
 function GerarPaginacao(totalPaginas) {
+
+    ulCatalogo.innerHTML = '';
 
     //Li padrão e link
     const itemLi = document.createElement('li')

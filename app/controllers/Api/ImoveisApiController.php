@@ -10,28 +10,31 @@ class ImoveisApiController extends ApiController
 
 
     //Coleta lista de para catalogo
-    public function index()
+    public function index($data = [])
     {
+
+        $query = $data['query'] ?? [];
         //Filtra Input da URL é retorna 1 caso não tenha sido passado nada
-        $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT) ?: 1;
-        $limit = filter_input(INPUT_GET, 'limit', FILTER_SANITIZE_NUMBER_INT)?: NULL;
+        $page  = isset($query['page'])  ? (int)$query['page']  : 1;
+        $limit = isset($query['limit']) ? (int)$query['limit'] : null;
         $ImoveisService = new ImoveisService;
 
         //Coleta total das Páginas
-        $total_pages = $ImoveisService->getTotalPages($limit);
+        $total_pages = $ImoveisService->getTotalPages($query,$limit);
 
         //Coleta dados de imoveis
-        $dados_imoveis = $ImoveisService->getDadosImoveisWithLimit((int)$page, $limit);
+        $dados_imoveis = $ImoveisService->getDadosImoveisWithLimit((int)$page,$query,$limit);
 
         $response = [
-             'pagination' => [
-                    'page' => (int) $page,
-                    'limit' => (int) $limit,
-                    'total_paginas' => $total_pages
-                ],
+            'pagination' => [
+                'page' => (int) $page,
+                'limit' => (int) $limit,
+                'total_registros' => $total_pages['total'],
+                'total_paginas' => $total_pages['total_pages']
+            ],
             'data' => $dados_imoveis
         ];
 
-      $this->success($response, 200); 
+        $this->success($response, 200);
     }
 }

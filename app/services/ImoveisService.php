@@ -12,31 +12,42 @@ class ImoveisService
     //Funções de paágina de catalogo
 
     //Coleta Valores para pagina de catalog
-    public function getTotalPages($limit = null)
+    public function getTotalPages($query, $limit = null)
     {
         $ImoveisModels = new ImoveisModels;
-        $dadosModel = $ImoveisModels->getTotalImoveis();
 
-        $total = (int) $dadosModel[0]['total_imoveis'];
-        //Limite da página catalog
-        $limit = $limit ?? $this->defaultLimit;
+        // Se o limite vier 0 ou nulo, usa o padrão
+        $limit = ($limit > 0) ? $limit : $this->defaultLimit;
 
-        //Calculo de Página
-        $total_pages =  ceil($total / $limit);         
+        unset($query['page'], $query['limit']);
 
-        return $total_pages;
+        $dadosModel = $ImoveisModels->getTotalImoveis($query);
+        $total = (int) $dadosModel['total_imoveis'];
+
+        $calculo = ceil($total / $limit);
+
+        $total_pages = ($calculo > 0) ? $calculo : 1;
+        
+        $dadosPaginas = [
+            'total_pages' => $total_pages,
+            'total' => $total
+        ];
+
+        return $dadosPaginas;
     }
 
-    public function getDadosImoveisWithLimit(int $page, $limit = null)
+    public function getDadosImoveisWithLimit(int $page, $query, $limit = null,)
     {
 
         $limit = $limit ?? $this->defaultLimit;
+
+        unset($query['page'], $query['limit']);
 
         //Calcular off de consulta
         $offset = ($page - 1) * $limit;
 
         $ImoveisModels = new ImoveisModels;
-        $dadosModel = $ImoveisModels->getImoveis($offset,$limit);
+        $dadosModel = $ImoveisModels->getImoveis($offset, $query, $limit);
 
         return $dadosModel;
     }
