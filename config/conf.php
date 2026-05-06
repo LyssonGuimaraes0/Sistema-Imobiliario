@@ -9,16 +9,6 @@ require_once __DIR__ . '/../routes/router.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-//Realiza tratamento de URL da página
-$base = "/trabalhos/imobiliaria";
-
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-$request = $_SERVER['REQUEST_METHOD'];
-
-$uri = str_replace($base, '', $uri);
-
-//=========================================
-
 
 // Configurações Pastas Raiz
 

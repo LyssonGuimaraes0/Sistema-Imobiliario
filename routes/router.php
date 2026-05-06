@@ -1,6 +1,6 @@
 <?php
 //Sistema de que separa rotas
-function loadRouter(string $type,string $controller, string $action)
+function loadRouter(string $type,string $controller, string $action, $data = [])
 {
     try {
         $controllerNameSpace = "app\\controllers\\{$type}\\{$controller}";
@@ -15,7 +15,8 @@ function loadRouter(string $type,string $controller, string $action)
             throw new Exception("o metodo {$action} não existe no {$controller} não existe");
         };
 
-        $controllerInstance->$action();
+
+        $controllerInstance->$action($data);
 
     } catch (Exception $e) {
         echo $e->getMessage();
@@ -24,11 +25,11 @@ function loadRouter(string $type,string $controller, string $action)
 
 //Função que realiza a separação de WEB e
 function web($controller, $action) {
-    return fn() => loadRouter('Web', $controller, $action);
+    return fn($data) => loadRouter('Web', $controller, $action,$data);
 }
 
 function api($controller, $action) {
-    return fn() => loadRouter('Api', $controller, $action);
+    return fn($data) => loadRouter('Api', $controller, $action, $data);
 }
 
 $router = [
@@ -37,7 +38,7 @@ $router = [
         '/catalog' => web('CatalogController', 'index'),
 
         //Sessão de Chamadas API GET
-        '/api/imoveis' => api('ImoveisApiController','index')
+        '/api/imoveis/' => api('ImoveisApiController','index')
     ],
     'POST' => [],
 
