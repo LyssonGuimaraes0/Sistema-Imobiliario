@@ -17,6 +17,9 @@ class ImoveisModels
         // Precisamos do JOIN com endereco_imovel caso o filtro seja por municipio/estado
         $sql = "SELECT COUNT(*) AS total_imoveis 
             FROM imovel AS i
+            LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+            LEFT JOIN valor AS v ON i.id = v.fk_imovel
+            LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
             LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id ";
 
 
@@ -45,19 +48,21 @@ class ImoveisModels
 
     public function getImoveis($offset, $query, $limit)
     {
+
         $conn = Database::connect();
         //Preparação do SQL
 
         $sql = "SELECT i.nome_imovel,
                 i.dimensao,
                 c.quarto,
-                c.bunheiro,
+                c.banheiro,
                 c.sala_de_estar,
-                c.suit,
+                c.suite,
                 v.preco
                 FROM imovel AS i
                 LEFT JOIN comodos AS c ON i.id = c.fk_imovel
-                LEFT JOIN  valor AS v ON i.id = v.fk_imovel
+                LEFT JOIN valor AS v ON i.id = v.fk_imovel
+                LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
                 LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id ";
 
         if (isset($query) && !empty($query)) {
@@ -74,10 +79,6 @@ class ImoveisModels
             }
         }
 
-
-
-
-        /* echo $sql; */
 
         $sql .= " LIMIT {$limit} offset {$offset}";
 
