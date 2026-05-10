@@ -1,10 +1,11 @@
    .card {
         width: 336px;
         height: 421px;
-        background-color: #ffffff;
+        background-color: var(--cor-primaria);
         display: flex;
         /* Transforma o card em um container flexível */
         flex-direction: column;
+        border: 2px solid var(--cor-cinza-escuro);
     }
 
     .card-head {
@@ -25,7 +26,7 @@
         flex-direction: column;
         padding: 20px;
         flex-grow: 1;
-        border: 2px solid #c3cfd9;
+        border-top: 2px solid var(--cor-cinza-escuro);
         box-sizing: border-box;
     }
 
@@ -76,3 +77,91 @@
         font-size: 15px;
 
     }
+
+    /* =========================
+   CARD SKELETON
+========================= */
+
+.card.loading {
+    pointer-events: none;
+}
+
+/* REMOVE TEXTO */
+.card.loading * {
+    color: transparent !important;
+}
+
+/* BLOCOS CINZA */
+.card.loading .card-img,
+.card.loading .card-titulo,
+.card.loading .card-item,
+.card.loading .card-valor,
+.card.loading .card-button {
+    position: relative;
+    overflow: hidden;
+    background: #e2e5e7;
+    border-radius: 6px;
+}
+
+/* IMAGEM */
+.card.loading .card-img {
+    width: 100%;
+    height: 100%;
+}
+
+/* TITULO */
+.card.loading .card-titulo {
+    width: 80%;
+    height: 28px;
+    margin-bottom: 20px;
+}
+
+/* ITENS */
+.card.loading .card-item {
+    width: 120px;
+    height: 14px;
+    margin: 8px 0;
+}
+
+/* PREÇO */
+.card.loading .card-valor {
+    width: 100px;
+    height: 32px;
+}
+
+/* BOTÃO */
+.card.loading .card-button {
+    width: 125px;
+    height: 42px;
+    border: none;
+    background: #dfe3e6;
+}
+
+/* EFEITO SHIMMER */
+.card.loading .card-img::after,
+.card.loading .card-titulo::after,
+.card.loading .card-item::after,
+.card.loading .card-valor::after,
+.card.loading .card-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150px;
+    width: 150px;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    animation: skeleton-loading 1.2s infinite;
+}
+
+@keyframes skeleton-loading {
+    100% {
+        left: 100%;
+    }
+}
