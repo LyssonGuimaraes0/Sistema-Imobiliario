@@ -1,53 +1,52 @@
 import { formatTextForMoney } from "./utils/format.js";
 import { request } from "./service/ajax.js";
+import { delay } from "./utils/delay.js";
+import { mostrarSkeleton } from "./utils/card.js";
+import { filterToInputs } from "./utils/filter.js";
 
 
+//================Funções Principais==============
 
-//Coleta de dados de Páginação na primeira recarga
+//Função de Carregamento de Imoveis(Com OU sem Filtro)
+async function carregarImoveis(pagina) {
 
-const queryParams = window.location.search;
+    //apresentação loading
+    mostrarSkeleton(containerCatalog, template);
 
+    await delay(800);
 
-let totalPaginas = 0;
-//Ver url e busca informação de page, caso n tenha torna pagina 1
-const params = new URLSearchParams(window.location.search);
-let paginaAtual = parseInt(params.get('page')) || 1;
-
-
-request('http://localhost/trabalhos/imobiliaria/api/imoveis/'+ queryParams)
-    .then(response => {
-        totalPaginas = response.data.pagination.total_paginas;
-
-        GerarPaginacao(totalPaginas);
-
-        carregarImoveis(paginaAtual);
-    });
-
-
-//Segunda recarga da Página atraves de clique
-function carregarImoveis(pagina) {
     // Captura os parâmetros da URL atual (ex: ?municipio=sao_paulo)
     const queryParams = window.location.search;
+
+    // PEGA URL ATUALIZADA
+    const params = new URLSearchParams(window.location.search);
+
+    // Atualiza página
     params.set('page', pagina);
-    request('http://localhost/trabalhos/imobiliaria/api/imoveis/?' + params.toString())
-        .then(response => {
-            const dadosImovel = response.data.data;
 
-            const containerCatalog = document.querySelector('.row-calalog');
+    const response = await request(
+        'http://localhost/trabalhos/imobiliaria/api/imoveis/?' +
+        params.toString()
+    );
 
-            // LIMPA antes de renderizar
-            containerCatalog.innerHTML = '';
+    const dadosImovel = response.data.data;
 
-            dadosImovel.forEach(dadoImovel => {
-                containerCatalog.appendChild(CriarCard(dadoImovel, 'default'))
-            });
-        });
+    containerCatalog.innerHTML = '';
+
+
+    dadosImovel.forEach(dadoImovel => {
+        containerCatalog.appendChild(
+            CriarCard(dadoImovel, 'default')
+        );
+    });
+
 }
 
+//=============================================================
 
-const ulCatalogo = document.querySelector('.container-botoes-paginacao');
 
-//função de Geração de Páginação
+//Função de Geração de Paginação do catalogo
+
 function GerarPaginacao(totalPaginas) {
 
     ulCatalogo.innerHTML = '';
@@ -108,6 +107,127 @@ function GerarPaginacao(totalPaginas) {
 
 }
 
+//=================================================
+
+
+//função de Criação de cards
+
+const templateCardDefault = document.querySelector('#card-template')
+
+function CriarCard(dadoImovel, tipo = 'default') {
+    if (tipo == 'default') {
+        var cloneCard = templateCardDefault.content.cloneNode(true);
+    }
+    //Adição de Elementos a cards
+    cloneCard.querySelector('.card-titulo').textContent = dadoImovel.nome_imovel;
+    cloneCard.querySelector('.card-dimensao').innerHTML = `${dadoImovel.dimensao}<sup>2</sup>m`
+    cloneCard.querySelector('#item-quarto').textContent += dadoImovel.quarto;
+    cloneCard.querySelector('#item-sala_estar').textContent += dadoImovel.sala_de_estar;
+    cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.bunheiro;
+    cloneCard.querySelector('#item-suit').textContent += dadoImovel.suit;
+    cloneCard.querySelector('.card-valor').textContent = formatTextForMoney(dadoImovel.preco.toString());
+
+    return cloneCard;
+
+}
+
+//=================================================
+
+
+
+//================Ações da Pagína===================
+
+//Coleta de dados de Páginação na primeira recarga
+
+const queryParams = window.location.search;
+
+console.log(queryParams);
+
+
+let totalPaginas = 0;
+let totalImovel = 0;
+//Ver url e busca informação de page, caso n tenha torna pagina 1
+const params = new URLSearchParams(window.location.search);
+let paginaAtual = parseInt(params.get('page')) || 1;
+
+//Coleta de itens de catalogo
+const containerCatalog = document.querySelector('.row-calalog');
+const template = document.querySelector('#card-template');
+
+
+request('http://localhost/trabalhos/imobiliaria/api/imoveis/' + queryParams)
+    .then(response => {
+        totalPaginas = response.data.pagination.total_paginas;
+        totalImovel = response.data.pagination.total_registros
+
+
+        //Gera Total Imoveis encontrados
+
+        const totalImoveisTexto = document.querySelector('.option-text-catalog');
+        totalImoveisTexto.textContent = `${totalImovel} imoveis encontrados`;
+
+        GerarPaginacao(totalPaginas);
+
+        carregarImoveis(paginaAtual);
+    });
+
+/* ============================================================================ */
+
+
+//Configurações de Filtros do Header
+
+const btnFilterHeader = document.querySelector('#btn-filter-header');
+
+btnFilterHeader.addEventListener('click', async function () {
+    const inputs = document.querySelectorAll('[data-filter]');
+    let queryFilter = filterToInputs(inputs);
+
+    //Trava botão para impedir varios clique
+    btnFilterHeader.disabled = true;
+
+    try {
+        const response = await request('http://localhost/trabalhos/imobiliaria/api/imoveis/?' + queryFilter)
+
+        //Atualiza URL com filtros
+        paginaAtual = 1;
+
+        //Atualiza URL com filtros
+        history.pushState(
+            null,
+            '',
+            `catalog?page=${paginaAtual}&${queryFilter}`
+        );
+
+        totalPaginas = response.data.pagination.total_paginas;
+        totalImovel = response.data.pagination.total_registros
+
+        const totalImoveisTexto = document.querySelector('.option-text-catalog');
+        totalImoveisTexto.textContent = `${totalImovel} imoveis encontrados`;
+
+        GerarPaginacao(totalPaginas);
+
+        await carregarImoveis(paginaAtual);
+
+    } catch (error) {
+
+        console.error(error);
+
+    } finally {
+
+        btnFilterHeader.disabled = false;
+    }
+
+
+})
+
+
+/* ============================================================================ */
+
+
+//=============Configuração de Botão Next e Prev de Páginação===================
+
+const ulCatalogo = document.querySelector('.container-botoes-paginacao');
+
 ulCatalogo.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -133,34 +253,46 @@ ulCatalogo.addEventListener('click', (e) => {
 
     paginaAtual = parseInt(page);
 
-    history.pushState(null, '', `?page=${paginaAtual}`);
+    const params = new URLSearchParams(window.location.search);
+
+    params.set('page', paginaAtual);
+
+    history.pushState(null, '', `?${params.toString()}`);
 
     carregarImoveis(paginaAtual);
 });
 
+/* ============================================================================ */
 
 
+//Verificar cliques do usuario para libera outros inputs
+/* 
+const inputCategory = document.querySelector('#input-category');
+const inputType = document.querySelector('#input-type');
+const inputModality = document.querySelector('#input-modality');
 
+let timeout;
 
+inputCategory.addEventListener('input', () => {
+    clearTimeout(timeout);
 
-//função de Criação de cards
-
-const templateCardDefault = document.querySelector('#card-template')
-
-function CriarCard(dadoImovel, tipo = 'default') {
-    if (tipo == 'default') {
-        var cloneCard = templateCardDefault.content.cloneNode(true);
+    if (inputCategory.value == "") {
+        inputType.setAttribute('readonly',true)
+        inputModality.setAttribute('readonly',true)
+        return
     }
-    //Adição de Elementos a cards
-    cloneCard.querySelector('.card-titulo').textContent = dadoImovel.nome_imovel;
-    cloneCard.querySelector('.card-dimensao').innerHTML = `${dadoImovel.dimensao}<sup>2</sup>m`
-    cloneCard.querySelector('#item-quarto').textContent += dadoImovel.quarto;
-    cloneCard.querySelector('#item-sala_estar').textContent += dadoImovel.sala_de_estar;
-    cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.bunheiro;
-    cloneCard.querySelector('#item-suit').textContent += dadoImovel.suit;
-    cloneCard.querySelector('.card-valor').textContent = formatTextForMoney(dadoImovel.preco.toString());
-
-    return cloneCard;
 
 
-}
+
+    timeout = setTimeout(() => {
+        inputType.removeAttribute('readonly')
+        inputModality.removeAttribute('readonly')
+    }, 500);
+}); */
+
+//============================//
+
+
+
+
+
