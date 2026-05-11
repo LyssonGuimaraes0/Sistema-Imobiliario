@@ -3,6 +3,7 @@ import { request } from "./service/ajax.js";
 import { delay } from "./utils/delay.js";
 import { mostrarSkeleton } from "./utils/card.js";
 import { filterToInputs } from "./utils/filter.js";
+import { filterToSelectOption } from "./utils/filter.js";
 
 
 //================Funções Principais==============
@@ -141,14 +142,16 @@ function CriarCard(dadoImovel, tipo = 'default') {
 
 const queryParams = window.location.search;
 
-console.log(queryParams);
-
-
 let totalPaginas = 0;
 let totalImovel = 0;
 //Ver url e busca informação de page, caso n tenha torna pagina 1
 const params = new URLSearchParams(window.location.search);
 let paginaAtual = parseInt(params.get('page')) || 1;
+
+
+//Selecionar Inputs de search
+const inputSearh = document.querySelector('[search]');
+const dropdown = document.querySelector('.dropdown-input-element');
 
 //Coleta de itens de catalogo
 const containerCatalog = document.querySelector('.row-calalog');
@@ -159,7 +162,7 @@ request('http://localhost/trabalhos/imobiliaria/api/imoveis/' + queryParams)
     .then(response => {
         totalPaginas = response.data.pagination.total_paginas;
         totalImovel = response.data.pagination.total_registros
-
+        const listAddress = response.data.address_to_list;
 
         //Gera Total Imoveis encontrados
 
@@ -169,6 +172,8 @@ request('http://localhost/trabalhos/imobiliaria/api/imoveis/' + queryParams)
         GerarPaginacao(totalPaginas);
 
         carregarImoveis(paginaAtual);
+
+        filterToSelectOption(inputSearh, dropdown, listAddress)
     });
 
 /* ============================================================================ */
@@ -264,9 +269,28 @@ ulCatalogo.addEventListener('click', (e) => {
 
 /* ============================================================================ */
 
+/* ==========================Evento de clique em dropdown===================================== */
+
+
+dropdown.addEventListener('click', (event) => {
+
+    const option = event.target.closest('.dropdown-option');
+
+    if(!option) return;
+
+    inputSearh.value = option.textContent
+    .replace(/\s+/g, ' ')
+    .trim();
+
+});
+
+
+
+/* ============================================================================ */
+
 
 //Verificar cliques do usuario para libera outros inputs
-/* 
+/*
 const inputCategory = document.querySelector('#input-category');
 const inputType = document.querySelector('#input-type');
 const inputModality = document.querySelector('#input-modality');

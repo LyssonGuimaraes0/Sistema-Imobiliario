@@ -25,6 +25,10 @@ class ImoveisApiController extends ApiController
         //Coleta dados de imoveis
         $dados_imoveis = $ImoveisService->getDadosImoveisWithLimit((int)$page,$query,$limit);
 
+        //Coleta Endereços de Imoveis
+
+        $dados_endereço = $ImoveisService->getDadosAddressImoveis();
+
         $response = [
             'pagination' => [
                 'page' => (int) $page,
@@ -32,6 +36,7 @@ class ImoveisApiController extends ApiController
                 'total_registros' => $total_pages['total'],
                 'total_paginas' => $total_pages['total_pages']
             ],
+            'address_to_list' => $dados_endereço,
             'data' => $dados_imoveis
         ];
 

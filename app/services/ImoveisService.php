@@ -27,7 +27,7 @@ class ImoveisService
         $calculo = ceil($total / $limit);
 
         $total_pages = ($calculo > 0) ? $calculo : 1;
-        
+
         $dadosPaginas = [
             'total_pages' => $total_pages,
             'total' => $total
@@ -48,6 +48,15 @@ class ImoveisService
 
         $ImoveisModels = new ImoveisModels;
         $dadosModel = $ImoveisModels->getImoveis($offset, $query, $limit);
+
+        return $dadosModel;
+    }
+
+    public function getDadosAddressImoveis()
+    {
+
+        $ImoveisModels = new ImoveisModels;
+        $dadosModel = $ImoveisModels->getAddressImoveis();
 
         return $dadosModel;
     }

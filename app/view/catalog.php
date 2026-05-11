@@ -6,15 +6,17 @@
             <div class="container-header">
                 <div class="container-input-header">
                     <span>Localização</span>
-                    <input class="input-default input-header input-header-first" placeholder="Localização" type="text" data-filter="bairro">
+                    <input class="input-default input-header input-header-first" placeholder="Localização" type="text" data-filter="bairro_slug" search>
+                    <div class="dropdown-input-element">
+                    </div>
                 </div>
                 <div class="container-input-header">
                     <span>Categoria</span>
-                    <input class="input-default input-header" placeholder="Categoria" type="text" id="input-category" >
+                    <input class="input-default input-header" placeholder="Categoria" type="text" id="input-category">
                 </div>
                 <div class="container-input-header">
                     <span>Tipo do Imovel</span>
-                    <input class="input-default input-header" placeholder="Tipo do Imovel" type="text" id="input-type" data-filter="tipo">
+                    <input class="input-default input-header" placeholder="Tipo do Imovel" type="text" id="input-type" data-filter="tipo" >
                 </div>
                 <div class="container-input-header">
                     <span>Finalidade</span>
