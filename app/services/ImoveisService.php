@@ -6,22 +6,24 @@ use app\models\imoveis\ImoveisModels;
 
 class ImoveisService
 {
-
+    private $imoveisModels;
     private $defaultLimit = 15;
 
+    public function __construct(){
+         $this->imoveisModels = new ImoveisModels;
+    }
     //Funções de paágina de catalogo
 
     //Coleta Valores para pagina de catalog
     public function getTotalPages($query, $limit = null)
     {
-        $ImoveisModels = new ImoveisModels;
 
         // Se o limite vier 0 ou nulo, usa o padrão
         $limit = ($limit > 0) ? $limit : $this->defaultLimit;
 
         unset($query['page'], $query['limit']);
 
-        $dadosModel = $ImoveisModels->getTotalImoveis($query);
+        $dadosModel = $this->imoveisModels->getTotalImoveis($query);
         $total = (int) $dadosModel['total_imoveis'];
 
         $calculo = ceil($total / $limit);
@@ -46,17 +48,24 @@ class ImoveisService
         //Calcular off de consulta
         $offset = ($page - 1) * $limit;
 
-        $ImoveisModels = new ImoveisModels;
-        $dadosModel = $ImoveisModels->getImoveis($offset, $query, $limit);
+        $dadosModel = $this->imoveisModels->getImoveis($offset, $query, $limit);
 
         return $dadosModel;
+    }
+
+    public function getImovelById(int $id){
+
+        $dadosModel = $this->imoveisModels->getImoveisById($id);
+
+        return $dadosModel;
+        
+
     }
 
     public function getDadosAddressImoveis()
     {
 
-        $ImoveisModels = new ImoveisModels;
-        $dadosModel = $ImoveisModels->getAddressImoveis();
+        $dadosModel = $this->imoveisModels->getAddressImoveis();
 
         return $dadosModel;
     }

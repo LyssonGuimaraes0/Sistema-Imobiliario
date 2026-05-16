@@ -9,10 +9,16 @@ use PDO;
 class ImoveisModels
 {
 
+    private $conn;
+
+    public function __construct()
+    {
+        $this->conn = Database::connect();
+    }
+
     //====================Buscar Total de Imoveis Com Filtros=================================
     public function getTotalImoveis($query = [])
     {
-        $conn = Database::connect();
 
         $sql = "SELECT COUNT(*) AS total_imoveis 
             FROM imovel AS i
@@ -37,7 +43,7 @@ class ImoveisModels
         }
 
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +54,6 @@ class ImoveisModels
     public function getImoveis($offset, $query, $limit)
     {
 
-        $conn = Database::connect();
         //Preparação do SQL
 
         $sql = "SELECT i.nome_imovel,
@@ -82,7 +87,7 @@ class ImoveisModels
         $sql .= " LIMIT {$limit} offset {$offset}";
 
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -90,11 +95,47 @@ class ImoveisModels
         return $dados;
     }
 
+    //====================Buscar Dados de Imoveis Por ID=================================
+    public function getImoveisById(int $id)
+    {
+        $sql = "SELECT i.nome_imovel,
+        i.dimensao,
+        i.estado_imovel,
+        e.estado,
+        e.municipio,
+        e.bairro,
+        e.CEP,
+        v.preco,
+        v.condominio,
+        v.modalidade,
+        c.quarto,
+        c.banheiro,
+        c.sala_de_estar,
+        c.suite,
+        c.garagem,
+        c.cozinha
+        FROM imovel AS i 
+        LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id
+        LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+        LEFT JOIN valor AS v ON i.id = v.fk_imovel
+        LEFT JOIN arquivos AS a ON i.id = a.fk_imovel
+        LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id 
+        WHERE i.id = :id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    }
+
     //====================Buscar Nomes de endereços de Imoveis =================================
 
     public function getAddressImoveis()
     {
-        $conn = Database::connect();
+
         //Preparação do SQL
 
         $sql = "SELECT 
@@ -105,7 +146,7 @@ class ImoveisModels
                 GROUP BY bairro
                 ORDER BY bairro ASC";
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);

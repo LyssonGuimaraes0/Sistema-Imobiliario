@@ -7,7 +7,12 @@ use app\services\ImoveisService;
 class ImoveisApiController extends ApiController
 {
 
+    private $imoveisService;
 
+    public function __construct()
+    {
+       $this->imoveisService = new ImoveisService;
+    }
 
     //Coleta lista de para catalogo
     public function index($data = [])
@@ -17,17 +22,16 @@ class ImoveisApiController extends ApiController
         //Filtra Input da URL é retorna 1 caso não tenha sido passado nada
         $page  = isset($query['page'])  ? (int)$query['page']  : 1;
         $limit = isset($query['limit']) ? (int)$query['limit'] : null;
-        $ImoveisService = new ImoveisService;
 
         //Coleta total das Páginas
-        $total_pages = $ImoveisService->getTotalPages($query,$limit);
+        $total_pages = $this->imoveisService->getTotalPages($query, $limit);
 
         //Coleta dados de imoveis
-        $dados_imoveis = $ImoveisService->getDadosImoveisWithLimit((int)$page,$query,$limit);
+        $dados_imoveis = $this->imoveisService->getDadosImoveisWithLimit((int)$page, $query, $limit);
 
         //Coleta Endereços de Imoveis
 
-        $dados_endereço = $ImoveisService->getDadosAddressImoveis();
+        $dados_endereço = $this->imoveisService->getDadosAddressImoveis();
 
         $response = [
             'pagination' => [
@@ -41,5 +45,20 @@ class ImoveisApiController extends ApiController
         ];
 
         $this->success($response, 200);
+    }
+
+
+    public function show($data)
+    {
+        $id = (int)$data['params']['id'];
+
+        $response = $this->imoveisService->getImovelById($id);
+
+        if (!$response) {
+            return $this->error("Registro não encontrado", 404);
+        }
+
+        return $this->success($response);
+
     }
 }
