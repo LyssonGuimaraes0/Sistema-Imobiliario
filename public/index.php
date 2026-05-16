@@ -5,7 +5,7 @@ require_once __DIR__ . '/../config/conf.php';
 //Realiza tratamento de URL da página
 $base = "/trabalhos/imobiliaria";
 //Coleta o caminho da Url
-$uri = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $request = $_SERVER['REQUEST_METHOD'];
 //Coleta os parametros da URL
 $queryParams = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS) ?? [];
@@ -30,19 +30,26 @@ if (!isset($router[$request])) {
     //futuro redirect para page 404
 }
 
-if (!array_key_exists($uri, $router[$request])) {
+$route = findRoute($router[$request], $uri);
 
-    //futuro redirect para page 404
+if (!$route) {
+
+    http_response_code(404);
+
+    echo "404 Not Found";
+
+    exit;
 }
 
-$router[$request][$uri]($data);
+
+//Adiciona parâmetros encontrados
+
+$data['params'] = $route['params'];
+
+
+//Executa callback da rota encontrada
+$route['callback']($data);
+
+
 
 ?>
-
-<!--Estrutura Padrão HTML-->
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<?php include(VIEW_PATH . "/components/head.php") ?>
-
-</html>
