@@ -2,8 +2,16 @@
 
 namespace app\controllers\Web;
 
-class CatalogController{
-    public function index(){
-        require_once VIEW_PATH ."\catalog.php";
+
+class CatalogController
+{
+    public function index()
+    {
+        require_once VIEW_PATH . "/catalog.php";
+    }
+
+    public function show()
+    {
+        require VIEW_PATH . '/showImovel.php';
     }
 }
