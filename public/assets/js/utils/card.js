@@ -9,7 +9,7 @@ export function mostrarSkeleton(containerCatalog,template,qtd = 9) {
 
         const card = clone.querySelector('.card');
 
-        card.classList.add('loading');
+        card.classList.add('loading-card');
 
         containerCatalog.appendChild(clone);
     }
