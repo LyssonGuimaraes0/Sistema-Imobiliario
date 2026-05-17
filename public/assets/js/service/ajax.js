@@ -17,8 +17,6 @@ export async function request(url, options = {}) {
         return data; 
 
     } catch (error) {
-        console.error(error);
-
         return {
             success: false,
             error: error.message
