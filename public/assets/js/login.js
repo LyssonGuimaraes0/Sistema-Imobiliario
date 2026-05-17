@@ -45,6 +45,9 @@ formLogin.addEventListener('submit', async (event) => {
             throw new Error(response?.error);
         }
 
+        //Login conseguiu ser cadastrado
+        window.location.href = "/trabalhos/imobiliaria/admin/dashboard";
+        
     } catch (error) {
         textErro.style.display = 'block';
 
@@ -55,8 +58,5 @@ formLogin.addEventListener('submit', async (event) => {
         }
 
     }
-
-
-
 
 });

@@ -2,13 +2,15 @@
 
 // Configurações Global
 
+
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../routes/router.php';
 
 // Carrega o .env
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+require_once __DIR__ . '/../routes/router.php';
+require_once 'cors.php';
 
 // Configurações Pastas Raiz
 

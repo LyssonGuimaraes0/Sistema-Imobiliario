@@ -4,8 +4,7 @@
 
 $router = [
     'GET' => [
-        
-    //Home
+        //Home
         '/' => web('HomeController', 'index'),
         
         //Página de Catalogo
@@ -15,11 +14,15 @@ $router = [
         //Sessão de Login
         '/admin/login' => web('LoginController','index'),
 
+        //Páginas de ADMIN
+        '/admin/dashboard' => web('DashboardController','index'),
+
         //Sessão de Chamadas API GET
         '/api/imoveis/' => api('ImoveisApiController', 'index'),
         '/api/imoveis/{id}' => api('ImoveisApiController', 'show')
     ],
     'POST' => [
+        //API de Busca Login de Usuario
         '/api/auth/login' => api('AuthApiController', 'login')
     ],
 
@@ -53,7 +56,7 @@ function loadRouter(string $type, string $controller, string $action, $data = []
 
 
 
-//Função que realiza a separação de WEB e
+//Função que realiza a separação de WEB e API
 function web($controller, $action)
 {
     return fn($data) => loadRouter('Web', $controller, $action, $data);

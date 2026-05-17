@@ -18,7 +18,9 @@ class UserModel
 
     public function FindByEmail(string $email){
 
-        $sql = "SELECT nome,
+        $sql = "SELECT 
+        id,
+        nome,
         email,
         password_hash 
         FROM usuario WHERE email = :email";

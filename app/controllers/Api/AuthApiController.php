@@ -27,7 +27,6 @@ class AuthApiController extends ApiController{
             return;
         };
         
-        
         $response = $this->authService->login($email,$password);
 
         if (!isset($response)) {
@@ -35,7 +34,8 @@ class AuthApiController extends ApiController{
             return;
         }
 
-        return $this->success($response);
-        
+        if ($response['success'] === true) {
+            return $this->success('');
+        }   
     }
 }
