@@ -157,6 +157,8 @@ const dropdown = document.querySelector('.dropdown-input-element');
 const containerCatalog = document.querySelector('.row-calalog');
 const template = document.querySelector('#card-template');
 
+//apresentação loading
+mostrarSkeleton(containerCatalog, template);
 
 request('http://localhost/trabalhos/imobiliaria/api/imoveis/' + queryParams)
     .then(response => {
