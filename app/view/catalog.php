@@ -119,7 +119,7 @@
 
     </section>
 
-    <script type="module" src="public/assets/js/catalog.js"></script>
+    <script type="module" src=<?= SCRIPT_URL . "/catalog.js" ?>></script>
 
 </body>
 
