@@ -26,6 +26,8 @@ define('ASSETS_PATH', PUBLIC_PATH . '/assets');
 //Caminho URL
 define('BASE_URL', '/trabalhos/imobiliaria/public');
 define('IMAGEM_URL', '/trabalhos/imobiliaria/public/assets/images');
+define('SCRIPT_URL', BASE_URL . '/assets/js');
+
 
 
 
