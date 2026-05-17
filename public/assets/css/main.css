@@ -1,8 +1,10 @@
 /*Importe de Componetes reutilizaveis*/
 @import './card.css';
+@import './animation.css';
 
 /*Importe de css de páginas*/
 @import './catalog.css';
+@import './login.css';
 
 
 /*Configurações Root*/
@@ -16,6 +18,16 @@
 
     /*Cor Para Textos*/
     --cor-texto-segundario: #788896;
+
+    /*Cores Padrões para Botões*/
+
+    --btn-color-blue: #2c88d9;
+    --btn-color-blue-hover: #236eaf;
+
+
+    /*Box Shadow padrão*/
+
+    --box-shadown-default : 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -32,6 +44,17 @@ button {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+label {
+    margin-bottom: 8px;
+    color: var(--cor-texto-segundario);
+    font-size: 14px;
+}
+
 /*Container Padrão*/
 
 .container-section {
@@ -45,6 +68,8 @@ button {
     padding: 10px;
     border: 0 solid;
     border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 
 }
 
@@ -53,6 +78,10 @@ button {
 .btn-blue {
     color: var(--cor-primaria);
     background-color: var(--cor-secundaria);
+}
+
+.btn-blue:hover{
+    background-color: var(--btn-color-blue-hover);
 }
 
 /*Botão padrão Branco*/
@@ -69,6 +98,9 @@ button {
     background-color: var(--cor-primaria);
     border: 2px solid var(--cor-cinza-escuro);
     border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.2s
 }
 
 .input-default[readonly] {
@@ -83,4 +115,8 @@ button {
 .input-default::placeholder {
     color: var(--cor-texto-segundario);
     opacity: 1;
+}
+
+.input-default:focus {
+    border-color: var(--cor-secundaria);
 }

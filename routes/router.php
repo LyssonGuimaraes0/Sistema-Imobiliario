@@ -4,9 +4,16 @@
 
 $router = [
     'GET' => [
+        
+    //Home
         '/' => web('HomeController', 'index'),
+        
+        //Página de Catalogo
         '/catalog' => web('CatalogController', 'index'),
         '/catalog/{id}' => web('CatalogController', 'show'),
+
+        //Sessão de Login
+        '/admin/login' => web('LoginController','index'),
 
         //Sessão de Chamadas API GET
         '/api/imoveis/' => api('ImoveisApiController', 'index'),
