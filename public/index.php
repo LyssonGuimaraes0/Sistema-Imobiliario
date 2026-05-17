@@ -29,7 +29,7 @@ if (!isset($router[$request])) {
 
     //futuro redirect para page 404
 }
-
+/** @disregard */
 $route = findRoute($router[$request], $uri);
 
 if (!$route) {
@@ -49,7 +49,6 @@ $data['params'] = $route['params'];
 
 //Executa callback da rota encontrada
 $route['callback']($data);
-
 
 
 ?>

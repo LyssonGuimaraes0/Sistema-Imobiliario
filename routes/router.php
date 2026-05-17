@@ -12,7 +12,9 @@ $router = [
         '/api/imoveis/' => api('ImoveisApiController', 'index'),
         '/api/imoveis/{id}' => api('ImoveisApiController', 'show')
     ],
-    'POST' => [],
+    'POST' => [
+        '/api/auth/login' => api('AuthApiController', 'login')
+    ],
 
 ];
 
