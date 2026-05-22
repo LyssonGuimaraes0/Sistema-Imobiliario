@@ -1,10 +1,12 @@
 /*Importe de Componetes reutilizaveis*/
 @import './card.css';
+@import './navbar.css';
 @import './animation.css';
 
 /*Importe de css de páginas*/
 @import './catalog.css';
 @import './login.css';
+@import './dashboard.css';
 
 
 /*Configurações Root*/
@@ -13,8 +15,9 @@
     /* Cor padrões para o site*/
     --cor-primaria: #FFFFFF;
     --cor-secundaria: #2c88d9;
-    --cor-cinza-escuro: #c2ccd4;
+    --cor-cinza-claro: #c2ccd4;
     --cor-branco-fantasma: #f7f9fa;
+    --cor-cinza-escuro: #424654;
 
     /*Cor Para Textos*/
     --cor-texto-segundario: #788896;
@@ -27,7 +30,18 @@
 
     /*Box Shadow padrão*/
 
-    --box-shadown-default : 0 4px 12px rgba(0, 0, 0, 0.1);
+    --box-shadown-default: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    
 }
 
 
@@ -80,7 +94,7 @@ label {
     background-color: var(--cor-secundaria);
 }
 
-.btn-blue:hover{
+.btn-blue:hover {
     background-color: var(--btn-color-blue-hover);
 }
 
@@ -88,7 +102,7 @@ label {
 .btn-white {
     color: var(--cor-secundaria);
     background-color: var(--cor-primaria);
-    border: 2px solid var(--cor-cinza-escuro);
+    border: 2px solid var(--cor-cinza-claro);
 }
 
 /*Input text Default*/
@@ -96,7 +110,7 @@ label {
 .input-default {
     padding: 10px;
     background-color: var(--cor-primaria);
-    border: 2px solid var(--cor-cinza-escuro);
+    border: 2px solid var(--cor-cinza-claro);
     border-radius: 4px;
     outline: none;
     font-size: 16px;
@@ -104,7 +118,7 @@ label {
 }
 
 .input-default[readonly] {
-    background-color: var(--cor-cinza-escuro);
+    background-color: var(--cor-cinza-claro);
     pointer-events: none;
     cursor: not-allowed;
     opacity: 0.5;

@@ -22,7 +22,7 @@ class JwtService
         $payload = [
             'id' => $user['id'],
             'email' => $user['email'],
-            'exp' => time() + 60 * 15
+            'exp' => time() + 660 * 15
         ];
 
         return JWT::encode(
