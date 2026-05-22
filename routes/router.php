@@ -23,7 +23,10 @@ $router = [
     ],
     'POST' => [
         //API de Busca Login de Usuario
-        '/api/auth/login' => api('AuthApiController', 'login')
+        '/api/auth/login' => api('AuthApiController', 'login'),
+
+        //API de realiza logout de Usuario
+        '/api/auth/logout' => api('AuthApiController', 'logout')
     ],
 
 ];

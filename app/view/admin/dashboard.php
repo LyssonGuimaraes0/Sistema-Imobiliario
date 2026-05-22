@@ -27,7 +27,7 @@
                     <div class="dashboard-container-card"></div>
                     <div class="card-dashboard ">
                         <h2 class="">Total imóveis<h2>
-                        <span></span>
+                                <span></span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
     </main>
 
 
-
+    <script src=<?= SCRIPT_URL . "/utils/navbar-admin.js" ?>></script>
 </body>
 
 </html>

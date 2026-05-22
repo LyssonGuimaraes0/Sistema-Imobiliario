@@ -30,6 +30,13 @@
                 <span>Usuario</span>
                 <span>email@gmail.com</span>
             </div>
+
+
+            <!--Dropdown para libera mais opcões-->
+            <div class="options-footer-admin" id="menu">
+                 <a class="menu-item" href=""><i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+            </div>
         </div>
+
     </nav>
 </aside>
