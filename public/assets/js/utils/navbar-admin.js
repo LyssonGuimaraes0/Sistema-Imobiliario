@@ -1,20 +1,23 @@
 //Criação de elememento ao clicar em footer usuario da navbar admin
-const footerNavbar = document.querySelector('.footer-navbar-admin')
-const options = document.querySelector('.options-footer-admin')
 
-footerNavbar.addEventListener('click', function () {
-    options.classList.toggle('active')
-})
+export function toggleOptions(footerSelector, optionsSelector) {
+    const footerNavbar = document.querySelector(footerSelector);
+    const options = document.querySelector(optionsSelector);
 
-// Clique fora
-document.addEventListener('click', (event) => {
+    if (!footerNavbar || !options) return;
 
-    const clicouFora = !footerNavbar.contains(event.target);
+    // Abrir / fechar opções
+    footerNavbar.addEventListener('click', function (event) {
+        event.stopPropagation();
+        options.classList.toggle('active');
+    });
 
-    if (clicouFora) {
-        options.classList.remove('active');
-    }
+    // Clique fora
+    document.addEventListener('click', function (event) {
+        const clicouFora = !footerNavbar.contains(event.target);
 
-});
-
-//
+        if (clicouFora) {
+            options.classList.remove('active');
+        }
+    });
+}

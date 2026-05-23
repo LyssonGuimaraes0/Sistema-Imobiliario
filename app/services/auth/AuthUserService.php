@@ -68,4 +68,35 @@ class AuthUserService
             'success' => true
         ];
     }
+
+    public function logout()
+    {
+        // Remove Access Token
+        setcookie(
+            'access_token',
+            '',
+            [
+                'expires' => time() - 3600,
+                'httponly' => true,
+                'path' => '/',
+                'samesite' => 'Lax'
+            ]
+        );
+
+        // Remove CSRF Token
+        setcookie(
+            'csrf_token',
+            '',
+            [
+                'expires' => time() - 3600,
+                'httponly' => false,
+                'path' => '/',
+                'samesite' => 'Lax'
+            ]
+        );
+
+        return [
+            'success' => true,
+        ];
+    }
 }

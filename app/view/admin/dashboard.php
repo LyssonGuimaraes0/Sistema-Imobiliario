@@ -35,7 +35,7 @@
     </main>
 
 
-    <script src=<?= SCRIPT_URL . "/utils/navbar-admin.js" ?>></script>
+    <script type="module" src=<?= SCRIPT_URL . "/admin/dashboard.js" ?>></script>
 </body>
 
 </html>
