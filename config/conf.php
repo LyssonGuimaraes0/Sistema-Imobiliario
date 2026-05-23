@@ -26,9 +26,10 @@ define('COMPONENTS_PATH', VIEW_PATH . '/components');
 define('ASSETS_PATH', PUBLIC_PATH . '/assets');
 
 //Caminho URL
-define('BASE_URL', '/trabalhos/imobiliaria/public');
+define('BASE_URL', '/trabalhos/imobiliaria');
 define('IMAGEM_URL', '/trabalhos/imobiliaria/public/assets/images');
-define('SCRIPT_URL', BASE_URL . '/assets/js');
+define('SCRIPT_URL', BASE_URL . "/public" .  '/assets/js');
+define('ADMIN_URL',  BASE_URL . "/admin");
 
 
 

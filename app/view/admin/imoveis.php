@@ -16,21 +16,11 @@
             <div class="container-admin-home">
                 <div class="admin-home-left">
                     <i class="fa-solid fa-house-chimney"></i>
-                    <span>Painel</span>
+                    <span>Catálogo/ Imovel</span>
                 </div>
                 <div class="admin-home-rigth"></div>
             </div>
 
-            <div class="container-card-dashboard">
-                <div class="admin-body">
-                    <!--Card 1--->
-                    <div class="dashboard-container-card"></div>
-                    <div class="card-dashboard ">
-                        <h2 class="">Total imóveis<h2>
-                                <span></span>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
 

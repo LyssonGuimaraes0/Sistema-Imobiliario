@@ -10,12 +10,13 @@
         <div class="body-navbar-admin">
             <div class="container-navbar-admin">
                 <span>Geral</span>
-                <a class="menu-item" href=""><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                
+                <a class="menu-item" href=<?= ADMIN_URL . "/dashboard" ?>><i class="fa-solid fa-border-all"></i> Dashboard</a>
             </div>
             <div class="container-navbar-admin">
                 <span>Catálogo</span>
-                <a class="menu-item" href=""><i class="fa-solid fa-building"></i>Imóveis</a>
-                <a class="menu-item" href=""><i class="fa-solid fa-plus"></i>Novo imóveis</a>
+                <a class="menu-item" href=<?= ADMIN_URL . "/imoveis" ?>><i class="fa-solid fa-building"></i>Imóveis</a>
+                <a class="menu-item" href=<?= ADMIN_URL . "/imoveis/create" ?>><i class="fa-solid fa-plus"></i>Novo imóveis</a>
             </div>
             <div class="container-navbar-admin">
                 <span>Sistema</span>

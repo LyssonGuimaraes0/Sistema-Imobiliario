@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\Web;
+namespace app\controllers\Web\admin;
 
 use app\middleware\AuthMiddleware;
 

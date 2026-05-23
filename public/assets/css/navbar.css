@@ -58,6 +58,10 @@
     gap: 10px;
 }
 
+.container-navbar-admin span{
+    color: var(--cor-branco-fantasma) ;
+}
+
 /*Menu item*/
 
 .menu-item {

@@ -2,11 +2,13 @@
 @import './card.css';
 @import './navbar.css';
 @import './animation.css';
+@import './admin.css';
 
 /*Importe de css de páginas*/
 @import './catalog.css';
 @import './login.css';
 @import './dashboard.css';
+@import './imovelAdmin.css';
 
 
 /*Configurações Root*/
@@ -41,7 +43,7 @@
 
 body {
     margin: 0;
-    
+
 }
 
 
@@ -66,7 +68,13 @@ a {
 label {
     margin-bottom: 8px;
     color: var(--cor-texto-segundario);
-    font-size: 14px;
+    font-size: 16px;
+}
+
+/*Text area*/
+
+textarea {
+    resize: none;
 }
 
 /*Container Padrão*/
@@ -134,3 +142,17 @@ label {
 .input-default:focus {
     border-color: var(--cor-secundaria);
 }
+
+/* 1. Cor do texto "Selecione..." (Quando o select ainda é inválido) */
+.input-default-select {
+    padding: 10px;
+    background-color: var(--cor-primaria);
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: var(--cor-texto-segundario);
+    opacity: 1;
+}
+
+
