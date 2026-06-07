@@ -1,20 +1,32 @@
 export async function request(url, options = {}) {
     try {
-        const response = await fetch(url, {
-            method: options.method || 'GET',
-            headers: {
+
+        const config = {
+            method: options.method || 'GET'
+        };
+
+        if (options.body instanceof FormData) {
+
+            config.body = options.body;
+
+        } else {
+
+            config.headers = {
                 'Content-Type': 'application/json'
-            },
-            body: options.body ? JSON.stringify(options.body) : null
-        });
+            };
+
+            config.body = options.body
+                ? JSON.stringify(options.body)
+                : null;
+        }
+
+        const response = await fetch(url, config);
 
         if (!response.ok) {
             throw new Error(`Erro HTTP: ${response.status}`);
         }
 
-        const data = await response.json();
-
-        return data; 
+        return await response.json();
 
     } catch (error) {
         return {

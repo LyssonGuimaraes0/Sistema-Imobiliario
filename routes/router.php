@@ -28,7 +28,10 @@ $router = [
         '/api/auth/login' => api('AuthApiController', 'login'),
 
         //API de realiza logout de Usuario
-        '/api/auth/logout' => api('AuthApiController', 'logout')
+        '/api/auth/logout' => api('AuthApiController', 'logout'),
+
+        //API para registro de imovel
+        '/api/imovel/create' => api('ImoveisApiController', 'create')
     ],
 
 ];

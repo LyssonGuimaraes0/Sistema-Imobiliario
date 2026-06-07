@@ -11,7 +11,7 @@ class ImoveisApiController extends ApiController
 
     public function __construct()
     {
-       $this->imoveisService = new ImoveisService;
+        $this->imoveisService = new ImoveisService;
     }
 
     //Coleta lista de para catalogo
@@ -47,6 +47,7 @@ class ImoveisApiController extends ApiController
         $this->success($response, 200);
     }
 
+    //Mostra imovel unico
 
     public function show($data)
     {
@@ -59,6 +60,21 @@ class ImoveisApiController extends ApiController
         }
 
         return $this->success($response);
+    }
 
+    //Cria novo imovel
+
+    public function create()
+    {
+        header('Content-Type: application/json');
+
+        echo json_encode([
+            'dados' => $_POST,
+            'files' => $_FILES
+        ]);
+
+        exit;
+        //Servicos para armazenamento em banco de dados
+        $this->imoveisService->createImovel($dados);
     }
 }

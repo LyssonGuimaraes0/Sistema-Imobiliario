@@ -1,6 +1,6 @@
 import { request } from "../service/ajax.js";
 import { toggleOptions } from "../utils/navbar-admin.js";
-import { getFormData } from "../utils/form.js";
+import { getFormData, createImovelFormData } from "../utils/form.js";
 
 import {
     formatInputToMoney,
@@ -218,18 +218,27 @@ cepInput.addEventListener('input', (e) => {
 
 //Envio de formulario
 
-const formLogin = document.querySelector('#formNovoImovel');
+const formCreateImovel = document.querySelector('#formNovoImovel');
 
 //Coleta os dados do formulario
-formLogin.addEventListener('submit', async (event) => {
+formCreateImovel.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const dados = getFormData(event.target)
     delete dados.foto
-    console.log(dados);
-    // Quando for enviar:
 
-    console.log(
+    const body = createImovelFormData(
+        dados,
         getImagens()
     );
+
+    const response = await request(
+        '../../api/imovel/create',
+        {
+            method: 'POST',
+            body
+        }
+    );
+
+    console.log(response);
 })

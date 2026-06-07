@@ -3,6 +3,7 @@
 namespace app\services;
 
 use app\models\imoveis\ImoveisModels;
+use app\helpers\ImovelSanitizerHelper;
 
 class ImoveisService
 {
@@ -38,6 +39,7 @@ class ImoveisService
         return $dadosPaginas;
     }
 
+    //Coleta Imoveis com limites de busca
     public function getDadosImoveisWithLimit(int $page, $query, $limit = null,)
     {
 
@@ -62,11 +64,26 @@ class ImoveisService
 
     }
 
+    //Coleta Endereço do Imovel
     public function getDadosAddressImoveis()
     {
 
         $dadosModel = $this->imoveisModels->getAddressImoveis();
 
         return $dadosModel;
+    }
+
+    //Criação de Imovel
+
+    public function createImovel($dados){
+
+        //Sanitizar as variaveis
+        $dados = ImovelSanitizerHelper::sanitize($dados['imovel']);
+
+        //Quarda regsitros de Imagens
+
+        var_dump($dados);
+        exit;
+
     }
 }

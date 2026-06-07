@@ -18,7 +18,7 @@ class AuthMiddleware
     {
         if (!isset($_COOKIE['access_token'])) {
             header(
-                'Location: ../admin/login'
+                'Location: ' . BASE_URL .'/admin/login'
             );
 
             exit;
@@ -30,7 +30,7 @@ class AuthMiddleware
 
         if (!$user) {
             header(
-                'Location: ../admin/login'
+                'Location: ' . BASE_URL .'/admin/login'
             );
 
             exit;
