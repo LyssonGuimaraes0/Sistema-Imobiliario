@@ -1,21 +1,35 @@
-//Formata para Formato de dinhero
-export function formatTextForMoney(texto) {
-    var grupos = []
+//Formata texto para so permitir numeros
 
-    for (let index = texto.length; index > 0; index -= 3) {
-        let inicio = index - 3;
+export function formatTextToNumber(valor) {
+    return valor = valor.replace(/\D/g, '');
+}
 
-        if (inicio < 0) {
-            inicio = 0;
-        }
+//Formata texto para so permitir string sem caracteres
+export function formatTextToString(valor) {
+    return valor = valor.replace(/[^a-zA-ZÀ-ÿ0-9 .,´`]/g, '');
+}
 
-        let parte = texto.slice(inicio, index);
-        grupos.push(parte);
-    }
+//Converte para estilo de dinhero
+export function formatInputToMoney(valor) {
+    valor = formatTextToNumber(valor);
 
-    grupos.reverse()
-    texto = `R$ ${grupos.join('.')}`
+    valor = valor.padStart(3, '0');
 
-    return texto;
+    let inteiro = valor.slice(0, -2);
+    const decimal = valor.slice(-2);
+
+    //Evita numeros 00 antes do input
+    inteiro = inteiro.replace(/^0+/, '') || '0';
+
+    return formatTextForMoney(inteiro, decimal);
+}
+
+export function formatTextForMoney(inteiro, decimal) {
+    inteiro = inteiro.replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        '.'
+    );
+
+    return `R$ ${inteiro},${decimal}`;
 }
 
