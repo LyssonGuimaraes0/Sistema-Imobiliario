@@ -10,12 +10,25 @@ export function getFormData(form) {
 
 export function createImovelFormData(dados, imagens) {
     const body = new FormData();
-
+    //Dados restantes
     body.append(
         'imovel',
         JSON.stringify(dados)
     );
 
+    //Armaneza dados de Imagem para banco
+    body.append(
+        'imagensInfo',
+        JSON.stringify(
+            imagens.map(imagem => ({
+                id: imagem.id,
+                ordem: imagem.ordem,
+                capa: imagem.capa
+            }))
+        )
+    );
+
+    //Dados da Imagem
     imagens.forEach((imagem) => {
         body.append('imagens[]', imagem.file);
     });
