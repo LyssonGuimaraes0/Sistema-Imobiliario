@@ -127,8 +127,6 @@ class ImoveisModels
         $stmt->execute();
 
         return $dados = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
     }
 
     //====================Buscar Nomes de endereços de Imoveis =================================
@@ -152,5 +150,89 @@ class ImoveisModels
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $dados;
+    }
+
+    //====================Criar Novo Imoveis =================================
+
+    public function createImovel($dados)
+    {
+        try {
+            // Inicia a transação de forma segura
+            $this->conn->beginTransaction();
+
+            //Preparação do SQL de Endereço
+            $sqlEndereco = "INSERT INTO endereco_imovel (bairro, bairro_slug, municipio, estado, CEP) 
+                        VALUES (:bairro, :bairro_slug, :municipio, :estado, :cep)";
+
+            $stmtEnd = $this->conn->prepare($sqlEndereco);
+
+            // Vinculando as variáveis do endereço
+            $stmtEnd->bindParam(':bairro', $dados['bairro'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':bairro_slug', $dados['bairro_slug'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':municipio', $dados['municipio'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':estado', $dados['estado'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':cep', $dados['cep'], PDO::PARAM_STR);
+
+            $stmtEnd->execute();
+
+            $idEndereco = $this->conn->lastInsertId();
+
+            //Preparação do SQL de Imovel
+            $sqlImovel = "INSERT INTO imovel (nome_imovel, dimensao, estado_imovel, fk_tipo_imovel, fk_endereco) 
+                      VALUES (:nome, :dimensao, :estado_imovel, :fk_tipo_imovel, :fk_endereco)";
+
+            $stmtImovel = $this->conn->prepare($sqlImovel);
+
+            // Vinculando as variáveis do imóvel
+            $stmtImovel->bindParam(':nome', $dados['nome_imovel'], PDO::PARAM_STR);
+            $stmtImovel->bindParam(':dimensao', $dados['dimensao'], PDO::PARAM_STR); // ou PARAM_INT dependendo do seu banco
+            $stmtImovel->bindParam(':estado_imovel', $dados['estado_imovel'], PDO::PARAM_STR);
+            $stmtImovel->bindParam(':fk_tipo_imovel', $dados['fk_tipo_imovel'], PDO::PARAM_INT);
+            $stmtImovel->bindParam(':fk_endereco', $idEndereco, PDO::PARAM_INT); // ID que veio do Passo 1
+
+            $stmtImovel->execute();
+
+            // Pega o ID gerado para o imóvel
+            $idImovel = $this->conn->lastInsertId();
+
+            //Preparação do SQL de Comodos
+            $sqlComodos = "INSERT INTO comodos (quarto, banheiro, sala_de_estar, suite, garagem, cozinha, fk_imovel) 
+                       VALUES (:quarto, :banheiro, :sala, :suite, :garagem, :cozinha, :fk_imovel)";
+
+            $stmtComodos = $this->conn->prepare($sqlComodos);
+
+            // Vinculando as variáveis dos cômodos
+            $stmtComodos->bindParam(':quarto', $dados['quarto'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':banheiro', $dados['banheiro'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':sala', $dados['sala_de_estar'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':suite', $dados['suite'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':garagem', $dados['garagem'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':cozinha', $dados['cozinha'], PDO::PARAM_INT);
+            $stmtComodos->bindParam(':fk_imovel', $idImovel, PDO::PARAM_INT); // ID que veio do Passo 2
+
+            $stmtComodos->execute();
+
+            //Preparação do SQL de Valor
+            $sqlValor = "INSERT INTO valor (preco, condominio, modalidade, fk_imovel) 
+                     VALUES (:preco, :condominio, :modalidade, :fk_imovel)";
+
+            $stmtValor = $this->conn->prepare($sqlValor);
+
+            // Vinculando as variáveis de valores
+            $stmtValor->bindParam(':preco', $dados['preco'], PDO::PARAM_STR); // Decimal/Float costuma entrar como STR no PDO
+            $stmtValor->bindParam(':condominio', $dados['condominio'], PDO::PARAM_STR);
+            $stmtValor->bindParam(':modalidade', $dados['modalidade'], PDO::PARAM_STR);
+            $stmtValor->bindParam(':fk_imovel', $idImovel, PDO::PARAM_INT); // ID que veio do Passo 2
+
+            $stmtValor->execute();
+
+            // Se nenhuma exceção foi lançada até aqui, confirma todas as inserções
+            $this->conn->commit();
+            return $idImovel;
+        } catch (\Exception $e) {
+            // Se houver qualquer falha em qualquer tabela, desfaz o banco inteiro
+            $this->conn->rollBack();
+            return null;
+        }
     }
 }

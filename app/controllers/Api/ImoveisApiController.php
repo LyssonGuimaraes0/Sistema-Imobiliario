@@ -66,14 +66,22 @@ class ImoveisApiController extends ApiController
 
     public function create()
     {
-        header('Content-Type: application/json');
+      /*   header('Content-Type: application/json');*/
+        
+        //Dados de imoveis
+        $dados = json_decode($_POST['imovel'],true);
 
-        echo json_encode([
-            'dados' => $_POST,
-            'files' => $_FILES
-        ]);
+        //Dados de Imagem
+        /* $imagensInfo = json_decode($_POST['imagensInfo'],true); */
 
-        exit;
+        //Arquivos de Imagens
+        /* $imagens = $_FILES; */
+
+/*         echo json_encode([
+            "dados" => $dados,
+            "imagensInfo" =>$imagensInfo
+        ]);  */
+
         //Servicos para armazenamento em banco de dados
         $this->imoveisService->createImovel($dados);
     }

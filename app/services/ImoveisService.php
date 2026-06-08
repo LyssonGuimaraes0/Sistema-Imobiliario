@@ -4,14 +4,16 @@ namespace app\services;
 
 use app\models\imoveis\ImoveisModels;
 use app\helpers\ImovelSanitizerHelper;
+use Exception;
 
 class ImoveisService
 {
     private $imoveisModels;
     private $defaultLimit = 15;
 
-    public function __construct(){
-         $this->imoveisModels = new ImoveisModels;
+    public function __construct()
+    {
+        $this->imoveisModels = new ImoveisModels;
     }
     //Funções de paágina de catalogo
 
@@ -55,13 +57,12 @@ class ImoveisService
         return $dadosModel;
     }
 
-    public function getImovelById(int $id){
+    public function getImovelById(int $id)
+    {
 
         $dadosModel = $this->imoveisModels->getImoveisById($id);
 
         return $dadosModel;
-        
-
     }
 
     //Coleta Endereço do Imovel
@@ -75,15 +76,28 @@ class ImoveisService
 
     //Criação de Imovel
 
-    public function createImovel($dados){
+    public function createImovel($dados)
+    {
 
-        //Sanitizar as variaveis
-        $dados = ImovelSanitizerHelper::sanitize($dados['imovel']);
+        try {
+            //Sanitizar as variaveis
+            $dados = ImovelSanitizerHelper::sanitize($dados);
 
-        //Quarda regsitros de Imagens
+            //Registra Primeiros dados de imoveis
 
-        var_dump($dados);
-        exit;
+            $idImovel = $this->imoveisModels->createImovel($dados);
 
+            if (isset($idImovel)) {
+                throw new Exception();
+            }
+
+            //Upload de Imagens de imovel
+            
+
+
+
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }
