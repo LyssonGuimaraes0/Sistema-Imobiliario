@@ -18,12 +18,13 @@ define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 define('CONFIG_PATH', BASE_PATH . '/config');
 define('PUBLIC_PATH', BASE_PATH . '/public');
+define('UPLOAD_PATH', BASE_PATH . '/storage/uploads/imoveis');
 
 // Configurações Subpasta
-
 define('VIEW_PATH', APP_PATH . '/view');
 define('COMPONENTS_PATH', VIEW_PATH . '/components');
 define('ASSETS_PATH', PUBLIC_PATH . '/assets');
+
 
 //Caminho URL
 define('BASE_URL', '/trabalhos/imobiliaria');
