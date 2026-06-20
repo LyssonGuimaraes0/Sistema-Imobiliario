@@ -206,8 +206,8 @@
                                         <input class="input-default" placeholder="Ex:Sâo Cristovão" name="bairro" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Cidade</label>
-                                        <input class="input-default" placeholder="Ex:Salvador" name="cidade" type="text">
+                                        <label class="label-form-imovel label-form-imovel-required" >Municipio</label>
+                                        <input class="input-default" placeholder="Ex:Salvador" name="municipio" type="text">
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required" >Estado</label>

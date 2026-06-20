@@ -229,10 +229,77 @@ class ImoveisModels
             // Se nenhuma exceção foi lançada até aqui, confirma todas as inserções
             $this->conn->commit();
             return $idImovel;
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             // Se houver qualquer falha em qualquer tabela, desfaz o banco inteiro
             $this->conn->rollBack();
-            return null;
+            return $e->getMessage();
+        }
+    }
+    //====================Upload de arquivo de imoveil =================================
+
+    public function createFileImovel($dados, $id_imovel)
+    {
+        try {
+            // Inicia a transação de forma segura
+            $this->conn->beginTransaction();
+
+            //Preparação do SQL de Endereço
+            $sql = "INSERT INTO arquivos (fk_imovel, tipo, caminho_arquivo, ordem, nome_arquivo) 
+                        VALUES (:fk_imovel, :tipo, :caminho_arquivo, :ordem, :nome_arquivo)";
+
+            $stmt = $this->conn->prepare($sql);
+
+            // Vinculando as variáveis do endereço
+            $stmt->bindParam(':fk_imovel', $id_imovel, PDO::PARAM_INT);
+            $stmt->bindParam(':tipo', $dados['tipo'], PDO::PARAM_STR);
+            $stmt->bindParam(':ordem', $dados['ordem'], PDO::PARAM_INT);
+            $stmt->bindParam(':caminho_arquivo', $dados['caminho_arquivo'], PDO::PARAM_STR);
+            $stmt->bindParam(':nome_arquivo', $dados['nome_arquivo'], PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            // Pega o ID gerado para o arquivo
+            $idFile = $this->conn->lastInsertId();
+
+            // Se nenhuma exceção foi lançada até aqui, confirma todas as inserções
+            $this->conn->commit();
+            return $idFile;
+        } catch (\PDOException $e) {
+            // Se houver qualquer falha em qualquer tabela, desfaz o banco inteiro
+            $this->conn->rollBack();
+            return $e->getMessage();;
+        }
+    }
+    //====================Altera imagem de capa =================================
+
+    public function updateCapaImovel(int $idFile, int $idImovel)
+    {
+        try {
+            // Inicia a transação de forma segura
+            $this->conn->beginTransaction();
+
+            //Preparação do SQL de Endereço
+            $sql = "UPDATE imovel SET 
+            fk_foto_destaque = :fk_foto_destaque
+            WHERE id = :id_imovel";
+
+            $stmt = $this->conn->prepare($sql);
+
+            // Vinculando as variáveis do endereço
+            $stmt->bindParam(':fk_foto_destaque', $idFile, PDO::PARAM_INT);
+            $stmt->bindParam(':id_imovel', $idImovel, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            // Se nenhuma exceção foi lançada até aqui, confirma todas as inserções
+            $this->conn->commit();
+
+            return;
+            
+        } catch (\PDOException $e) {
+            // Se houver qualquer falha em qualquer tabela, desfaz o banco inteiro
+            $this->conn->rollBack();
+            return $e->getMessage();
         }
     }
 }

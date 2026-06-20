@@ -4,17 +4,21 @@ namespace app\services;
 
 use app\models\imoveis\ImoveisModels;
 use app\helpers\ImovelSanitizerHelper;
+use app\services\UploadService;
 use Exception;
 
 class ImoveisService
 {
     private $imoveisModels;
+    private $uploadService;
     private $defaultLimit = 15;
 
     public function __construct()
     {
         $this->imoveisModels = new ImoveisModels;
+        $this->uploadService = new UploadService;
     }
+
     //Funções de paágina de catalogo
 
     //Coleta Valores para pagina de catalog
@@ -76,28 +80,55 @@ class ImoveisService
 
     //Criação de Imovel
 
-    public function createImovel($dados)
+    public function createImovel(array $dados, $file, array $infoFiles)
     {
 
-        try {
-            //Sanitizar as variaveis
-            $dados = ImovelSanitizerHelper::sanitize($dados);
+        //Sanitizar as variaveis
+        $dados = ImovelSanitizerHelper::sanitize($dados);
 
-            //Registra Primeiros dados de imoveis
-
-            $idImovel = $this->imoveisModels->createImovel($dados);
-
-            if (isset($idImovel)) {
-                throw new Exception();
-            }
-
-            //Upload de Imagens de imovel
-            
+        //Registra Primeiros dados de imoveis
+        $idImovel = $this->imoveisModels->createImovel($dados);
 
 
-
-        } catch (\Exception $e) {
-            return false;
+        if (!isset($idImovel)) {
+            throw new Exception("Falha na criação de Imovel");
         }
+
+        //Organiza Dados de imagens
+
+        $AllDateFiles = [];
+
+        foreach ($infoFiles as $index => $imagem) {
+
+            $file = [
+                'name' => $_FILES['imagens']['name'][$index],
+                'tmp_name' => $_FILES['imagens']['tmp_name'][$index],
+                'size' => $_FILES['imagens']['size'][$index]
+            ];
+
+            //Realiza upload de imoveis na pasta
+            $dadosFile = $this->uploadService->upload($idImovel, $file);
+
+            //Organiza dados em array 
+
+            $AllDateFiles = array_merge(
+                $dadosFile,
+                [
+                    "ordem" => $imagem['ordem'],
+                    "capa" => $imagem['capa'],
+                    "tipo" => "imagem",
+                ]
+            );
+
+            //Armazena uma imagem de cada vez
+            $idImagem = $this->imoveisModels->createFileImovel($AllDateFiles, $idImovel);
+
+            //Verifica caso a imagem atual seja capa do Imovel
+            if ($AllDateFiles['capa'] === true) {
+                //Define imagem como capa
+                $this->imoveisModels->updateCapaImovel($idImagem, $idImovel);
+            }
+        }
+        return;
     }
 }

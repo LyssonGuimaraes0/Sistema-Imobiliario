@@ -66,23 +66,30 @@ class ImoveisApiController extends ApiController
 
     public function create()
     {
-      /*   header('Content-Type: application/json');*/
-        
-        //Dados de imoveis
-        $dados = json_decode($_POST['imovel'],true);
+        try {
+            //Dados de imoveis
+            $dados = json_decode($_POST['imovel'], true);
 
-        //Dados de Imagem
-        /* $imagensInfo = json_decode($_POST['imagensInfo'],true); */
+            //Dados de Imagem
+            $imagensInfo = json_decode($_POST['imagensInfo'], true);
 
-        //Arquivos de Imagens
-        /* $imagens = $_FILES; */
+            //Servicos para armazenamento em banco de dados
+            $this->imoveisService->createImovel($dados, $_FILES, $imagensInfo);
 
-/*         echo json_encode([
-            "dados" => $dados,
-            "imagensInfo" =>$imagensInfo
-        ]);  */
+            return $this->success("Registro realizado com sucesso",201);
+        } catch (\Exception $e) {
 
-        //Servicos para armazenamento em banco de dados
-        $this->imoveisService->createImovel($dados);
+            $statusCode = $e->getCode();
+
+            if ($statusCode === 401) {
+                return $this->error($e->getMessage(), 401);
+            }
+
+            if ($statusCode === 500) {
+                return $this->error($e->getMessage(), 500);
+            }
+
+            /* return $this->error($e->getMessage(), 400); */
+        }
     }
 }
