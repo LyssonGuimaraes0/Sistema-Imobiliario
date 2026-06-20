@@ -6,6 +6,10 @@
 <body class="layout-admin">
     <!--Navbar Admin-->
     <?php include_once VIEW_PATH . "/components/admin/navbar-admin.php" ?>
+    <!--Modal-->
+    <?php include_once VIEW_PATH . "/components/modal.php" ?>
+
+
 
     <!--Estrutura de dashBoard-->
     <main class="main-admin">
@@ -36,13 +40,13 @@
                         <form action="" id="formNovoImovel">
                             <div class="body-form-imovel">
                                 <div class="container-input-header">
-                                    <label class="label-form-imovel label-form-imovel-required" >Titulo do anúncio</label>
+                                    <label class="label-form-imovel label-form-imovel-required">Titulo do anúncio</label>
                                     <input class="input-default input-header input-header-first" placeholder="Ex:Apartamento 4 quartos" name="nome_imovel" type="text">
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Tipo de Imovel</label>
-                                        <select class="input-default-select" name="tipo-imovel" >
+                                        <label class="label-form-imovel label-form-imovel-required">Tipo de Imovel</label>
+                                        <select class="input-default-select" name="tipo-imovel">
                                             <option value="" hidden selected>Selecione Tipo Imovel</option>
                                             <option value="residencial">Residencial</option>
                                             <option value="comercial">Comercial</option>
@@ -54,8 +58,8 @@
                                     </div>
                                 </div>
                                 <div class="container-input-form">
-                                    <label class="label-form-imovel" >Descrição</label>
-                                    <textarea class="input-default textarea-form-imovel" name="descricao" ></textarea>
+                                    <label class="label-form-imovel">Descrição</label>
+                                    <textarea class="input-default textarea-form-imovel" name="descricao"></textarea>
                                 </div>
                             </div>
                             <div class="div-separetion"></div>
@@ -68,19 +72,19 @@
                             <div class="body-form-imovel" id="container-valores">
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Preço do Imovel</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Preço do Imovel</label>
                                         <input class="input-default" placeholder="Ex:R$ 0,00" name="preco" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Condominio <small>(opcional)</small></label>
+                                        <label class="label-form-imovel">Condominio <small>(opcional)</small></label>
                                         <input class="input-default" placeholder="Ex:R$ 0,00" name="condominio" type="text">
                                     </div>
                                 </div>
 
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Modalidade</label>
-                                        <select class="input-default-select" name="modalidade"  required>
+                                        <label class="label-form-imovel label-form-imovel-required">Modalidade</label>
+                                        <select class="input-default-select" name="modalidade" required>
                                             <option value="" selected>Nenhum</option>
                                             <option value="">Venda</option>
                                             <option value="">Aluguel</option>
@@ -88,8 +92,8 @@
                                         </select>
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Destaque</label>
-                                        <select class="input-default-select" name="destaque"  required>
+                                        <label class="label-form-imovel">Destaque</label>
+                                        <select class="input-default-select" name="destaque" required>
                                             <option value="" selected>Nenhum</option>
                                             <option value="">Destaque</option>
                                             <option value="">Lançamento</option>
@@ -107,39 +111,39 @@
                             <div class="body-form-imovel" id="container-caracteristicas">
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Área Total (m<sup>2</sup>)</label>
-                                        <input class="input-default" placeholder="Ex:00"maxlength="5" name="area_total" type="text">
+                                        <label class="label-form-imovel label-form-imovel-required">Área Total (m<sup>2</sup>)</label>
+                                        <input class="input-default" placeholder="Ex:00" maxlength="5" name="area_total" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Área útil (m<sup>2</sup>)</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Área útil (m<sup>2</sup>)</label>
                                         <input class="input-default" placeholder="Ex:00" maxlength="5" name="area_util" type="text">
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Quartos</label>
+                                        <label class="label-form-imovel">Quartos</label>
                                         <input class="input-default" value="0" min=0 name="quarto" type="number">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Banheiros</label>
+                                        <label class="label-form-imovel">Banheiros</label>
                                         <input class="input-default" value="0" min=0 name="banheiro" type="number">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Suítes</label>
+                                        <label class="label-form-imovel">Suítes</label>
                                         <input class="input-default" value="0" min=0 name="suite" type="number">
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Sala de Estar</label>
+                                        <label class="label-form-imovel">Sala de Estar</label>
                                         <input class="input-default" value="0" min=0 name="sala_de_estar" type="number">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Cozinhas</label>
+                                        <label class="label-form-imovel">Cozinhas</label>
                                         <input class="input-default" value="0" min=0 name="cozinha" type="number">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel" >Garagem</label>
+                                        <label class="label-form-imovel">Garagem</label>
                                         <input class="input-default" value="0" min=0 name="garagem" type="number">
                                     </div>
                                 </div>
@@ -149,24 +153,24 @@
                                     </div>
                                     <div class="container-checkbox-form">
                                         <div class="item-checkbox-form">
-                                            <input type="checkbox" name="piscina" >
-                                            <label >Piscina</label>
+                                            <input type="checkbox" name="piscina">
+                                            <label>Piscina</label>
                                         </div>
                                         <div class="item-checkbox-form">
-                                            <input type="checkbox" name="churrasqueira" >
-                                            <label >Churrasqueira</label>
+                                            <input type="checkbox" name="churrasqueira">
+                                            <label>Churrasqueira</label>
                                         </div>
                                         <div class="item-checkbox-form">
-                                            <input type="checkbox" name="varanda" >
-                                            <label >Varanda</label>
+                                            <input type="checkbox" name="varanda">
+                                            <label>Varanda</label>
                                         </div>
                                         <div class="item-checkbox-form">
-                                            <input type="checkbox" name="quintal" >
-                                            <label >Quintal</label>
+                                            <input type="checkbox" name="quintal">
+                                            <label>Quintal</label>
                                         </div>
                                         <div class="item-checkbox-form">
-                                            <input type="checkbox" name="salao_de_festa" >
-                                            <label >Salão de Festa</label>
+                                            <input type="checkbox" name="salao_de_festa">
+                                            <label>Salão de Festa</label>
                                         </div>
                                     </div>
 
@@ -182,36 +186,36 @@
                             <div class="body-form-imovel" id="container-endereco">
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >CEP</label>
+                                        <label class="label-form-imovel label-form-imovel-required">CEP</label>
                                         <input class="input-default" placeholder="Ex:00000-000" id="cep-input" name="cep" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Rua/Longradouro</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Rua/Longradouro</label>
                                         <input class="input-default" placeholder="Ex:Rua exemplo" name="rua" type="text">
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Número</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Número</label>
                                         <input class="input-default" placeholder="Ex:00" maxlength="3" id="numero-input" name="numero" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Complemento</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Complemento</label>
                                         <input class="input-default" placeholder="Ex:Exemplo" name="complemento" type="text">
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Bairro</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Bairro</label>
                                         <input class="input-default" placeholder="Ex:Sâo Cristovão" name="bairro" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Municipio</label>
+                                        <label class="label-form-imovel label-form-imovel-required">Municipio</label>
                                         <input class="input-default" placeholder="Ex:Salvador" name="municipio" type="text">
                                     </div>
                                     <div class="container-input-form">
-                                        <label class="label-form-imovel label-form-imovel-required" >Estado</label>
-                                        <select class="input-default-select" name="estado"  required>
+                                        <label class="label-form-imovel label-form-imovel-required">Estado</label>
+                                        <select class="input-default-select" name="estado" required>
                                             <option value="BA" selected>BA</option>
                                         </select>
                                     </div>
@@ -232,8 +236,9 @@
                                 </div>
                                 <div class="container-imagem-preview">
                                     <span>Fotos adicionadas (<span id="text-imgs-upload">0</span>) </span>
+                                    <?php require_once COMPONENTS_PATH . '/admin/card-admin.php'; ?>
                                     <div class="list-imagens-select">
-                                        <?php require_once COMPONENTS_PATH . '/admin/card-admin.php'; ?>
+
                                     </div>
                                 </div>
                             </div>

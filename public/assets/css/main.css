@@ -3,6 +3,7 @@
 @import './navbar.css';
 @import './animation.css';
 @import './admin.css';
+@import './modal.css';
 
 /*Importe de css de páginas*/
 @import './catalog.css';

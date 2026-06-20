@@ -145,13 +145,13 @@
     font-size: 40px;
 }
 
-#drop-area:hover{
+#drop-area:hover {
     border: 2px dashed var(--cor-secundaria);
     color: var(--cor-secundaria);
 }
 
 
-#drop-area.drag-over{
+#drop-area.drag-over {
     border: 2px dashed var(--cor-secundaria);
     color: var(--cor-secundaria);
 }
@@ -165,6 +165,15 @@
     height: auto;
     gap: 20px;
     padding: 10px 0;
+}
+
+.empty-message {
+    padding: 12px;
+    text-align: center;
+    color: #777;
+    background: #f5f5f5;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
 }
 
 .card-imagem-preview {
@@ -203,7 +212,7 @@
 
 
 /*Tag de Imagem capa*/
-.tag-capa-img{
+.tag-capa-img {
     display: none;
     position: absolute;
     top: 10px;
@@ -213,9 +222,9 @@
     background-color: var(--cor-preto);
     border-radius: 8px;
     color: var(--cor-secundaria);
-    z-index: 2;          
-    align-items: center;       
-    justify-content: center;   
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
 }
 
@@ -257,7 +266,7 @@
 
 }
 
-.btn-capa-form-active{
+.btn-capa-form-active {
     color: var(--cor-secundaria);
 }
 
@@ -267,4 +276,3 @@
     object-fit: cover;
     filter: brightness(0.6);
 }
-

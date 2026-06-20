@@ -19,6 +19,10 @@ export function adicionarArquivo(
     textImgs
 ) {
 
+    if (imagensSelecionadas.length === 0) {
+        containerList.innerHTML = '';
+    }
+
     const imagem = {
         id: contador,
         file,
@@ -48,8 +52,11 @@ export function adicionarArquivo(
 
 export function removerPreview(
     id,
-    textImgs
+    textImgs,
+    containerList
 ) {
+
+    verificarListaVazia(containerList)
 
     const containerCard = document.querySelector(
         `#preview-imagem-${id}`
@@ -74,6 +81,8 @@ export function removerPreview(
 
     textImgs.textContent =
         imagensSelecionadas.length;
+
+    verificarListaVazia(containerList);
 
     if (eraCapa) {
 
@@ -255,7 +264,7 @@ export function mostrarPreview(
 
         btnRemover.addEventListener(
             'click',
-            () => removerPreview(id, textImgs)
+            () => removerPreview(id, textImgs, containerList)
         );
 
         btnCapa.addEventListener(
@@ -280,4 +289,25 @@ export function mostrarPreview(
     });
 
     reader.readAsDataURL(file);
+}
+
+//Elementos para quando não tiver imagens selecionadas
+
+export function verificarListaVazia(container) {
+
+    const previews =
+        container.querySelectorAll('.card-imagem-preview');
+
+    if (imagensSelecionadas.length === 0) {
+        mensageNoImagesSelect(container);
+    }
+}
+
+
+export function mensageNoImagesSelect(container) {
+    container.innerHTML = `
+        <p class="empty-message">
+            Nenhuma imagem selecionada.
+        </p>
+    `;
 }
