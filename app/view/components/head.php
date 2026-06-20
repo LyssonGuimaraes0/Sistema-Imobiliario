@@ -5,3 +5,14 @@
     <link rel="stylesheet" type="text/css" href=<?= BASE_URL . "./public/assets/css/main.css" ?>>
     <title>Imobiliaria - FA</title>
 </head>
+
+<!--Define rota padrão para JS-->
+<script>
+    // O PHP imprime a rota diretamente dentro do objeto global do JS
+    window.env = {
+        ROTA_RAIZ: "<?php echo BASE_URL  ?>"
+    };
+
+    //Variavel Global JS de raiz
+    const urlBase = window.env.ROTA_RAIZ;
+</script>

@@ -2,7 +2,8 @@
 <template id="card-template">
     <article class="card">
         <div class="card-head">
-            <img class="card-img" src= "<?= IMAGEM_URL?>/placeholder/image-not-found.png" alt="Image-not-found">
+            <!-- /placeholder/image-not-found.png -->
+            <img class="card-img" src= "<?= BASE_URL?>" alt="Image-not-found">
         </div>
         <div class="card-description">
             <h3 class="card-titulo"></h3>

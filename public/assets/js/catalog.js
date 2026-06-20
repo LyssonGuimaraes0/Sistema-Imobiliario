@@ -34,6 +34,7 @@ async function carregarImoveis(pagina) {
 
     containerCatalog.innerHTML = '';
 
+    console.log(response.data)
 
     dadosImovel.forEach(dadoImovel => {
         containerCatalog.appendChild(
@@ -127,6 +128,11 @@ function CriarCard(dadoImovel, tipo = 'default') {
     cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.bunheiro;
     cloneCard.querySelector('#item-suit').textContent += dadoImovel.suit;
     cloneCard.querySelector('.card-valor').textContent = formatTextForMoney(dadoImovel.preco.toString());
+
+    //Selecionando imagem de card
+    const imagemCard = cloneCard.querySelector('.card-img');
+
+    imagemCard.src += dadoImovel.caminho_arquivo
 
     return cloneCard;
 

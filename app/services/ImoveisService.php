@@ -58,6 +58,11 @@ class ImoveisService
 
         $dadosModel = $this->imoveisModels->getImoveis($offset, $query, $limit);
 
+        foreach ($dadosModel as &$imovel) {
+            $imovel['caminho_arquivo'] .= '/' . $imovel['nome_arquivo'];
+            unset($imovel['nome_arquivo']);
+        }
+
         return $dadosModel;
     }
 

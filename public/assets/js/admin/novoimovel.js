@@ -1,6 +1,7 @@
 import { request } from "../service/ajax.js";
 import { toggleOptions } from "../utils/navbar-admin.js";
 import { getFormData, createImovelFormData } from "../utils/form.js";
+import { showModalToast } from "../utils/modal.js";
 
 import {
     formatInputToMoney,
@@ -10,7 +11,8 @@ import {
 
 import {
     adicionarArquivo,
-    getImagens
+    getImagens,
+    mensageNoImagesSelect
 } from "../utils/image-manager.js";
 
 //Ações do formulario
@@ -63,6 +65,8 @@ const containerList =
     document.querySelector(
         '.list-imagens-select'
     );
+
+mensageNoImagesSelect(containerList);
 
 const textImgs =
     document.querySelector(
@@ -224,21 +228,50 @@ const formCreateImovel = document.querySelector('#formNovoImovel');
 formCreateImovel.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const dados = getFormData(event.target)
-    delete dados.foto
+    try {
 
-    const body = createImovelFormData(
-        dados,
-        getImagens()
-    );
+        const dados = getFormData(event.target)
+        delete dados.foto
 
-    const response = await request(
-        '../../api/imovel/create',
-        {
-            method: 'POST',
-            body
+        const body = createImovelFormData(
+            dados,
+            getImagens()
+        );
+
+        const response = await request(
+            '../../api/imovel/create',
+            {
+                method: 'POST',
+                body
+            }
+        );
+        console.log(response);
+
+        if (!response?.success) {
+            throw new Error(
+                response.error ??
+                response.message ??
+                "Erro interno do servidor"
+            );
         }
-    );
 
-    console.log(response);
+        formCreateImovel.reset();
+        containerList.innerHTML = "";
+        textImgs.textContent = "0"
+
+        mensageNoImagesSelect(containerList);
+
+        // Vai para o topo
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        showModalToast(response.data)
+
+    } catch (error) {
+        showModalToast(error, "error")
+    }
+
+
 })

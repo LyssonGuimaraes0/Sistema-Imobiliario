@@ -62,12 +62,15 @@ class ImoveisModels
                 c.banheiro,
                 c.sala_de_estar,
                 c.suite,
-                v.preco
+                v.preco,
+                a.caminho_arquivo,
+                a.nome_arquivo
                 FROM imovel AS i
                 LEFT JOIN comodos AS c ON i.id = c.fk_imovel
                 LEFT JOIN valor AS v ON i.id = v.fk_imovel
                 LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
-                LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id ";
+                LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
+                LEFT JOIN arquivos AS a ON i.fk_foto_destaque = a.id";
 
         if (isset($query) && !empty($query)) {
             $contador = 1;
