@@ -9,29 +9,31 @@ class UploadService
     public function upload(int $idImovel, array $file)
     {
 
-            //Verificar a extensão
-            if (($extensao = $this->verifyExtension($file['name'])) === false) {
-                throw new Exception('Extensão não é válida');
-            }
+        //Verificar a extensão
+        if (($extensao = $this->verifyExtension($file['name'])) === false) {
+            throw new Exception('Extensão não é válida');
+        }
 
-            //Verifica se pasta existe, caso não exista cria
-            $diretorio = $this->verifyDir($idImovel);
+        //Verifica se pasta existe, caso não exista cria
+        $diretorio = $this->verifyDir($idImovel);
 
-            //Altera nome do arquivo
-            $newNameFile = $this->gerarCodigoImovel($idImovel, $extensao);
+        //Altera nome do arquivo
+        $newNameFile = $this->gerarCodigoImovel($idImovel, $extensao);
 
-            $destino = "$diretorio/$newNameFile";
+        $destino = "$diretorio/$newNameFile";
 
-            //Move os arquivos para a pasta
-            if (!move_uploaded_file($file['tmp_name'], $destino)) {
-                throw new \Exception('Arquivo não foi pode ser salvo', 500);
-            }
+        //Move os arquivos para a pasta
+        if (!move_uploaded_file($file['tmp_name'], $destino)) {
+            throw new \Exception('Arquivo não foi pode ser salvo', 500);
+        }
 
-            //Retorna dados de imovel
-            return [
-                'nome_arquivo' => $newNameFile,
-                'caminho_arquivo' => $diretorio
-            ];
+        $diretorioFormatado = str_replace(BASE_PATH, "", $diretorio);
+
+        //Retorna dados de imovel
+        return [
+            'nome_arquivo' => $newNameFile,
+            'caminho_arquivo' => $diretorioFormatado
+        ];
     }
 
     //Verifica extenção de arquivo
@@ -63,6 +65,7 @@ class UploadService
 
         if (!is_dir($diretorio)) {
             mkdir($diretorio, 0770, true);
+
             return $diretorio;
         }
 
