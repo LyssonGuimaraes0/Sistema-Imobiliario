@@ -15,9 +15,10 @@ $router = [
         '/admin/login' => web('LoginController','index'),
 
         //Páginas de ADMIN
-        '/admin/dashboard' => web('admin\DashboardController','index'),
-        '/admin/imoveis' => web('admin\ImoveisController','index'),
-        '/admin/imoveis/create' => web('admin\ImoveisController','create'),
+        '/admin/dashboard' => web('admin\ImoveisController','index'),
+        '/admin/imoveis' => web('admin\ImoveisController','searchImovel'),
+        '/admin/imoveis/create' => web('admin\ImoveisController','createImovel'),
+        '/admin/imoveis/edit/{id}' => web('admin\ImoveisController','editImovel'),
 
         //Sessão de Chamadas API GET
         '/api/imoveis/' => api('ImoveisApiController', 'index'),

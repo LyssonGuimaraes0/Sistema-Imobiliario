@@ -106,7 +106,7 @@ class ImoveisModels
         $sql = "SELECT i.nome_imovel,
         i.area_total,
         i.area_util,
-        i.estado_imovel,
+        i.descricao,
         e.estado,
         e.municipio,
         e.bairro,
@@ -119,7 +119,8 @@ class ImoveisModels
         c.sala_de_estar,
         c.suite,
         c.garagem,
-        c.cozinha
+        c.cozinha,
+        ti.tipo
         FROM imovel AS i 
         LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id
         LEFT JOIN comodos AS c ON i.id = c.fk_imovel

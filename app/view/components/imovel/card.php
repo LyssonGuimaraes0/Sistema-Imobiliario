@@ -1,6 +1,6 @@
 <!--Card Default-->
 <template id="card-template">
-    <article class="card">
+    <article class="card" data-card="">
         <div class="card-head">
             <!-- /placeholder/image-not-found.png -->
             <img class="card-img" src= "<?= BASE_URL?>" alt="Image-not-found">
