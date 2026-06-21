@@ -122,11 +122,11 @@ function CriarCard(dadoImovel, tipo = 'default') {
     }
     //Adição de Elementos a cards
     cloneCard.querySelector('.card-titulo').textContent = dadoImovel.nome_imovel;
-    cloneCard.querySelector('.card-dimensao').innerHTML = `${dadoImovel.dimensao}<sup>2</sup>m`
+    cloneCard.querySelector('.card-dimensao').innerHTML = `${dadoImovel.area_total}<sup>2</sup>m`
     cloneCard.querySelector('#item-quarto').textContent += dadoImovel.quarto;
     cloneCard.querySelector('#item-sala_estar').textContent += dadoImovel.sala_de_estar;
-    cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.bunheiro;
-    cloneCard.querySelector('#item-suit').textContent += dadoImovel.suit;
+    cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.banheiro;
+    cloneCard.querySelector('#item-suit').textContent += dadoImovel.suite;
     cloneCard.querySelector('.card-valor').textContent = formatTextForMoney(dadoImovel.preco.toString());
 
     //Selecionando imagem de card

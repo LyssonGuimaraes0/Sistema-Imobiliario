@@ -1,35 +1,39 @@
-//Formata texto para so permitir numeros
-
+// Formata texto para só permitir números (Protegido contra null/undefined/vazio)
 export function formatTextToNumber(valor) {
-    return valor = valor.replace(/\D/g, '');
+    if (valor === undefined || valor === null) return '';
+    return String(valor).replace(/\D/g, '');
 }
 
-//Formata texto para so permitir string sem caracteres
+// Formata texto para só permitir string sem caracteres especiais
 export function formatTextToString(valor) {
-    return valor = valor.replace(/[^a-zA-ZÀ-ÿ0-9 .,´`]/g, '');
+    if (valor === undefined || valor === null) return '';
+    return String(valor).replace(/[^a-zA-ZÀ-ÿ0-9 .,´`]/g, '');
 }
 
-//Converte para estilo de dinhero
+// Converte para estilo de dinheiro
 export function formatInputToMoney(valor) {
-    valor = formatTextToNumber(valor);
+    
+    let valorLimpo = formatTextToNumber(valor);
 
-    valor = valor.padStart(3, '0');
+    if (!valorLimpo || valorLimpo === '0') {
+        valorLimpo = '000';
+    }
 
-    let inteiro = valor.slice(0, -2);
-    const decimal = valor.slice(-2);
 
-    //Evita numeros 00 antes do input
-    inteiro = inteiro.replace(/^0+/, '') || '0';
+    valorLimpo = valorLimpo.padStart(3, '0');
+
+    const inteiro = valorLimpo.slice(0, -2).replace(/^0+/, '') || '0';
+    const decimal = valorLimpo.slice(-2);
 
     return formatTextForMoney(inteiro, decimal);
 }
 
 export function formatTextForMoney(inteiro, decimal) {
-    inteiro = inteiro.replace(
-        /\B(?=(\d{3})+(?!\d))/g,
-        '.'
-    );
+    // Adiciona os pontos de milhar
+    const inteiroFormatado = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    
+    // Força o decimal a ter sempre 2 dígitos por segurança contra undefined
+    const decimalFormatado = String(decimal || '00').padStart(2, '0');
 
-    return `R$ ${inteiro},${decimal}`;
+    return `R$ ${inteiroFormatado},${decimalFormatado}`;
 }
-

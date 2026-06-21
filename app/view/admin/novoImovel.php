@@ -48,10 +48,10 @@
                                         <label class="label-form-imovel label-form-imovel-required">Tipo de Imovel</label>
                                         <select class="input-default-select" name="tipo-imovel">
                                             <option value="" hidden selected>Selecione Tipo Imovel</option>
-                                            <option value="residencial">Residencial</option>
-                                            <option value="comercial">Comercial</option>
-                                            <option value="terreno">Terreno</option>
-                                            <option value="especial">Especial</option>
+                                            <option value="1">Residencial</option>
+                                            <option value="2">Comercial</option>
+                                            <option value="3">Terreno</option>
+                                            <option value="4">Especial</option>
                                         </select>
                                         <div class="dropdown-input-element">
                                         </div>
@@ -85,18 +85,18 @@
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Modalidade</label>
                                         <select class="input-default-select" name="modalidade" required>
-                                            <option value="" selected>Nenhum</option>
-                                            <option value="">Venda</option>
-                                            <option value="">Aluguel</option>
-                                            <option value="">Permuta</option>
+                                            <option hidden selected>Nenhum</option>
+                                            <option value="venda">Venda</option>
+                                            <option value="aluguel">Aluguel</option>
+                                            <option value="permuta">Permuta</option>
                                         </select>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel">Destaque</label>
-                                        <select class="input-default-select" name="destaque" required>
-                                            <option value="" selected>Nenhum</option>
-                                            <option value="">Destaque</option>
-                                            <option value="">Lançamento</option>
+                                        <select class="input-default-select" name="destaque">
+                                            <option value="1" selected>Nenhum</option>
+                                            <option value="2">Destaque</option>
+                                            <option value="3">Lançamento</option>
                                         </select>
                                     </div>
                                 </div>

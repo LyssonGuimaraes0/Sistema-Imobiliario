@@ -57,7 +57,8 @@ class ImoveisModels
         //Preparação do SQL
 
         $sql = "SELECT i.nome_imovel,
-                i.dimensao,
+                i.area_total,
+                i.area_util,
                 c.quarto,
                 c.banheiro,
                 c.sala_de_estar,
@@ -102,7 +103,8 @@ class ImoveisModels
     public function getImoveisById(int $id)
     {
         $sql = "SELECT i.nome_imovel,
-        i.dimensao,
+        i.area_total,
+        i.area_util,
         i.estado_imovel,
         e.estado,
         e.municipio,
@@ -181,16 +183,18 @@ class ImoveisModels
             $idEndereco = $this->conn->lastInsertId();
 
             //Preparação do SQL de Imovel
-            $sqlImovel = "INSERT INTO imovel (nome_imovel, dimensao, estado_imovel, fk_tipo_imovel, fk_endereco) 
-                      VALUES (:nome, :dimensao, :estado_imovel, :fk_tipo_imovel, :fk_endereco)";
+            $sqlImovel = "INSERT INTO imovel (nome_imovel, area_total, area_util, descricao, fk_tipo_imovel, fk_endereco, fk_tipo_destaque) 
+                      VALUES (:nome, :area_total, :area_util , :descricao, :fk_tipo_imovel, :fk_endereco, :fk_tipo_destaque)";
 
             $stmtImovel = $this->conn->prepare($sqlImovel);
 
             // Vinculando as variáveis do imóvel
             $stmtImovel->bindParam(':nome', $dados['nome_imovel'], PDO::PARAM_STR);
-            $stmtImovel->bindParam(':dimensao', $dados['dimensao'], PDO::PARAM_STR); // ou PARAM_INT dependendo do seu banco
-            $stmtImovel->bindParam(':estado_imovel', $dados['estado_imovel'], PDO::PARAM_STR);
-            $stmtImovel->bindParam(':fk_tipo_imovel', $dados['fk_tipo_imovel'], PDO::PARAM_INT);
+            $stmtImovel->bindParam(':area_total', $dados['area_total'], PDO::PARAM_INT);
+            $stmtImovel->bindParam(':area_util', $dados['area_util'], PDO::PARAM_INT); // ou PARAM_INT dependendo do seu banco
+            $stmtImovel->bindParam(':descricao', $dados['descricao'], PDO::PARAM_STR);
+            $stmtImovel->bindParam(':fk_tipo_imovel', $dados['tipo_imovel'], PDO::PARAM_INT);
+            $stmtImovel->bindParam(':fk_tipo_destaque', $dados['destaque'], PDO::PARAM_INT);
             $stmtImovel->bindParam(':fk_endereco', $idEndereco, PDO::PARAM_INT); // ID que veio do Passo 1
 
             $stmtImovel->execute();
