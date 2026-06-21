@@ -1,5 +1,5 @@
 /*Estrutura Padrão da Página admin*/
-.layout-admin{
+.layout-admin {
     display: grid;
     grid-template-columns: 240px 1fr;
     min-height: 100vh;
@@ -40,17 +40,24 @@
 
 /*Corpo da pagina de admin*/
 
-.admin-body{
+.admin-body {
     padding: 20px;
     margin: 5px;
 }
 
 /*Container padrão admin*/
 
-.container-card-admin{
+.container-card-admin {
     width: 100%;
     height: auto;
     background-color: var(--cor-cinza-escuro);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.container-admin {
+    width: 100%;
+    height: auto;
     border-radius: 8px;
     padding: 20px;
 }

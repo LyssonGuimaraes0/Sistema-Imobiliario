@@ -6,6 +6,7 @@
         /* Transforma o card em um container flexível */
         flex-direction: column;
         border: 2px solid var(--cor-cinza-claro);
+        cursor: pointer;
     }
 
     .card-head {
