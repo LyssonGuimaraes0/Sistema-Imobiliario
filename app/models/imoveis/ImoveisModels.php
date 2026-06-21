@@ -56,7 +56,8 @@ class ImoveisModels
 
         //Preparação do SQL
 
-        $sql = "SELECT i.nome_imovel,
+        $sql = "SELECT i.id, 
+                i.nome_imovel,
                 i.area_total,
                 i.area_util,
                 c.quarto,
@@ -70,6 +71,7 @@ class ImoveisModels
                 LEFT JOIN comodos AS c ON i.id = c.fk_imovel
                 LEFT JOIN valor AS v ON i.id = v.fk_imovel
                 LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
+                LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id
                 LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
                 LEFT JOIN arquivos AS a ON i.fk_foto_destaque = a.id";
 
@@ -89,7 +91,6 @@ class ImoveisModels
 
 
         $sql .= " LIMIT {$limit} offset {$offset}";
-
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();

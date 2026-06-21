@@ -239,7 +239,7 @@ formCreateImovel.addEventListener('submit', async (event) => {
         );
 
         const response = await request(
-            '../../api/imovel/create',
+            `${urlBase}/api/imovel/create`,
             {
                 method: 'POST',
                 body

@@ -18,7 +18,7 @@ logout.addEventListener('click', async function () {
     }
 
     try {
-        response = await request('http://localhost/trabalhos/imobiliaria/api/auth/logout', options);
+        response = await request(`${urlBase}/api/auth/logout`, options);
 
 
         if (!response || response.success === false) {

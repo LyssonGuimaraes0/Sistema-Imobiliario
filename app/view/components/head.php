@@ -10,7 +10,7 @@
 <script>
     // O PHP imprime a rota diretamente dentro do objeto global do JS
     window.env = {
-        ROTA_RAIZ: "<?php echo BASE_URL  ?>"
+         ROTA_RAIZ: "<?php echo $_ENV['RAIZ_URL']; ?>"
     };
 
     //Variavel Global JS de raiz

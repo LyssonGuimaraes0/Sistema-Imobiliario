@@ -26,15 +26,13 @@ export async function request(url, options = {}) {
             throw new Error(`Erro HTTP: ${response.status}`);
         }
 
-        //Testes de resposta de servidor
+/*         //Testes de resposta de servidor
 
-/*      const text = await response.text();
+        const clone = response.clone();
 
-        console.log('RESPOSTA BRUTA:', text);
+        console.log('RESPOSTA BRUTA:', await clone.text()); */
 
-        return text; */
-
-        return await response.json(); 
+        return await response.json();
 
     } catch (error) {
         return {

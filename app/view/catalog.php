@@ -17,15 +17,33 @@
                     </div>
                     <div class="container-input-header">
                         <span>Categoria</span>
-                        <input class="input-default input-header" placeholder="Categoria" type="text" id="input-category">
+                        <select class="input-default input-header" name="tipo" id="" data-filter="fk_tipo_destaque">
+                            <option value="" selected hidden>Selecione</option>
+                            <option value="1">Nenhum</option>
+                            <option value="2">Destaque</option>
+                            <option value="3">Lançamento</option>
+                        </select>
                     </div>
                     <div class="container-input-header">
                         <span>Tipo do Imovel</span>
-                        <input class="input-default input-header" placeholder="Tipo do Imovel" type="text" id="input-type" data-filter="tipo">
+                        <select class="input-default input-header" name="tipo" id="" data-filter="fk_tipo_imovel">
+                            <option value="" selected hidden>Selecione</option>
+                            <option value="">Nenhum</option>
+                            <option value="1">Residencial</option>
+                            <option value="2">Comercial</option>
+                            <option value="3">Terreno</option>
+                            <option value="4">Especial</option>
+                        </select>
                     </div>
                     <div class="container-input-header">
                         <span>Finalidade</span>
-                        <input class="input-default input-header" placeholder="Finalidade" type="text" id="input-modality" data-filter="modalidade">
+                        <select class="input-default input-header" name="tipo" id="" data-filter="modalidade">
+                            <option  value="" selected hidden>Selecione</option>
+                            <option value="">Nenhum</option>
+                            <option value="venda">Venda</option>
+                            <option value="aluguel">Aluguel</option>
+                            <option value="permuta">Permuta</option>
+                        </select>
                     </div>
                     <div class="container-input-header">
                         <button class="btn-default btn-blue btn-header-catalog" id="btn-filter-header">Buscar</button>
@@ -119,7 +137,7 @@
 
     </section>
 
-    <script type="module" src=<?= SCRIPT_URL . "/catalog.js" ?>></script>
+    <script type="module" src=<?= SCRIPT_URL . "/service/catalog.js" ?>></script>
 
 </body>
 

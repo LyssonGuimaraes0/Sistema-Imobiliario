@@ -38,7 +38,7 @@ formLogin.addEventListener('submit', async (event) => {
     let response;
 
     try {
-        response = await request('http://localhost/trabalhos/imobiliaria/api/auth/login', options);
+        response = await request(`${urlBase}/api/auth/login`, options);
 
 
         if (!response || response.success === false) {
@@ -46,7 +46,7 @@ formLogin.addEventListener('submit', async (event) => {
         }
 
         //Login conseguiu ser cadastrado
-        window.location.href = "/trabalhos/imobiliaria/admin/dashboard";
+        window.location.href = `${urlBase}/admin/dashboard`;
         
     } catch (error) {
         textErro.style.display = 'block';
