@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <?php include_once VIEW_PATH . '/components/head.php'; ?>
 
-
 <body class="layout-admin">
     <!--Navbar Admin-->
     <?php include_once VIEW_PATH . "/components/admin/navbar-admin.php" ?>
@@ -24,9 +23,15 @@
                 <div class="admin-home-rigth"></div>
             </div>
             <div class="admin-body">
-                <div class="titulo-imoveis">
-                    <h2>Editar Imóvel</h2>
-                    <span>Verifique ou altere as informações do Imóvel</span>
+                <div class="info-imovel-head">
+                    <div class="titulo-imoveis">
+                        <h2>Editar Imóvel</h2>
+                        <span>Verifique ou altere as informações do Imóvel</span>
+                    </div>
+                    <div class="info-imovel-btns">
+                        <button class="btn-default btn-info-imovel"><i class="fa-solid fa-pen-to-square"></i>Editar Imovel</button>
+                        <button class="btn-default btn-info-imovel"><i class="fa-solid fa-trash-can"></i>Excluir Imovel</button>
+                    </div>
                 </div>
                 <div class="container-card-admin">
                     <!--Container Formulario-->
@@ -39,14 +44,41 @@
                         </div>
                         <form action="" id="formNovoImovel">
                             <div class="body-form-imovel">
+
+                                <!--Sessão de Imagens-->
+                                <div class="container-imagens-imovel">
+                                    <div class="container-imagem-capa">
+                                        <div class="tag-capa-img" style="display: flex;">
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>Capa do anúncio</span>
+                                        </div>
+                                        <img class="img-cover-container" src=<?= BASE_URL . $capa ?> alt="">
+                                    </div>
+
+
+                                    <div class="container-imagem-segundaria">
+                                        <?php foreach ($imagens as $ordem => $imagem): ?>
+
+                                            <div class="item-imagem">
+                                                <img class="img-cover-container" src=<?= BASE_URL . $imagem ?> alt="">
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <!-- <div class="contaiener-imagem-form" id="drop-area">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <span>Arraste e solte ou clique aqui para subir uma imagem</span>
+                                    <input class="" type="file" name="foto" id="fileInput" accept="image/*" hidden>
+                                </div> -->
+
                                 <div class="container-input-header">
                                     <label class="label-form-imovel label-form-imovel-required">Titulo do anúncio</label>
-                                    <input class="input-default input-header input-header-first"  value="<?= htmlspecialchars($dateImovel['nome_imovel']) ?>" name="nome_imovel" type="text" readonly disabled>
+                                    <input class="input-default input-header input-header-first" value="<?= htmlspecialchars($dateImovel['nome_imovel']) ?>" name="nome_imovel" type="text" readonly disabled>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Tipo de Imovel</label>
-                                        <select class="input-default-select" name="tipo-imovel">
+                                        <select class="input-default-select" disabled name="tipo-imovel">
                                             <option value="1">Residencial</option>
                                             <option value="2">Comercial</option>
                                             <option value="3">Terreno</option>
@@ -58,7 +90,7 @@
                                 </div>
                                 <div class="container-input-form">
                                     <label class="label-form-imovel">Descrição</label>
-                                    <textarea class="input-default textarea-form-imovel"  name="descricao" disabled readonly><?= htmlspecialchars($dateImovel['descricao']) ?>
+                                    <textarea class="input-default textarea-form-imovel" name="descricao" disabled readonly><?= htmlspecialchars($dateImovel['descricao']) ?>
                                     </textarea>
                                 </div>
                             </div>
@@ -73,7 +105,7 @@
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Preço do Imovel</label>
-                                        <input class="input-default"  value="<?= htmlspecialchars($dateImovel['preco']) ?>" name="preco" type="text" disabled readonly>
+                                        <input class="input-default" value="<?= htmlspecialchars($dateImovel['preco']) ?>" name="preco" type="text" disabled readonly>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel">Condominio <small>(opcional)</small></label>
@@ -187,58 +219,37 @@
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">CEP</label>
-                                        <input class="input-default" placeholder="Ex:00000-000" id="cep-input" name="cep" type="text">
+                                        <input class="input-default" value="<?= htmlspecialchars($dateImovel['CEP']) ?>" id="cep-input" name="cep" type="text" disabled readonly>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Rua/Longradouro</label>
-                                        <input class="input-default" placeholder="Ex:Rua exemplo" name="rua" type="text">
+                                        <input class="input-default" value="<?= htmlspecialchars($dateImovel['rua']) ?>" name="rua" type="text" disabled readonly>
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Número</label>
-                                        <input class="input-default" placeholder="Ex:00" maxlength="3" id="numero-input" name="numero" type="text">
+                                        <input class="input-default" value="<?= htmlspecialchars($dateImovel['numero']) ?>" maxlength="3" id="numero-input" name="numero" type="text" disabled readonly>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Complemento</label>
-                                        <input class="input-default" placeholder="Ex:Exemplo" name="complemento" type="text">
+                                        <input class="input-default" placeholder="Ex:Exemplo" name="complemento" type="text" disabled readonly>
                                     </div>
                                 </div>
                                 <div class="row-form-imovel">
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Bairro</label>
-                                        <input class="input-default" placeholder="Ex:Sâo Cristovão" name="bairro" type="text">
+                                        <input class="input-default" value=<?= htmlspecialchars($dateImovel['bairro']) ?> name="bairro" type="text" disabled readonly>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Municipio</label>
-                                        <input class="input-default" placeholder="Ex:Salvador" name="municipio" type="text">
+                                        <input class="input-default" value=<?= htmlspecialchars($dateImovel['municipio']) ?> name="municipio" type="text" disabled readonly>
                                     </div>
                                     <div class="container-input-form">
                                         <label class="label-form-imovel label-form-imovel-required">Estado</label>
-                                        <select class="input-default-select" name="estado" required>
+                                        <select class="input-default-select" name="estado" required disabled readonly>
                                             <option value="BA" selected>BA</option>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="div-separetion"></div>
-                            <div class="head-form-imovel">
-                                <div class="menu-title-form">
-                                    <i class="fa-solid fa-images"></i>
-                                    <h3>Fotos</h3>
-                                </div>
-                            </div>
-                            <div class="body-form-imovel">
-                                <div class="contaiener-imagem-form" id="drop-area">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                    <span>Arraste e solte ou clique aqui para subir uma imagem</span>
-                                    <input class="" type="file" name="foto" id="fileInput" accept="image/*" hidden>
-                                </div>
-                                <div class="container-imagem-preview">
-                                    <span>Fotos adicionadas (<span id="text-imgs-upload">0</span>) </span>
-                                    <?php require_once COMPONENTS_PATH . '/admin/card-admin.php'; ?>
-                                    <div class="list-imagens-select">
-
                                     </div>
                                 </div>
                             </div>
@@ -256,3 +267,4 @@
 </body>
 
 </html>
+<script type="module" src=<?= SCRIPT_URL . "/admin/admin.js" ?>></script>

@@ -1,3 +1,5 @@
+import { request } from '../service/ajax.js';
+
 //Criação de elememento ao clicar em footer usuario da navbar admin
 
 export function toggleOptions(footerSelector, optionsSelector) {
@@ -21,3 +23,39 @@ export function toggleOptions(footerSelector, optionsSelector) {
         }
     });
 }
+
+export function logout() {
+
+    const logout = document.querySelector('#logout');
+
+    if (!logout) return;
+
+    logout.addEventListener('click', async function () {
+
+        const options = {
+            method: 'POST'
+        };
+
+        try {
+
+            const response = await request(
+                `${urlBase}/api/auth/logout`,
+                options
+            );
+
+            if (!response || response.success === false) {
+                throw new Error(response?.error);
+            }
+
+            window.location.href =
+                "/trabalhos/imobiliaria/admin/login";
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    });
+}
+
+
+

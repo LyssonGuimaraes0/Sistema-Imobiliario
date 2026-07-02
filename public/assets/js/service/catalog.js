@@ -50,8 +50,7 @@ dadosImovel = response.data.data;
 
 
 try {
-    const response = await request(
-        'http://localhost/trabalhos/imobiliaria/api/imoveis/' + queryParams
+    const response = await request(`${urlBase}/api/imoveis/` + queryParams
     );
 
     totalPaginas = response.data.pagination.total_paginas;
@@ -99,7 +98,7 @@ btnFilterHeader.addEventListener('click', async function () {
     btnFilterHeader.disabled = true;
 
     try {
-        const response = await request('http://localhost/trabalhos/imobiliaria/api/imoveis/?' + queryFilter)
+        const response = await request(`${urlBase}/api/imoveis/?` + queryFilter)
 
         //Atualiza URL com filtros
         paginaAtual = 1;

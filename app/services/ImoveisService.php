@@ -74,6 +74,27 @@ class ImoveisService
         return $dadosModel;
     }
 
+
+    public function getAllDateImovelById(int $id)
+    {
+        //Coleta dados do Imovel
+        $dadosModel = $this->imoveisModels->getImoveisById($id);
+
+        if (!$dadosModel) {
+            throw new Exception("Imóvel não encontrado.");
+        }
+
+        $dadosModel['imagens'] = $this->imoveisModels->getImagesByImovel($id);
+
+        return $dadosModel;
+    }
+
+
+
+
+
+
+
     //Coleta Endereço do Imovel
     public function getDadosAddressImoveis()
     {

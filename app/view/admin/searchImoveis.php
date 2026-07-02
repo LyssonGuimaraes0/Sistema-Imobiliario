@@ -104,7 +104,7 @@
         </section>
     </main>
 
-
+    <script type="module" src=<?= SCRIPT_URL . "/admin/admin.js" ?>></script>
     <script type="module" src=<?= SCRIPT_URL . "/service/catalog.js" ?>></script>
     <script src=<?= SCRIPT_URL . "/admin/searchImovel.js" ?>></script>
 </body>

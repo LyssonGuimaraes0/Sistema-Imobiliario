@@ -100,7 +100,7 @@ class ImoveisModels
         return $dados;
     }
 
-    //====================Buscar Dados de Imoveis Por ID=================================
+    //====================Buscar Dados basicos de Imoveis Por ID=================================
     public function getImoveisById(int $id)
     {
         $sql = "SELECT i.nome_imovel,
@@ -111,6 +111,8 @@ class ImoveisModels
         e.municipio,
         e.bairro,
         e.CEP,
+        e.rua,
+        e.numero,
         v.preco,
         v.condominio,
         v.modalidade,
@@ -134,6 +136,28 @@ class ImoveisModels
         $stmt->execute();
 
         return $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    //====================Buscar Imagens do Imoveis Por ID=================================
+    public function getImagesByImovel(int $id): array
+    {
+        $sql = "SELECT
+                CONCAT(caminho_arquivo, '/', nome_arquivo) AS arquivo,
+                ordem
+            FROM arquivos
+            WHERE fk_imovel = :id
+            ORDER BY ordem";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+
+        $stmt->execute();
+
+        return array_column(
+        $stmt->fetchAll(PDO::FETCH_ASSOC),
+        'arquivo',
+        'ordem'
+    );
     }
 
     //====================Buscar Nomes de endereços de Imoveis =================================
@@ -168,8 +192,8 @@ class ImoveisModels
             $this->conn->beginTransaction();
 
             //Preparação do SQL de Endereço
-            $sqlEndereco = "INSERT INTO endereco_imovel (bairro, bairro_slug, municipio, estado, CEP) 
-                        VALUES (:bairro, :bairro_slug, :municipio, :estado, :cep)";
+            $sqlEndereco = "INSERT INTO endereco_imovel (bairro, bairro_slug, municipio, estado, CEP, rua, numero) 
+                        VALUES (:bairro, :bairro_slug, :municipio, :estado, :cep, :rua, :numero)";
 
             $stmtEnd = $this->conn->prepare($sqlEndereco);
 
@@ -179,6 +203,8 @@ class ImoveisModels
             $stmtEnd->bindParam(':municipio', $dados['municipio'], PDO::PARAM_STR);
             $stmtEnd->bindParam(':estado', $dados['estado'], PDO::PARAM_STR);
             $stmtEnd->bindParam(':cep', $dados['cep'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':rua', $dados['rua'], PDO::PARAM_STR);
+            $stmtEnd->bindParam(':numero', $dados['numero'], PDO::PARAM_STR);
 
             $stmtEnd->execute();
 
@@ -304,7 +330,6 @@ class ImoveisModels
             $this->conn->commit();
 
             return;
-            
         } catch (\PDOException $e) {
             // Se houver qualquer falha em qualquer tabela, desfaz o banco inteiro
             $this->conn->rollBack();

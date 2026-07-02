@@ -253,7 +253,7 @@
         </section>
     </main>
 
-
+    <script type="module" src=<?= SCRIPT_URL . "/admin/admin.js" ?>></script>
     <script type="module" src=<?= SCRIPT_URL . "/admin/novoimovel.js" ?>></script>
 </body>
 
