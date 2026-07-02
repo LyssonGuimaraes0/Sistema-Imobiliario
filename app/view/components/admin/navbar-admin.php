@@ -10,7 +10,7 @@
         <div class="body-navbar-admin">
             <div class="container-navbar-admin">
                 <span>Geral</span>
-                
+
                 <a class="menu-item" href=<?= ADMIN_URL . "/dashboard" ?>><i class="fa-solid fa-border-all"></i> Dashboard</a>
             </div>
             <div class="container-navbar-admin">
@@ -28,16 +28,16 @@
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="user-credencial">
-                <span>Usuario</span>
-                <span>email@gmail.com</span>
+                <span>Administrador</span>
             </div>
 
 
             <!--Dropdown para libera mais opcões-->
             <div class="options-footer-admin" id="menu">
-                 <a class="menu-item" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+                <a class="menu-item" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
             </div>
         </div>
 
     </nav>
 </aside>
+

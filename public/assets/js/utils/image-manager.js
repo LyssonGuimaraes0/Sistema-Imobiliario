@@ -180,6 +180,26 @@ export function adicionarCapa(id) {
             imagem => imagem.id === id
         );
 
+    // NOVO: Localiza a imagem que atualmente é a capa
+    const imagemAnterior =
+        imagensSelecionadas.find(
+            imagem => imagem.id === imagemPrincipal
+        );
+
+    // NOVO: Troca a ordem entre a capa antiga e a nova
+    if (
+        imagemSelecionada &&
+        imagemAnterior &&
+        imagemSelecionada.id !== imagemAnterior.id
+    ) {
+
+        const ordemAnterior =
+            imagemSelecionada.ordem;
+
+        imagemSelecionada.ordem = 0;
+        imagemAnterior.ordem = ordemAnterior;
+    }
+
     if (imagemSelecionada) {
         imagemSelecionada.capa = true;
     }
