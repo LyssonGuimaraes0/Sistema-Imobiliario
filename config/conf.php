@@ -27,7 +27,7 @@ define('ASSETS_PATH', PUBLIC_PATH . '/assets');
 
 
 //Caminho URL
-define('BASE_URL', '/trabalhos/imobiliaria');
+define('BASE_URL', $_ENV['RAIZ_URL']);
 define('IMAGEM_URL', '/trabalhos/imobiliaria/public/assets/images');
 define('SCRIPT_URL', BASE_URL . "/public" .  '/assets/js');
 define('ADMIN_URL',  BASE_URL . "/admin");

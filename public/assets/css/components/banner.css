@@ -1,0 +1,157 @@
+/*Banner*/
+.banner {
+    position: relative;
+    min-height: 700px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/*Configuração de Imagem Background*/
+
+.banner-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+    transform: scale(1.05);
+    object-fit: cover;
+    z-index: 0;
+}
+
+/*bluer em background Imagem*/
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--cor-secundaria);
+    opacity: .45;
+    z-index: 1;
+}
+
+/*body banner*/
+
+.banner-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 2;
+}
+
+/*Textos do banner*/
+
+.banner-content {
+    color: var(--cor-primaria);
+}
+
+.banner-subtitle {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.banner-title {
+    font-size: 3.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.banner-description {
+    max-width: 52rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/*Container de pesquisa banner*/
+
+.banner-search {
+    max-width: 890px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--cor-primaria);
+    margin-top: 10px;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.banner-search h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--cor-secundaria);
+}
+
+.banner-search span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--cor-cinza-escuro);
+}
+
+/*lista de filtro*/
+
+.banner-filter {
+    display: flex;
+    gap: 16px;
+    align-items: end;
+}
+
+.banner-filter label {
+    color: var(--cor-secundaria);
+}
+
+
+.item-banner-filter {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.item-banner-filter input {
+    padding: 12px 12px 12px 48px;
+}
+
+/*botão buscar*/
+
+.btn-search {
+    height: 42px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 8px;
+    background: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    cursor: pointer;
+}
+
+/*Mobile*/
+
+@media (max-width: 920px) {
+    .banner-search {
+        height: auto;
+    }
+
+    .banner-filter {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .item-banner-filter {
+        width: 100%;
+    }
+
+    .item-banner-filter select,
+    .search-box{
+        width: 100%;
+        max-width: 500px !important;
+    }
+}

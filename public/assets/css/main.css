@@ -1,9 +1,12 @@
 /*Importe de Componetes reutilizaveis*/
-@import './card.css';
-@import './navbar.css';
-@import './animation.css';
-@import './admin.css';
-@import './modal.css';
+@import './components/card.css';
+@import './components/navbar-admin.css';
+@import './components/navbar.css';
+@import './components/animation.css';
+@import './components/admin.css';
+@import './components/modal.css';
+@import './components/banner.css';
+@import './components/footer.css';
 
 /*Importe de css de páginas*/
 @import './catalog.css';
@@ -17,7 +20,7 @@
 :root {
     /* Cor padrões para o site*/
     --cor-primaria: #FFFFFF;
-    --cor-secundaria: #2c88d9;
+    --cor-secundaria: #0C57E3;
     --cor-cinza-claro: #c2ccd4;
     --cor-branco-fantasma: #f7f9fa;
     --cor-cinza-escuro: #424654;
@@ -68,9 +71,16 @@ a {
 }
 
 label {
-    margin-bottom: 8px;
     color: var(--cor-texto-segundario);
     font-size: 16px;
+}
+
+/*section-container*/
+.section-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 32px;
 }
 
 /*Text area*/
@@ -135,7 +145,7 @@ textarea {
     border-color: var(--cor-texto-segundario);
 }
 
-select:disabled{
+select:disabled {
     background-color: var(--cor-cinza-claro);
     pointer-events: none;
     cursor: not-allowed;

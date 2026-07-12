@@ -3,6 +3,9 @@
 <?php include_once VIEW_PATH . '/components/head.php'; ?>
 
 <body>
+    <!--Navbar-->
+    <?php include_once COMPONENTS_PATH . '/navbar.php'; ?>
+
     <section class="section-catalog" id="catalog">
         <div class="container-section">
             <div class="header-catalog">
@@ -38,7 +41,7 @@
                     <div class="container-input-header">
                         <span>Finalidade</span>
                         <select class="input-default input-header" name="tipo" id="" data-filter="modalidade">
-                            <option  value="" selected hidden>Selecione</option>
+                            <option value="" selected hidden>Selecione</option>
                             <option value="">Nenhum</option>
                             <option value="venda">Venda</option>
                             <option value="aluguel">Aluguel</option>
@@ -136,6 +139,10 @@
             </div>
 
     </section>
+
+
+    <!--Footer-->
+    <?php require_once COMPONENTS_PATH . '/footer.php'; ?>
 
     <script type="module" src=<?= SCRIPT_URL . "/service/catalog.js" ?>></script>
 
