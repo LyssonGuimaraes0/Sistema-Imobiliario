@@ -1,6 +1,6 @@
 <footer class="footer">
     <div class="section-container">
-        <div class="footer-content">
+        <div class="footer-content section-body">
             <!-- Logo / Descrição -->
             <div class="footer-column">
                 <a href="/" class="footer-logo">

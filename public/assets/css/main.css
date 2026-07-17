@@ -9,6 +9,7 @@
 @import './components/footer.css';
 
 /*Importe de css de páginas*/
+@import './home.css';
 @import './catalog.css';
 @import './login.css';
 @import './dashboard.css';
@@ -86,6 +87,10 @@ label {
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 32px;
+}
+
+.section-body{
+    padding: 40px 0;
 }
 
 /*Text area*/

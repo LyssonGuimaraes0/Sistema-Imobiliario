@@ -1,0 +1,77 @@
+/*Section Sobre Mim*/
+.about-me {
+    width: 100%;
+    height: auto;
+    background-color: var(--cor-secundaria);
+}
+
+.about-body {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+/*Configuraçãos de Conteudo*/
+
+.about-image,
+.about-content {
+    flex-basis: 450px;
+    flex-grow: 1;
+}
+
+.about-image {
+    max-width: 450px;
+    height: 450px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--cor-primaria);
+}
+
+.about-info {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.about-info div {
+    text-align: center;
+}
+
+@media(max-width:768px) {
+
+    .about-body {
+        flex-direction: column;
+    }
+
+    .about-info {
+        justify-content: space-between;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .about-image{
+        flex-basis: 380px;
+    }
+}
+
+@media (max-width: 382px) {
+    .about-image{
+        flex-basis: 340px;
+    }
+}

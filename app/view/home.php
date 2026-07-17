@@ -76,11 +76,54 @@
         </div>
     </section>
 
+    <!--Sobre Mim-->
+    <section class="about-me">
+        <div class="section-container">
+            <div class="about-body section-body">
+                <div class="about-image">
+                    <img src="<?= IMAGEM_URL . "/placeholder/image-not-found.png" ?>" alt="Foto do Corretor">
+                </div>
+
+
+                <div class="about-content">
+                    <h2>Sobre Mim</h2>
+
+                    <p>Atendimento personalizado para encontrar o imóvel ideal.</p>
+
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, culpa libero eaque tenetur, qui rem asperiores blanditiis quia temporibus cum quis eum deserunt, earum excepturi debitis. Numquam animi doloribus explicabo.
+                    </p>
+
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi voluptas sapiente assumenda, esse, modi, aperiam animi impedit repellendus est id aliquam odit repellat. Corporis repellat velit delectus. Repudiandae, eos dolores?
+                    </p>
+
+                    <div class="about-info">
+                        <div>
+                            <h3>+150</h3>
+                            <span>Imóveis</span>
+                        </div>
+
+                        <div>
+                            <h3>8+</h3>
+                            <span>Anos de experiência</span>
+                        </div>
+
+                        <div>
+                            <h3>100%</h3>
+                            <span>Atendimento personalizado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!--Footer-->
     <?php include_once COMPONENTS_PATH . '/footer.php'; ?>
 
 
-    <script  src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
+    <script src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
 </body>
 
 </html>
