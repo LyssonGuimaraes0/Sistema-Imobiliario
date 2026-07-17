@@ -78,6 +78,9 @@
 
     <!--Footer-->
     <?php include_once COMPONENTS_PATH . '/footer.php'; ?>
+
+
+    <script  src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
 </body>
 
 </html>

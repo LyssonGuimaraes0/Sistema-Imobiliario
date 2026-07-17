@@ -3,6 +3,9 @@ header {
     width: 100%;
     padding: 16px 0px;
     background-color: var(--cor-secundaria);
+    position: sticky;
+    top: 0;
+    z-index: 3;
 }
 
 .navbar {
@@ -22,6 +25,44 @@ header {
     width: 50px;
     height: 50px;
     object-fit: cover;
+}
+
+/*configuraçõs mobile*/
+
+.logo-mobile {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 15px;
+}
+
+.close-mobile-navbar {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    background: transparent;
+    border: none;
+    color: var(--cor-primaria);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    /* top:0 right:0 bottom:0 left:0 */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .brand-text {
@@ -87,8 +128,32 @@ header {
 
 @media (max-width: 1064px) {
 
+    /*Menu Mobile*/
     .navbar-menu {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        height: 100vh;
+        width: 300px;
+        padding: 40px 20px;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        background: var(--cor-secundaria);
+        transform: translateX(-100%);
+        transition: transform .35s ease;
+    }
+
+    .navbar-menu.active {
+        transform: translateX(0);
+    }
+
+    .navbar-menu li {
+        margin-bottom: 10px;
+    }
+
+    .logo-mobile {
+        display: flex;
     }
 
     .menu-toggle {

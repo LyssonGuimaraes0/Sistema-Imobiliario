@@ -51,6 +51,11 @@ body {
 
 }
 
+/*Bloqueia Sroll do Body*/
+body.no-scroll{
+    overflow: hidden;
+}
+
 
 h3 {
     font-size: 24px;

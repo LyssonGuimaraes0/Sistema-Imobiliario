@@ -145,6 +145,7 @@
     <?php require_once COMPONENTS_PATH . '/footer.php'; ?>
 
     <script type="module" src=<?= SCRIPT_URL . "/service/catalog.js" ?>></script>
+    <script  src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
 
 </body>
 

@@ -1,5 +1,7 @@
 <header>
     <div class="section-container">
+        <!--Overlay para Mobile-->
+        <div class="menu-overlay"></div>
         <nav class="navbar">
             <div class="navbar-brand">
                 <div class="logo">
@@ -13,6 +15,22 @@
             </div>
 
             <ul class="navbar-menu">
+                <!--Logo Navbar mobile-->
+                <div class="logo-mobile">
+                    <!--Botão fecha menu mobile-->
+                    <button class="close-mobile-navbar" aria-label="Fechar menu">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                    <div class="logo">
+                        <img src="<?= IMAGEM_URL . "/placeholder/image-not-found.png" ?>" alt="Logo">
+                    </div>
+                    <div class="brand-text">
+                        <h1>Nome da Imobiliária</h1>
+                    </div>
+
+                </div>
+
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
 
