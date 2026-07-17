@@ -119,6 +119,48 @@
         </div>
     </section>
 
+    <!--Icons de Services-->
+
+    <section class="benefits">
+        <div class="section-container">
+            <div class="benefits-body section-body">
+                <h2>Comigo você encontrar!</h2>
+
+                <!--Grid Grid-->
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <div>
+                            <h3>Foco em você</h3>
+                            <p>Soluções personalizadas para atender às suas necessidades.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <h3>Transparência total</h3>
+                            <p>Informaçõesclaras e honestas para decisoes seguras.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <h3>Agilidade</h3>
+                            <p>Processos mais rapidos e menos complicaçoes.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fa-solid fa-ruler"></i>
+                        <div>
+                            <h3>Atendimento próximo</h3>
+                            <p>Acompanhamento pessoal em cada etapa do processo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!--Footer-->
     <?php include_once COMPONENTS_PATH . '/footer.php'; ?>
 
