@@ -22,23 +22,29 @@
     /* Cor padrões para o site*/
     --cor-primaria: #FFFFFF;
     --cor-secundaria: #0C57E3;
+    --cor-segundaria-escura: #1831D4;
+
+    
     --cor-cinza-claro: #c2ccd4;
     --cor-branco-fantasma: #f7f9fa;
-    --cor-cinza-escuro: #424654;
+    --cor-verde : #1EA10C;
+    --cor-cinza-escuro: #474747;
     --cor-preto: #111111;
 
     /*Cor Para Textos*/
-    --cor-texto-segundario: #788896;
+    --cor-texto-segundario: #969696;
 
     /*Cores Padrões para Botões*/
 
     --btn-color-blue: #2c88d9;
     --btn-color-blue-hover: #236eaf;
 
-
     /*Box Shadow padrão*/
 
-    --box-shadown-default: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --box-shadown-default: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+    /*Font*/
+    --font-card : 'Roboto';
 }
 
 * {

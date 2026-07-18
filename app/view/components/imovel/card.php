@@ -2,23 +2,25 @@
 <template id="card-template">
     <article class="card" data-card="">
         <div class="card-head">
-            <!-- /placeholder/image-not-found.png -->
-            <img class="card-img" src= "<?= BASE_URL?>" alt="Image-not-found">
+            <img class="card-img" src= "<?= BASE_URL ?>" alt="Imagem do Imovel">
         </div>
         <div class="card-description">
-            <h3 class="card-titulo"></h3>
+            <div class="card-header-titulo">
+                <h3 data-item="nome_imovel"></h3>
+                <p data-item="bairro"></p>
+            </div>
+            <ul class="card-list-item">
+                <li class="card-item"><span data-item="area_total"></span> m<sup>2</sup></li>
+                <li class="card-item"><span data-item="quarto"></span>Quarto</li>
+                <li class="card-item"><span data-item="sala_de_estar"></span>Sala de Estar</li>
+                <li class="card-item"><span data-item="banheiro"></span>Banheiro</li>
+            </ul>
             <div class="card-container-text">
                 <div class="card-text-left">
-                    <span class="card-item card-dimensao"> <sup>2</sup></span>
-                    <ul>
-                        <li class="card-item" id="item-quarto">Quarto </li>
-                        <li class="card-item" id="item-sala_estar">Sala de Estar </li>
-                        <li class="card-item" id="item-banheiro">Banheiro </li>
-                        <li class="card-item" id="item-suit">Suit </li>
-                    </ul>
+                    <p class="card-subtitulo-valor">IPTU+Condominio: R$<span data-item="condominio"></span></p>
+                    <p class="card-valor">R$ <span data-item="preco"></span></p>
                 </div>
                 <div class="card-text-right">
-                    <span class="card-valor"></span>
                     <button class="card-button">Ver Mais</button>
                 </div>
             </div>

@@ -1,85 +1,132 @@
-   .card {
-        width: 336px;
-        height: 421px;
-        background-color: var(--cor-primaria);
-        display: flex;
-        /* Transforma o card em um container flexível */
-        flex-direction: column;
-        border: 2px solid var(--cor-cinza-claro);
-        cursor: pointer;
-    }
+/*Configuração do Card*/
+.card {
+    width: 100%;
+    max-width: 410px;
+    min-height: 560px;
+    background-color: var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--box-shadown-default);
+    cursor: pointer;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-style: var(--font-card);
+}
 
-    .card-head {
-        width: 100%;
-        height: 185px;
-        overflow: hidden;
-    }
+/*Container da Imagem*/
 
-    .card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+.card-head {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    border-radius: 12px;
+}
 
-    }
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    .card-description {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        flex-grow: 1;
-        border-top: 2px solid var(--cor-cinza-claro);
-        box-sizing: border-box;
-    }
+/*Container de Descrição do card*/
 
-    .card-container-text {
-        display: flex;
-        justify-content: space-between;
-        flex-grow: 1;
-    }
+.card-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 16px;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
 
-    .card-text-left {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
+.card-header-titulo {
+    margin: 5px 0;
+    font-weight: bold;
+}
 
-    .card-text-left ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+.card-header-titulo h3 {
+    color: var(--cor-cinza-escuro);
+}
 
-    .card-item {
-        margin: 5px 0;
-        color: #788896;
-    }
+.card-header-titulo p {
+    color: var(--cor-texto-segundario);
+}
 
-    .card-text-right {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        /* Alinha o preço e botão no final da área */
-        align-items: flex-end;
-        gap: 10px;
-    }
+.card-container-text {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+}
 
-    .card-valor {
-        font-size: 30px;
-        color: green;
-        font-weight: bold;
-    }
+.card-text-left {
+    width: 100%;
+    align-items: flex-start;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+}
 
-    .card-button {
-        width: 125px;
-        padding: 10px;
-        background-color: #d5e7f7;
-        border: 2px solid #2c88d9;
-        border-radius: 20px;
-        font-size: 15px;
+.card-subtitulo-valor {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--cor-texto-segundario);
+}
 
-    }
+.card-valor {
+    font-size: 26px !important;
+    font-weight: 700;
+    color: var(--cor-verde);
+    font-weight: bold;
+}
 
-    /* =========================
+
+.card-list-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0;
+    margin: 10px 0;
+    list-style: none;
+}
+
+.card-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 0;
+    font-size: 14px;
+    color: var(--cor-texto-segundario);
+}
+
+.card-item span {
+    margin-right: 4px;
+}
+
+.card-item::before {
+    content: "●";
+    margin-right: 4px;
+    color: var(--cor-texto-segundario);
+}
+
+.card-text-right {
+    align-content: center;
+}
+
+
+/*Botão do card*/
+
+.card-button {
+    width: 120px;
+    padding: 8px;
+    background-color: var(--cor-segundaria-escura);
+    border-radius: 6px;
+    border: none;
+    font-size: 15px;
+    color: var(--cor-branco-fantasma);
+    font-weight: 600;
+}
+
+/* =========================
    CARD SKELETON
 ========================= */
 
@@ -94,7 +141,7 @@
 
 /* BLOCOS CINZA */
 .card.loading-card .card-head,
-.card.loading-card .card-titulo,
+.card.loading-card .card-ticard-header-titulo,
 .card.loading-card .card-item,
 .card.loading-card .card-valor,
 .card.loading-card .card-button {
@@ -111,7 +158,7 @@
 }
 
 /* TITULO */
-.card.loading-card .card-titulo {
+.card.loading-card .card-header-titulo {
     width: 80%;
     height: 28px;
     margin-bottom: 20px;
@@ -140,7 +187,7 @@
 
 /* EFEITO SHIMMER */
 .card.loading-card .card-head::after,
-.card.loading-card .card-titulo::after,
+.card.loading-card .card-header-titulo::after,
 .card.loading-card .card-item::after,
 .card.loading-card .card-valor::after,
 .card.loading-card .card-button::after {
@@ -151,12 +198,10 @@
     width: 150px;
     height: 100%;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.5),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent);
 
     animation: skeleton-loading-card 1.2s infinite;
 }

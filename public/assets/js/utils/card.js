@@ -83,18 +83,16 @@ function CriarCard(template, dadoImovel, tipo = 'default') {
     // 2. Agora sim, adiciona o data-card na raiz do elemento
     cloneCard.dataset.card = dadoImovel.id;
 
-    //Adição de Elementos a cards
-    cloneCard.querySelector('.card-titulo').textContent = dadoImovel.nome_imovel;
-    cloneCard.querySelector('.card-dimensao').innerHTML = `${dadoImovel.area_total}<sup>2</sup>m`
-    cloneCard.querySelector('#item-quarto').textContent += dadoImovel.quarto;
-    cloneCard.querySelector('#item-sala_estar').textContent += dadoImovel.sala_de_estar;
-    cloneCard.querySelector('#item-banheiro').textContent += dadoImovel.banheiro;
-    cloneCard.querySelector('#item-suit').textContent += dadoImovel.suite;
-    cloneCard.querySelector('.card-valor').textContent = dadoImovel.preco.toString();
+    //Cria Elementos Existentes do card
+    Object.entries(dadoImovel).forEach(([chave, valor]) => {
+        const elemento = cloneCard.querySelector(`[data-item="${chave}"]`);
 
-    //Selecionando imagem de card
+        if (elemento) {
+            elemento.textContent = valor;
+        }
+    });
+
     const imagemCard = cloneCard.querySelector('.card-img');
-
     imagemCard.src += dadoImovel.caminho_arquivo
 
     return cloneCard;

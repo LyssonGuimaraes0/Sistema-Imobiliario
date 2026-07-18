@@ -59,12 +59,12 @@ class ImoveisModels
         $sql = "SELECT i.id, 
                 i.nome_imovel,
                 i.area_total,
-                i.area_util,
                 c.quarto,
                 c.banheiro,
                 c.sala_de_estar,
-                c.suite,
+                e.bairro,
                 v.preco,
+                v.condominio,
                 a.caminho_arquivo,
                 a.nome_arquivo
                 FROM imovel AS i
