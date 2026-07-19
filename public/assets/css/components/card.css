@@ -11,6 +11,7 @@
     border-radius: 12px;
     box-sizing: border-box;
     font-style: var(--font-card);
+    flex-shrink: 0;
 }
 
 /*Container da Imagem*/

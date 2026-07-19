@@ -1,15 +1,33 @@
-/*Section Sobre Mim*/
-.about-me {
+/*Container Padrão*/
+.container-home {
     width: 100%;
     height: auto;
+}
+
+/*Section Colors*/
+
+.about-me,
+.service {
     background-color: var(--cor-secundaria);
 }
+
+
+.benefits,
+.imovel-lancamento {
+    background-color: var(--cor-primaria);
+}
+
+
+/*-----------Section Sobre Mim-------------*/
+
+
 
 .about-body {
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 40px;
     flex-wrap: wrap;
+    font-family: 'Roboto';
 }
 
 /*Configuraçãos de Conteudo*/
@@ -51,14 +69,43 @@
     text-align: center;
 }
 
+/*-----------Section Imovel Lançamento-------------*/
 
-/*Conteudo De icons de service*/
 
-.benefits {
+.lancamento-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lancamento-content h2 {
+    color: var(--cor-preto);
+}
+
+.lancamento-content p {
+    color: var(--cor-texto-segundario);
+    font-weight: 700;
+}
+
+.carrosel {
+    position: relative;
     width: 100%;
     height: auto;
-    background-color: var(--cor-primaria);
+    overflow: hidden;
 }
+
+.carrosel-list {
+
+    display: flex;
+    gap: 15px;
+    padding: 10px 0;
+    transition: transform .4s ease;
+}
+
+
+/*-----------Section icons de service-------------*/
+
+
 
 .benefits-body {
     width: 100%;
@@ -70,13 +117,11 @@
 
 }
 
-.benefits-body h2{
+.benefits-body h2 {
     color: var(--cor-secundaria);
-    font-size: 30px;
-    font-weight: 600;
 }
 
-/*benifits grids and Cards*/
+/*benifits, service grids and Cards*/
 
 .benefit-grid {
     display: grid;
@@ -86,24 +131,61 @@
 }
 
 
-.benefit-card {
+.benefit-card,
+.service-card {
     display: flex;
     gap: 25px;
     align-items: flex-start;
 }
 
-.benefit-card i{
+.benefit-card i {
     color: var(--cor-secundaria);
+
+}
+
+.benefit-card i,
+.service-card i {
     font-size: 50px;
 }
 
-.benefit-card h3{
+.benefit-card h3,
+.service-card h3 {
     font-size: 27px;
 }
 
-.benefit-card p{
+.benefit-card p {
     color: var(--cor-cinza-escuro);
 }
+
+/*-----------Section service-------------*/
+
+
+
+.service-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 0;
+    column-gap: 30px;
+    align-content: space-between;
+    align-items: start;
+}
+
+
+.service-body h2,
+.service-card i,
+.service-card h3,
+.service-card p {
+    color: var(--cor-primaria);
+}
+
 
 
 
@@ -117,10 +199,11 @@
         justify-content: space-between;
     }
 
-    .benefit-grid{
+    .benefit-grid, .service-grid {
         grid-template-columns: 1fr;
         gap: 70px;
         height: auto;
+        align-self: center;
     }
 
 

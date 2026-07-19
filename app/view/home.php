@@ -76,8 +76,44 @@
         </div>
     </section>
 
+    <!--Imoveis de Lançamento-->
+
+    <section class="container-home imovel-lancamento">
+        <div class="section-container">
+            <div class="about-body section-body">
+                <div class="lancamento-content">
+                    <h2>Lançamento</h2>
+                    <p>Um imóvel em andamento é a chave para o seu futuro!</p>
+                </div>
+
+                <!--carrosel-->
+                <div class="carrosel">
+                    <div class="carrosel-list">
+                        <?php include_once  COMPONENTS_PATH . '/imovel/card.php' ?>
+                    </div>
+                    <div class="cards-pagination">
+
+                        <button class="btn-pagination prev">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button class="dott-pagination active"></button>
+                        <button class="dott-pagination"></button>
+                        <button class="dott-pagination"></button>
+
+                        <button class="btn-pagination next">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!--Sobre Mim-->
-    <section class="about-me">
+    <section class="container-home about-me">
         <div class="section-container">
             <div class="about-body section-body">
                 <div class="about-image">
@@ -121,7 +157,7 @@
 
     <!--Icons de Services-->
 
-    <section class="benefits">
+    <section class="container-home benefits">
         <div class="section-container">
             <div class="benefits-body section-body">
                 <h2>Comigo você encontrar!</h2>
@@ -161,11 +197,53 @@
         </div>
     </section>
 
+    <!--Services -->
+    <section class="container-home service">
+        <div class="section-container">
+            <div class="service-body section-body">
+                <h2>Serviços</h2>
+
+                <!--Grid Grid-->
+                <div class="service-grid">
+                    <div class="service-card">
+                        <i class="fa-solid fa-check"></i>
+                        <div>
+                            <h3>Encontre o imóvel ideal para você</h3>
+                            <p>Compra, aluguel e oportunidades nas melhores regiões de Salvador</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <i class="fa-solid fa-check"></i>
+                        <div>
+                            <h3>Transparência total</h3>
+                            <p>Informaçõesclaras e honestas para decisoes seguras.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <i class="fa-solid fa-check"></i>
+                        <div>
+                            <h3>Agilidade</h3>
+                            <p>Processos mais rapidos e menos complicaçoes.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <i class="fa-solid fa-check"></i>
+                        <div>
+                            <h3>Atendimento próximo</h3>
+                            <p>Acompanhamento pessoal em cada etapa do processo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!--Footer-->
     <?php include_once COMPONENTS_PATH . '/footer.php'; ?>
 
 
     <script src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
+    <script type="module" src=<?= SCRIPT_URL . "/page/home.js" ?>></script>
 </body>
 
 </html>
