@@ -24,10 +24,10 @@
     --cor-secundaria: #0C57E3;
     --cor-segundaria-escura: #1831D4;
 
-    
+
     --cor-cinza-claro: #c2ccd4;
     --cor-branco-fantasma: #f7f9fa;
-    --cor-verde : #1EA10C;
+    --cor-verde: #1EA10C;
     --cor-cinza-escuro: #474747;
     --cor-preto: #111111;
 
@@ -44,7 +44,7 @@
     --box-shadown-default: 0 2px 12px rgba(0, 0, 0, 0.1);
 
     /*Font*/
-    --font-card : 'Roboto';
+    --font-card: 'Roboto';
 }
 
 * {
@@ -59,8 +59,13 @@ body {
 }
 
 /*Bloqueia Sroll do Body*/
-body.no-scroll{
+body.no-scroll {
     overflow: hidden;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 700;
 }
 
 
@@ -95,7 +100,7 @@ label {
     padding: 0 32px;
 }
 
-.section-body{
+.section-body {
     padding: 40px 0;
 }
 
@@ -104,14 +109,6 @@ label {
 textarea {
     resize: none;
 }
-
-/*Container Padrão*/
-
-.container-section {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
 
 
 .btn-default {

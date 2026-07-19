@@ -1,6 +1,29 @@
+/*Section de catalogo*/
 .section-catalog {
-    background-color: var(--cor-branco-fantasma);
     padding: 10px;
+}
+
+/*Cabeçalho do Catalogo*/
+
+.header-catalog-titulo {
+    width: 410px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header-catalog-titulo h2 {
+    color: var(--cor-cinza-escuro);
+}
+
+.header-catalog-titulo p {
+    color: var(--cor-texto-segundario);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.header-catalog-titulo span {
+    color: var(--btn-color-blue);
 }
 
 .container-header {
@@ -75,21 +98,18 @@
 
 
 .container-filtro {
-    width: 380px;
-    height: 900px;
+    flex: 0 0  250px;
     display: grid;
     gap: 15px;
 }
 
 .filtro-superior {
-    width: 100%;
     height: 300px;
     background-color: var(--cor-primaria);
     border: 2px solid var(--cor-cinza-claro);
 }
 
 .filtro-inferior {
-    width: 100%;
     height: 750px;
     background-color: var(--cor-primaria);
     border: 2px solid var(--cor-cinza-claro);
@@ -97,16 +117,17 @@
 
 .container-catalog {
     display: flex;
-    margin: 10px 0;
+    width: 100%;
     gap: 15px;
+    align-items: flex-start;
 
 }
 
 .container-card {
-    width: 100%;
-    padding: 15px;
-    height: auto;
-    background-color: var(--cor-cinza-claro);
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    background: var(--cor-cinza-claro);
 }
 
 .container-option-catalog {
@@ -176,4 +197,59 @@
 .container-botoes-paginacao {
     display: flex;
     justify-content: center;
+}
+
+
+/*Botões de Páginação*/
+
+.cards-pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-pagination {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+}
+
+.dott-pagination {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: var(--cor-cinza-claro);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.dott-pagination.active {
+    border-radius: 50%;
+    background: var(--cor-branco-fantasma);
+    border: 1px solid var(--cor-secundaria);
+}
+
+.cards-btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+    transition: .25s;
+}
+
+.cards-btn:hover {
+    transform: scale(1.08);
+    background: #0d6efd;
+    color: #fff;
 }
