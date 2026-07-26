@@ -27,54 +27,137 @@
             </div>
 
             <div class="container-catalog">
-                <div class="container-filtro">
-                    <h3>Filtros</h3>
-                    <div class="filtro-superior">
-                        
-                        <div class="filtro-tags">
+                <div class="filtro">
+                    <div class="filtro-head">
+                        <h3>Filtros</h3>
+                    </div>
+                    <div class="container-filtro">
+                        <!--Fitro Ativos--->
+                        <div>
+                            <span>Filtro Ativos</span>
+                            <div class="filtro-tags">
+                                <div class="list-tags">
+                                    <div class="tag">
+                                        <span>Salvador</span>
+                                        <i class="fa-solid fa-x"></i>
+                                    </div>
+                                    <div class="tag">
+                                        <span>Apartamento</span>
+                                        <i class="fa-solid fa-x"></i>
+                                    </div>
+                                    <div class="tag">
+                                        <span>Psicina</span>
+                                        <i class="fa-solid fa-x"></i>
+                                    </div>
+                                    <div class="tag-more">
+                                        <span>+10</span>
+                                    </div>
+                                </div>
+                                <p class="clear-tags">Limpar Filtros</p>
+                            </div>
+                        </div>
+                        <!--Select Filtros--->
+                        <div class="grupo-filtro">
+                            <div class="item-filtro">
+                                <label>Categoria</label>
+                                <select class="input-default input-header" name="" id="">
+                                    <option value="" selected>Nenhum</option>
+                                    <option value="2">Destaque</option>
+                                    <option value="3">Lançamento</option>
+                                </select>
+                            </div>
+                            <div class="item-filtro">
+                                <label>Tipo</label>
+                                <select class="input-default input-header" name="" id="">
+                                    <option value="" selected>Nenhum</option>
+                                    <option value="1">Residencial</option>
+                                    <option value="2">Comercial</option>
+                                    <option value="3">Terreno</option>
+                                    <option value="4">Especial</option>
+                                </select>
+                            </div>
+                            <div class="item-filtro">
+                                <label>Finalidade</label>
+                                <select class="input-default input-header" name="" id="">
+                                    <option value="" selected>Nenhum</option>
+                                    <option value="1">Comprar</option>
+                                    <option value="2">Venda</option>
+                                    <option value="2">Aluguel</option>
+                                </select>
+                            </div>
+                        </div>
 
-                        </div>
-                    </div>
-                    <div class="filtro-inferior">
-                        <div class="row-filtro-inferior">
-                            <div class="input-range">
-                                <span>Número de quartos</span>
-                                <input type="range" name="" id="" min="0" value="0" max="5">
-                                <div class="row-numeros-range">
-                                    <small>0</small>
-                                    <small>1</small>
-                                    <small>2</small>
-                                    <small>3</small>
-                                    <small>4</small>
-                                    <small>+5</small>
+                        <!--Inputs Filtro--->
+
+                        <div class="grupo-filtro">
+                            <div class="item-filtro">
+                                <label>Faixa de Preço</label>
+                                <div class="item-duplo-filtro">
+                                    <div class="item-input">
+                                        <span>De</span>
+                                        <input class="input-default" type="text" placeholder="R$0,00">
+                                    </div>
+                                    <div class="item-input">
+                                        <span>Até</span>
+                                        <input class="input-default" type="text" placeholder="R$0,00">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="input-range">
-                                <span>Número de banheiros</span>
-                                <input type="range" name="" id="" min="0" value="0" max="5">
-                                <div class="row-numeros-range">
-                                    <small>0</small>
-                                    <small>1</small>
-                                    <small>2</small>
-                                    <small>3</small>
-                                    <small>4</small>
-                                    <small>+5</small>
-                                </div>
-                            </div>
-                            <div class="input-range">
-                                <span>Número de garagem</span>
-                                <input type="range" name="" id="" min="0" value="0" max="5">
-                                <div class="row-numeros-range">
-                                    <small>0</small>
-                                    <small>1</small>
-                                    <small>2</small>
-                                    <small>3</small>
-                                    <small>4</small>
-                                    <small>+5</small>
+                            <div class="item-filtro">
+                                <label>Área Total <sup>2m</sup></label>
+                                <div class="item-duplo-filtro">
+                                    <div class="item-input">
+                                        <span>De</span>
+                                        <input class="input-default" type="text" placeholder="00.00">
+                                    </div>
+                                    <div class="item-input">
+                                        <span>Até</span>
+                                        <input class="input-default" type="text" placeholder="00.00">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!---List Checkbox--->
+                        <div class="grupo-filtro">
+                            <div class="item-filtro">
+                                <label>Quartos</label>
+                                <div class="item-duplo-filtro">
+                                    <div class="item-checkbox">
+                                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                            <input type="checkbox" name="" id="">
+                                            <span><?= ($i == 5) ? "+" . $i : $i ?></span>
+                                        <?php endfor; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-filtro">
+                                <label>Banheiros</label>
+                                <div class="item-duplo-filtro">
+                                    <div class="item-checkbox">
+                                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                            <input type="checkbox" name="" id="">
+                                            <span><?= ($i == 5) ? "+" . $i : $i ?></span>
+                                        <?php endfor; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-filtro">
+                                <label>Vagas</label>
+                                <div class="item-duplo-filtro">
+                                    <div class="item-checkbox">
+                                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                            <input type="checkbox" name="" id="">
+                                            <span><?= ($i == 5) ? "+" . $i : $i ?></span>
+                                        <?php endfor; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
+
                 </div>
                 <div class="container-card">
                     <div class="container-option-catalog">
@@ -83,13 +166,9 @@
                         <div class="row-option-right">
                             <div class="container-option-catalog">
                                 <span>Ordenar por: </span>
-                                <select class="option-select-catalog" name="" id="">
+                                <select class="input-default input-header" name="" id="">
                                     <option value="" hidden>Recentes</option>
                                 </select>
-                                <div class="row-btn-catalog">
-                                    <button class="option-btn-catalog"><i class="fa-solid fa-border-all"></i></button>
-                                    <button class="option-btn-catalog"><i class="fa-solid fa-list"></i></button>
-                                </div>
                             </div>
                         </div>
                     </div>
