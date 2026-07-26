@@ -28,8 +28,9 @@
 
             <div class="container-catalog">
                 <div class="container-filtro">
+                    <h3>Filtros</h3>
                     <div class="filtro-superior">
-                        <h3>Filtros</h3>
+                        
                         <div class="filtro-tags">
 
                         </div>

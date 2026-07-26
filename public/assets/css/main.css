@@ -187,3 +187,9 @@ select:disabled {
     color: var(--cor-texto-segundario);
     opacity: 1;
 }
+
+@media (max-width: 420px) {
+    .section-container{
+        padding: 0 10px;
+    }
+}

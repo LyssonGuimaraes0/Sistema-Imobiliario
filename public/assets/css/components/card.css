@@ -1,8 +1,7 @@
 /*Configuração do Card*/
 .card {
-    width: 100%;
-    max-width: 410px;
-    min-height: 560px;
+    width: 100%;      /* ou 400px */
+    max-width: 390px;
     background-color: var(--cor-primaria);
     display: flex;
     flex-direction: column;
@@ -11,7 +10,6 @@
     border-radius: 12px;
     box-sizing: border-box;
     font-style: var(--font-card);
-    flex-shrink: 0;
 }
 
 /*Container da Imagem*/

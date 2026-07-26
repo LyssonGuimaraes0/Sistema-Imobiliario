@@ -98,22 +98,18 @@
 
 
 .container-filtro {
-    flex: 0 0  250px;
-    display: grid;
+    width: 250px;
+    min-width: 160px;
+    flex-shrink: 1;
+    height: 100vh;
     gap: 15px;
+    border: 2px solid var(--cor-cinza-claro);
+    background-color: var(--cor-cinza-claro);
 }
 
-.filtro-superior {
-    height: 300px;
-    background-color: var(--cor-primaria);
-    border: 2px solid var(--cor-cinza-claro);
-}
+.filtro-superior {}
 
-.filtro-inferior {
-    height: 750px;
-    background-color: var(--cor-primaria);
-    border: 2px solid var(--cor-cinza-claro);
-}
+.filtro-inferior {}
 
 .container-catalog {
     display: flex;
@@ -125,9 +121,8 @@
 
 .container-card {
     flex: 1;
-    min-width: 0;
-    padding: 10px;
-    background: var(--cor-cinza-claro);
+    width: 100%;
+    overflow: hidden;
 }
 
 .container-option-catalog {
@@ -159,13 +154,11 @@
 .row-calalog {
     position: relative;
     display: flex;
-    /* Ativa o modo Flexbox */
     flex-wrap: wrap;
-    /* Faz os cards descerem quando o limite é atingido */
-    gap: 10px;
-    /* Cria um espaçamento entre os cards */
+    gap: 15px;
     width: 100%;
     min-height: 700px;
+    justify-content: space-between;
 }
 
 /*Div sem Imovel adicionado*/
@@ -252,4 +245,64 @@
     transform: scale(1.08);
     background: #0d6efd;
     color: #fff;
+}
+
+@media (max-width: 1568px) {
+    .container-catalog {
+        flex-direction: column;
+    }
+
+    .container-filtro {
+        width: 100%;
+        height: auto;
+
+    }
+}
+
+@media (max-width: 1283px) {
+
+    .card {
+        max-width: 360px !important;
+    }
+
+}
+
+@media (max-width: 1193px) {
+
+    .card {
+        max-width: 450px !important;
+    }
+
+}
+
+@media (max-width: 998px) {
+
+    .card {
+        max-width: 390px !important;
+    }
+
+}
+
+
+@media (max-width: 878px) {
+
+    .row-calalog {
+        justify-content: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 480px !important;
+        min-width: 0 !important;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+
+    .card {
+        max-width:100% !important;
+    }
+
 }
