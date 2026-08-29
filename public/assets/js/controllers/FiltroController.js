@@ -1,6 +1,7 @@
 export class FiltroController {
 
     constructor(service) {
+
         this.service = service;
 
         this.templateTag =
@@ -30,38 +31,109 @@ export class FiltroController {
         };
 
         this.service.carregarFiltros();
+
+        this.configurarEndereco();
     }
 
-    // Adicionar filtro
     adicionar(filtro) {
+
         this.service.adicionar(filtro);
+
         this.render();
     }
 
+    configurarEndereco() {
 
-    // Remover filtro
+        this.inputEndereco.addEventListener('input', () => {
+
+            const valor =
+                this.inputEndereco.value
+                    .toLowerCase()
+                    .trim();
+
+            this.dropdownEndereco.innerHTML = '';
+
+            if (!valor) {
+                this.dropdownEndereco.style.display = 'none';
+                return;
+            }
+
+            const enderecos =
+                this.service.listarEnderecos();
+
+            const resultados =
+                enderecos.filter(endereco =>
+                    endereco.bairro
+                        .toLowerCase()
+                        .includes(valor)
+                );
+
+            resultados.forEach(endereco => {
+
+                const option =
+                    document.createElement('div');
+
+                option.classList.add(
+                    'dropdown-option'
+                );
+
+                option.textContent =
+                    `${endereco.bairro} - ${endereco.municipio} - ${endereco.estado}`;
+
+                option.dataset.bairro =
+                    endereco.bairro;
+
+                this.dropdownEndereco.appendChild(option);
+            });
+
+            // MOSTRA / ESCONDE O DROPDOWN
+            this.dropdownEndereco.style.display =
+                resultados.length > 0
+                    ? 'block'
+                    : 'none';
+        });
+
+        this.dropdownEndereco.addEventListener('click', (event) => {
+
+            const option =
+                event.target.closest('.dropdown-option');
+
+            if (!option) return;
+
+            this.inputEndereco.value =
+                option.textContent
+                    .replace(/\s+/g, ' ')
+                    .trim();
+
+            this.dropdownEndereco.innerHTML = '';
+            this.dropdownEndereco.style.display = 'none';
+        });
+    }
+
     remove(id) {
+
         this.service.remove(id);
+
         this.render();
     }
 
-    // Remove todos filtros
     removeAll() {
+
         this.service.removeAll();
+
         this.render();
     }
 
-    // Listar filtros
     listar() {
         return this.service.listar();
     }
 
-    // Renderizar no HTML
     render() {
 
         this.container.innerHTML = '';
 
-        const filtros = this.listar();
+        const filtros =
+            this.listar();
 
         filtros.slice(0, 3).forEach((filtro, index) => {
 

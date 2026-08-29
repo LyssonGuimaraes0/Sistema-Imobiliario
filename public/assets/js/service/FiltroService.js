@@ -1,20 +1,27 @@
 export class FiltroService {
 
     constructor() {
+
         this.filtros = [];
         this.enderecos = [];
     }
 
     getFiltros() {
-        const params =
-            new URLSearchParams(window.location.search);
 
-        return Object.fromEntries(params.entries());
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        return Object.fromEntries(
+            params.entries()
+        );
     }
 
     atualizarUrl() {
 
-        const params = new URLSearchParams();
+        const params =
+            new URLSearchParams();
 
         this.filtros.forEach(filtro => {
 
@@ -22,10 +29,10 @@ export class FiltroService {
                 filtro.tipo,
                 filtro.valor
             );
-
         });
 
-        const queryStr = params.toString();
+        const queryStr =
+            params.toString();
 
         const novaUrl = queryStr
             ? `${window.location.pathname}?${queryStr}`
@@ -36,6 +43,16 @@ export class FiltroService {
             '',
             novaUrl
         );
+    }
+
+    carregarEnderecos(enderecos) {
+
+        this.enderecos = enderecos;
+    }
+
+    listarEnderecos() {
+
+        return this.enderecos;
     }
 
     carregarFiltros() {
@@ -50,7 +67,6 @@ export class FiltroService {
                     tipo,
                     valor
                 });
-
             });
     }
 
@@ -100,6 +116,7 @@ export class FiltroService {
     }
 
     listar() {
+
         return this.filtros;
     }
 }

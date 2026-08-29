@@ -19,7 +19,7 @@
                 <div class="container-header">
                     <div class="container-input-header">
                         <label>Localização</label>
-                        <input class="input-default search-input" placeholder="Localização" type="text" data-filter="bairro_slug" search>
+                        <input class="input-default search-input" placeholder="Localização" type="text" data-filter="bairro" search>
                         <div class="dropdown-input-element">
                         </div>
                     </div>
