@@ -2,15 +2,13 @@
 
 require_once __DIR__ . '/../config/conf.php';
 
-//Realiza tratamento de URL da página
-$base = "/trabalhos/imobiliaria";
 //Coleta o caminho da Url
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $request = $_SERVER['REQUEST_METHOD'];
 //Coleta os parametros da URL
 $queryParams = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS) ?? [];
 
-$uri = str_replace($base, '', $uri);
+$uri = str_replace(BASE_PATH, '', $uri);
 
 //Definição de Variavel de Parametos e query
 
