@@ -117,25 +117,25 @@
 
 /*Container Filtros*/
 
-.container-filtro{
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    gap:20px;
-    align-items:flex-start;
+.container-filtro {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
     padding: 10px 15px;
 }
 
-.container-filtro > div {
+.container-filtro>div {
     width: 100%;
     box-sizing: border-box;
 }
 
-.grupo-filtro{
-    flex:1 1 250px;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.grupo-filtro {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .container-filtro span,
@@ -148,6 +148,7 @@
 
 /*Filtros Ativos*/
 .filtro-tags {
+    position: relative;
     width: 100%;
     min-height: 200px;
     display: flex;
@@ -177,18 +178,22 @@
     width: auto;
 }
 
-.tag span {
+.tag span, .tag-more-container span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.tag button{
+.tag-more-container span{
+    color: var(--cor-branco-fantasma);
+} 
+
+.tag button, .tag-more-container button {
     background: none;
     border: none;
 }
 
-.tag i {
+.tag i, .tag-more-container i {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -203,6 +208,37 @@
     transition: .2s;
 }
 
+.tag-more {
+    width: 45px;
+    height: 30px;
+    padding: 2px;
+    background-color: var(--btn-color-blue);
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tag-more-container {
+    position: absolute;
+    min-width: 150px;
+    min-height: 120px;
+    background-color: var(--btn-color-blue);
+    top: 24%;
+    left: 20%;
+    border-radius: 8px;
+    padding: 10px;
+    display: none;
+}
+
+.tag-more-container.active{
+    display: block !important;
+}
+
+.tag-more span {
+    color: var(--cor-branco-fantasma);
+}
+
+
 .tag i:hover {
     background: var(--cor-cinza-claro);
     color: var(--cor-branco-fantasma);
@@ -216,20 +252,6 @@
     width: 90px;
     background: none;
     border: none;
-}
-
-.tag-more {
-    width: 45px;
-    height: 30px;
-    padding: 2px;
-    background-color: var(--btn-color-blue);
-    border-radius: 20px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.tag-more span {
-    color: var(--cor-branco-fantasma);
 }
 
 /*Inputs Filtro*/
@@ -439,7 +461,7 @@
 
 
     .container-catalog {
-       flex-direction: column;
+        flex-direction: column;
     }
 
 }
@@ -466,7 +488,7 @@
         max-width: 390px !important;
     }
 
-    .item-duplo-filtro{
+    .item-duplo-filtro {
         flex-direction: column;
     }
 }
@@ -487,7 +509,7 @@
 }
 
 @media (max-width: 853px) {
-    .input-header{
+    .input-header {
         max-width: 100%;
     }
 }

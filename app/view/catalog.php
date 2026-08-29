@@ -7,7 +7,7 @@
     <?php include_once COMPONENTS_PATH . '/navbar.php'; ?>
 
     <!--Tags-->
-   <?php include_once COMPONENTS_PATH . '/imovel/tag.php'; ?>
+    <?php include_once COMPONENTS_PATH . '/imovel/tag.php'; ?>
 
     <section class="section-catalog" id="catalog">
         <div class="section-container">
@@ -40,8 +40,13 @@
                             <span>Filtro Ativos</span>
                             <div class="filtro-tags">
                                 <div class="list-tags">
-                                    
-                                    
+
+                                </div>
+                                <div class="tag-more-container" id="container-tagmore">
+                                    <div class="tag">
+                                        <span>Brutal</span>
+                                        <button type="button" id="remove-tag"><i class="fa-solid fa-x"></i></button>
+                                    </div>
                                 </div>
                                 <button class="clear-tags" id="removerAllFilter" type="button">Limpar Filtros</button>
                             </div>
@@ -50,7 +55,7 @@
                         <div class="grupo-filtro">
                             <div class="item-filtro">
                                 <label>Categoria</label>
-                                <select class="input-default input-header"  data-tipo="tipo_destaque">
+                                <select class="input-default input-header" data-tipo="tipo_destaque">
                                     <option value="" selected>Nenhum</option>
                                     <option value="destaque">Destaque</option>
                                     <option value="lancamento">Lançamento</option>

@@ -10,6 +10,8 @@ export class FiltroController {
         this.templateTagmore =
             document.querySelector('#template-tagmore');
 
+        this.tagMoreContainer = document.querySelector('.tag-more-container')
+
         this.container =
             document.querySelector('.list-tags');
 
@@ -128,51 +130,57 @@ export class FiltroController {
         return this.service.listar();
     }
 
-    render() {
+render() {
 
-        this.container.innerHTML = '';
+    this.container.innerHTML = '';
 
-        const filtros =
-            this.listar();
+    const filtros = this.listar();
 
-        filtros.slice(0, 3).forEach((filtro, index) => {
+    this.tagMoreContainer.innerHTML = '';
+    this.tagMoreContainer.style.display = 'none';
 
-            const clone =
-                this.templateTag.content.cloneNode(true);
+    filtros.forEach((filtro, index) => {
 
-            const tag =
-                clone.querySelector('.tag');
+        const clone =
+            this.templateTag.content.cloneNode(true);
 
-            const texto =
-                this.modificadores[filtro.tipo]
-                    ? `${this.modificadores[filtro.tipo]}: ${filtro.valor}`
-                    : filtro.valor;
+        const tag =
+            clone.querySelector('.tag');
 
-            tag.dataset.id = index;
+        const texto =
+            this.modificadores[filtro.tipo]
+                ? `${this.modificadores[filtro.tipo]}: ${filtro.valor}`
+                : filtro.valor;
 
-            const nameTag =
-                tag.querySelector('span');
+        tag.dataset.id = index;
 
-            nameTag.textContent = texto;
+        const nameTag =
+            tag.querySelector('span');
 
+        nameTag.textContent = texto;
+
+        if (index < 3) {
             this.container.appendChild(tag);
-        });
-
-        if (filtros.length > 3) {
-
-            const clone =
-                this.templateTagmore.content.cloneNode(true);
-
-            const tagMore =
-                clone.querySelector('.tag-more');
-
-            const nameTag =
-                tagMore.querySelector('span');
-
-            nameTag.textContent =
-                `+${filtros.length - 3}`;
-
-            this.container.appendChild(tagMore);
+        } else {
+            this.tagMoreContainer.appendChild(tag);
         }
+    });
+
+    if (filtros.length > 3) {
+
+        const clone =
+            this.templateTagmore.content.cloneNode(true);
+
+        const tagMore =
+            clone.querySelector('.tag-more');
+
+        const nameTag =
+            tagMore.querySelector('span');
+
+        nameTag.textContent =
+            `+${filtros.length - 3}`;
+
+        this.container.appendChild(tagMore);
     }
+}
 }

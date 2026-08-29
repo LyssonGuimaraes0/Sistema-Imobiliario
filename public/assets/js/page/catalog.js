@@ -44,6 +44,12 @@ Imoveis.carregarImoveis(
 // Função de reload
 function reloadCards() {
 
+    const tagContainer= document.querySelector('.tag-more-container');
+
+        if (tagContainer && tagContainer.children.length === 0) {
+            tagContainer.classList.remove('active')
+        }
+
     setTimeout(() => {
 
         filtrosAtivos =
@@ -125,16 +131,32 @@ const containerFiltroAtivos =
     document.querySelector('.filtro-tags');
 
 // Remove filtro
+// Remove filtro
 containerFiltroAtivos.addEventListener('click', (e) => {
 
-    if (
-        e.target.id !== "remove-tag" &&
-        e.target.id !== "removerAllFilter"
-    ) {
+    const tagMore =
+        e.target.closest('.tag-more');
+
+    const removeTag =
+        e.target.closest('#remove-tag');
+
+    const removeAll =
+        e.target.closest('#removerAllFilter');
+
+    if (!tagMore && !removeTag && !removeAll) {
         return;
     }
 
-    if (e.target.id === "removerAllFilter") {
+    if (tagMore) {
+
+        document
+            .querySelector('.tag-more-container')
+            .classList.toggle('active');
+
+        return;
+    }
+
+    if (removeAll) {
 
         Filtros.removeAll();
 
@@ -144,6 +166,26 @@ containerFiltroAtivos.addEventListener('click', (e) => {
     }
 
     const tag =
+        removeTag.closest('.tag');
+
+    Filtros.remove(
+        tag.dataset.id
+    );
+
+    reloadCards();
+});
+//Clicou dentro da tagMore
+containerFiltro.addEventListener('click', (e) => {
+
+    const tagMore =
+        e.target.closest('.tag-more-container');
+
+    if (!tagMore) {
+        return;
+    }
+
+
+    const tag =
         e.target.closest('.tag');
 
     Filtros.remove(
@@ -151,6 +193,7 @@ containerFiltroAtivos.addEventListener('click', (e) => {
     );
 
     reloadCards();
+
 });
 
 // Select e checkbox
