@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../config/conf.php';
 
 //Coleta o caminho da Url
@@ -8,7 +7,7 @@ $request = $_SERVER['REQUEST_METHOD'];
 //Coleta os parametros da URL
 $queryParams = filter_input_array(INPUT_GET, FILTER_SANITIZE_SPECIAL_CHARS) ?? [];
 
-$uri = str_replace(BASE_PATH, '', $uri);
+$uri = str_replace(BASE_URL, '', $uri);
 
 //Definição de Variavel de Parametos e query
 

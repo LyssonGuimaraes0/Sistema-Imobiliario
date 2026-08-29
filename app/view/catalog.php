@@ -6,6 +6,9 @@
     <!--Navbar-->
     <?php include_once COMPONENTS_PATH . '/navbar.php'; ?>
 
+    <!--Tags-->
+   <?php include_once COMPONENTS_PATH . '/imovel/tag.php'; ?>
+
     <section class="section-catalog" id="catalog">
         <div class="section-container">
             <div class="header-catalog">
@@ -37,52 +40,39 @@
                             <span>Filtro Ativos</span>
                             <div class="filtro-tags">
                                 <div class="list-tags">
-                                    <div class="tag">
-                                        <span>Salvador</span>
-                                        <i class="fa-solid fa-x"></i>
-                                    </div>
-                                    <div class="tag">
-                                        <span>Apartamento</span>
-                                        <i class="fa-solid fa-x"></i>
-                                    </div>
-                                    <div class="tag">
-                                        <span>Psicina</span>
-                                        <i class="fa-solid fa-x"></i>
-                                    </div>
-                                    <div class="tag-more">
-                                        <span>+10</span>
-                                    </div>
+                                    
+                                    
                                 </div>
-                                <p class="clear-tags">Limpar Filtros</p>
+                                <button class="clear-tags" id="removerAllFilter" type="button">Limpar Filtros</button>
                             </div>
                         </div>
                         <!--Select Filtros--->
                         <div class="grupo-filtro">
                             <div class="item-filtro">
                                 <label>Categoria</label>
-                                <select class="input-default input-header" name="" id="">
+                                <select class="input-default input-header"  data-tipo="tipo_destaque">
                                     <option value="" selected>Nenhum</option>
-                                    <option value="2">Destaque</option>
-                                    <option value="3">Lançamento</option>
+                                    <option value="destaque">Destaque</option>
+                                    <option value="lancamento">Lançamento</option>
                                 </select>
                             </div>
                             <div class="item-filtro">
                                 <label>Tipo</label>
-                                <select class="input-default input-header" name="" id="">
+                                <select class="input-default input-header" data-tipo="tipo_imovel">
                                     <option value="" selected>Nenhum</option>
-                                    <option value="1">Residencial</option>
-                                    <option value="2">Comercial</option>
-                                    <option value="3">Terreno</option>
-                                    <option value="4">Especial</option>
+                                    <option value="residencial">Residencial</option>
+                                    <option value="comercial">Comercial</option>
+                                    <option value="terreno">Terreno</option>
+                                    <option value="especial">Especial</option>
                                 </select>
                             </div>
                             <div class="item-filtro">
                                 <label>Finalidade</label>
-                                <select class="input-default input-header" name="" id="">
+                                <select class="input-default input-header" data-tipo="modalidade">
                                     <option value="" selected>Nenhum</option>
-                                    <option value="1">Comprar</option>
-                                    <option value="2">Venda</option>
-                                    <option value="2">Aluguel</option>
+                                    <option value="comprar">Comprar</option>
+                                    <option value="venda">Venda</option>
+                                    <option value="aluguel">Aluguel</option>
                                 </select>
                             </div>
                         </div>
@@ -95,11 +85,11 @@
                                 <div class="item-duplo-filtro">
                                     <div class="item-input">
                                         <span>De</span>
-                                        <input class="input-default" type="text" placeholder="R$0,00">
+                                        <input class="input-default input-filtro" type="text" data-tipo="preco_min" placeholder="R$0,00">
                                     </div>
                                     <div class="item-input">
                                         <span>Até</span>
-                                        <input class="input-default" type="text" placeholder="R$0,00">
+                                        <input class="input-default input-filtro" type="text" data-tipo="preco_max" placeholder="R$0,00">
                                     </div>
                                 </div>
                             </div>
@@ -108,11 +98,11 @@
                                 <div class="item-duplo-filtro">
                                     <div class="item-input">
                                         <span>De</span>
-                                        <input class="input-default" type="text" placeholder="00.00">
+                                        <input class="input-default input-filtro" data-tipo="area_min" type="text" placeholder="00.00">
                                     </div>
                                     <div class="item-input">
                                         <span>Até</span>
-                                        <input class="input-default" type="text" placeholder="00.00">
+                                        <input class="input-default input-filtro" data-tipo="area_max" type="text" placeholder="00.00">
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +115,7 @@
                                 <div class="item-duplo-filtro">
                                     <div class="item-checkbox">
                                         <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                            <input type="checkbox" name="" id="">
+                                            <input value="<?= $i ?>" type="checkbox" data-tipo="quarto">
                                             <span><?= ($i == 5) ? "+" . $i : $i ?></span>
                                         <?php endfor; ?>
                                     </div>
@@ -136,7 +126,7 @@
                                 <div class="item-duplo-filtro">
                                     <div class="item-checkbox">
                                         <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                            <input type="checkbox" name="" id="">
+                                            <input value="<?= $i ?>" type="checkbox" data-tipo="banheiro">
                                             <span><?= ($i == 5) ? "+" . $i : $i ?></span>
                                         <?php endfor; ?>
                                     </div>
@@ -147,7 +137,7 @@
                                 <div class="item-duplo-filtro">
                                     <div class="item-checkbox">
                                         <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                            <input type="checkbox" name="" id="">
+                                            <input value="<?= $i ?>" type="checkbox" data-tipo="garagem">
                                             <span><?= ($i == 5) ? "+" . $i : $i ?></span>
                                         <?php endfor; ?>
                                     </div>
@@ -191,7 +181,9 @@
     <!--Footer-->
     <?php require_once COMPONENTS_PATH . '/footer.php'; ?>
 
+
     <script type="module" src=<?= SCRIPT_URL . "/service/catalog.js" ?>></script>
+    <script type="module" src=<?= SCRIPT_URL . "/page/catalog.js" ?>></script>
     <script src=<?= SCRIPT_URL . "/page/components/navbar.js" ?>></script>
 
 </body>

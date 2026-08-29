@@ -126,6 +126,11 @@
     padding: 10px 15px;
 }
 
+.container-filtro > div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .grupo-filtro{
     flex:1 1 250px;
     display:flex;
@@ -144,7 +149,6 @@
 /*Filtros Ativos*/
 .filtro-tags {
     width: 100%;
-    height: auto;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -179,6 +183,11 @@
     text-overflow: ellipsis;
 }
 
+.tag button{
+    background: none;
+    border: none;
+}
+
 .tag i {
     display: inline-flex;
     justify-content: center;
@@ -204,8 +213,9 @@
     font-weight: 400;
     font-size: 13px;
     text-decoration: underline;
-    text-align: end;
-    cursor: pointer;
+    width: 90px;
+    background: none;
+    border: none;
 }
 
 .tag-more {

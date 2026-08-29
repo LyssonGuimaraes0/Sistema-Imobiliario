@@ -9,7 +9,6 @@ import {
 import { filterToInputs } from "../utils/filter.js";
 import { filterToSelectOption } from "../utils/filter.js";
 
-
 const ulCatalogo = document.querySelector('.container-botoes-paginacao');
 const totalImoveisTexto = document.querySelector('.option-text-catalog');
 
@@ -42,7 +41,6 @@ let dadosImovel
 
 //Carregar cards
 let response = await request(`${urlBase}/api/imoveis/?` + params.toString());
-
 
 dadosImovel = response.data.data;
 

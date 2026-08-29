@@ -25,20 +25,40 @@ class ImoveisModels
             LEFT JOIN comodos AS c ON i.id = c.fk_imovel
             LEFT JOIN valor AS v ON i.id = v.fk_imovel
             LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
-            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id ";
+            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
+            LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id";
 
+        $filtros = [
+            'tipo_imovel'   => ['coluna' => 'ti.tipo_imovel',   'operador' => '='],
+            'tipo_destaque' => ['coluna' => 'td.tipo_destaque', 'operador' => '='],
+            'bairro'        => ['coluna' => 'e.bairro',         'operador' => '='],
+            'tipo_negocio'  => ['coluna' => 'v.modalidade',     'operador' => '='],
+            'banheiro'      => ['coluna' => 'c.banheiro',       'operador' => '='],
+            'garagem'       => ['coluna' => 'c.garagem',        'operador' => '='],
+            'quarto'        => ['coluna' => 'c.quarto',         'operador' => '='],
+
+            'preco_min'     => ['coluna' => 'v.preco',          'operador' => '>='],
+            'preco_max'     => ['coluna' => 'v.preco',          'operador' => '<='],
+            'area_min'      => ['coluna' => 'i.area_total',     'operador' => '>='],
+            'area_max'      => ['coluna' => 'i.area_total',     'operador' => '<='],
+        ];
 
         if (isset($query) && !empty($query)) {
-            $contador = 1;
-            $sql .= " WHERE ";
-            foreach (array_keys($query) as $indice) {
-                if (count($query) > $contador) {
-                    $sql .= "{$indice} = '$query[$indice]' AND ";
-                } else {
-                    $sql .= "{$indice} = '$query[$indice]'";
+            $where = [];
+
+            foreach ($query as $indice => $valor) {
+
+                if (!isset($filtros[$indice])) {
+                    continue;
                 }
 
-                $contador++;
+                $filtro = $filtros[$indice];
+
+                $where[] = "{$filtro['coluna']} {$filtro['operador']} '{$valor}'";
+            }
+
+            if (!empty($where)) {
+                $sql .= " WHERE " . implode(' AND ', $where);
             }
         }
 
@@ -75,20 +95,40 @@ class ImoveisModels
                 LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
                 LEFT JOIN arquivos AS a ON i.fk_foto_destaque = a.id";
 
+        $filtros = [
+            'tipo_imovel'   => ['coluna' => 'ti.tipo_imovel',   'operador' => '='],
+            'tipo_destaque' => ['coluna' => 'td.tipo_destaque', 'operador' => '='],
+            'bairro'        => ['coluna' => 'e.bairro',         'operador' => '='],
+            'tipo_negocio'  => ['coluna' => 'v.modalidade',     'operador' => '='],
+            'banheiro'      => ['coluna' => 'c.banheiro',       'operador' => '='],
+            'garagem'       => ['coluna' => 'c.garagem',        'operador' => '='],
+            'quarto'        => ['coluna' => 'c.quarto',         'operador' => '='],
+
+            'preco_min'     => ['coluna' => 'v.preco',          'operador' => '>='],
+            'preco_max'     => ['coluna' => 'v.preco',          'operador' => '<='],
+            'area_min'      => ['coluna' => 'i.area_total',     'operador' => '>='],
+            'area_max'      => ['coluna' => 'i.area_total',     'operador' => '<='],
+        ];
+
+
         if (isset($query) && !empty($query)) {
-            $contador = 1;
-            $sql .= " WHERE ";
-            foreach (array_keys($query) as $indice) {
-                if (count($query) > $contador) {
-                    $sql .= "{$indice} = '$query[$indice]' AND ";
-                } else {
-                    $sql .= "{$indice} = '$query[$indice]'";
+            $where = [];
+
+            foreach ($query as $indice => $valor) {
+
+                if (!isset($filtros[$indice])) {
+                    continue;
                 }
 
-                $contador++;
+                $filtro = $filtros[$indice];
+
+                $where[] = "{$filtro['coluna']} {$filtro['operador']} '{$valor}'";
+            }
+
+            if (!empty($where)) {
+                $sql .= " WHERE " . implode(' AND ', $where);
             }
         }
-
 
         $sql .= " LIMIT {$limit} offset {$offset}";
 
@@ -154,10 +194,10 @@ class ImoveisModels
         $stmt->execute();
 
         return array_column(
-        $stmt->fetchAll(PDO::FETCH_ASSOC),
-        'arquivo',
-        'ordem'
-    );
+            $stmt->fetchAll(PDO::FETCH_ASSOC),
+            'arquivo',
+            'ordem'
+        );
     }
 
     //====================Buscar Nomes de endereços de Imoveis =================================
