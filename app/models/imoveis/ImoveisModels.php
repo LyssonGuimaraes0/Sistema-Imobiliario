@@ -10,25 +10,11 @@ class ImoveisModels
 {
 
     private $conn;
+    private $filtros;
 
     public function __construct()
     {
-        $this->conn = Database::connect();
-    }
-
-    //====================Buscar Total de Imoveis Com Filtros=================================
-    public function getTotalImoveis($query = [])
-    {
-
-        $sql = "SELECT COUNT(*) AS total_imoveis 
-            FROM imovel AS i
-            LEFT JOIN comodos AS c ON i.id = c.fk_imovel
-            LEFT JOIN valor AS v ON i.id = v.fk_imovel
-            LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
-            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
-            LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id";
-
-        $filtros = [
+        $this->filtros = [
             'tipo_imovel'   => ['coluna' => 'ti.tipo_imovel',   'operador' => '='],
             'tipo_destaque' => ['coluna' => 'td.tipo_destaque', 'operador' => '='],
             'bairro'        => ['coluna' => 'e.bairro',         'operador' => '='],
@@ -43,27 +29,52 @@ class ImoveisModels
             'area_max'      => ['coluna' => 'i.area_total',     'operador' => '<='],
         ];
 
-        if (isset($query) && !empty($query)) {
-            $where = [];
+        $this->conn = Database::connect();
+    }
 
-            foreach ($query as $indice => $valor) {
+    //Aplica filtros
+    private function aplicarFiltros(array $query, array &$where, array &$params): void
+    {
+        foreach ($query as $indice => $valor) {
 
-                if (!isset($filtros[$indice])) {
-                    continue;
-                }
-
-                $filtro = $filtros[$indice];
-
-                $where[] = "{$filtro['coluna']} {$filtro['operador']} '{$valor}'";
+            if (!isset($this->filtros[$indice])) {
+                continue;
             }
 
-            if (!empty($where)) {
-                $sql .= " WHERE " . implode(' AND ', $where);
-            }
+            $filtro = $this->filtros[$indice];
+            $parametro = ":{$indice}";
+
+            $where[] = "{$filtro['coluna']} {$filtro['operador']} {$parametro}";
+            $params[$parametro] = $valor;
+        }
+    }
+
+    //====================Buscar Total de Imoveis Com Filtros=================================
+    public function getTotalImoveis($query = [])
+    {
+        $sql = "SELECT COUNT(*) AS total_imoveis 
+            FROM imovel AS i
+            LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+            LEFT JOIN valor AS v ON i.id = v.fk_imovel
+            LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
+            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
+            LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id";
+
+        $where = [];
+        $params = [];
+
+        $this->aplicarFiltros($query, $where, $params);
+
+        if (!empty($where)) {
+            $sql .= " WHERE " . implode(' AND ', $where);
         }
 
-
         $stmt = $this->conn->prepare($sql);
+
+        foreach ($params as $parametro => $valor) {
+            $stmt->bindValue($parametro, $valor);
+        }
+
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -73,111 +84,95 @@ class ImoveisModels
 
     public function getImoveis($offset, $query, $limit)
     {
-
-        //Preparação do SQL
-
         $sql = "SELECT i.id, 
-                i.nome_imovel,
-                i.area_total,
-                c.quarto,
-                c.banheiro,
-                c.sala_de_estar,
-                e.bairro,
-                v.preco,
-                v.condominio,
-                a.caminho_arquivo,
-                a.nome_arquivo
-                FROM imovel AS i
-                LEFT JOIN comodos AS c ON i.id = c.fk_imovel
-                LEFT JOIN valor AS v ON i.id = v.fk_imovel
-                LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
-                LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id
-                LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
-                LEFT JOIN arquivos AS a ON i.fk_foto_destaque = a.id";
+            i.nome_imovel,
+            i.area_total,
+            c.quarto,
+            c.banheiro,
+            c.sala_de_estar,
+            e.bairro,
+            v.preco,
+            v.condominio,
+            a.caminho_arquivo,
+            a.nome_arquivo
+            FROM imovel AS i
+            LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+            LEFT JOIN valor AS v ON i.id = v.fk_imovel
+            LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
+            LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id
+            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id 
+            LEFT JOIN arquivos AS a ON i.fk_foto_destaque = a.id";
 
-        $filtros = [
-            'tipo_imovel'   => ['coluna' => 'ti.tipo_imovel',   'operador' => '='],
-            'tipo_destaque' => ['coluna' => 'td.tipo_destaque', 'operador' => '='],
-            'bairro'        => ['coluna' => 'e.bairro',         'operador' => '='],
-            'tipo_negocio'  => ['coluna' => 'v.modalidade',     'operador' => '='],
-            'banheiro'      => ['coluna' => 'c.banheiro',       'operador' => '='],
-            'garagem'       => ['coluna' => 'c.garagem',        'operador' => '='],
-            'quarto'        => ['coluna' => 'c.quarto',         'operador' => '='],
+        $where = [];
+        $params = [];
 
-            'preco_min'     => ['coluna' => 'v.preco',          'operador' => '>='],
-            'preco_max'     => ['coluna' => 'v.preco',          'operador' => '<='],
-            'area_min'      => ['coluna' => 'i.area_total',     'operador' => '>='],
-            'area_max'      => ['coluna' => 'i.area_total',     'operador' => '<='],
-        ];
+        $this->aplicarFiltros($query, $where, $params);
 
-
-        if (isset($query) && !empty($query)) {
-            $where = [];
-
-            foreach ($query as $indice => $valor) {
-
-                if (!isset($filtros[$indice])) {
-                    continue;
-                }
-
-                $filtro = $filtros[$indice];
-
-                $where[] = "{$filtro['coluna']} {$filtro['operador']} '{$valor}'";
-            }
-
-            if (!empty($where)) {
-                $sql .= " WHERE " . implode(' AND ', $where);
-            }
+        if (!empty($where)) {
+            $sql .= " WHERE " . implode(' AND ', $where);
         }
 
-        $sql .= " LIMIT {$limit} offset {$offset}";
+        $sql .= " LIMIT {$limit} OFFSET {$offset}";
 
         $stmt = $this->conn->prepare($sql);
+
+        foreach ($params as $parametro => $valor) {
+            $stmt->bindValue($parametro, $valor);
+        }
+
         $stmt->execute();
 
-        $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $dados;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //====================Buscar Dados basicos de Imoveis Por ID=================================
-    public function getImoveisById(int $id)
-    {
-        $sql = "SELECT i.nome_imovel,
-        i.area_total,
-        i.area_util,
-        i.descricao,
-        e.estado,
-        e.municipio,
-        e.bairro,
-        e.CEP,
-        e.rua,
-        e.numero,
-        v.preco,
-        v.condominio,
-        v.modalidade,
-        c.quarto,
-        c.banheiro,
-        c.sala_de_estar,
-        c.suite,
-        c.garagem,
-        c.cozinha,
-        ti.tipo
-        FROM imovel AS i 
-        LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id
-        LEFT JOIN comodos AS c ON i.id = c.fk_imovel
-        LEFT JOIN valor AS v ON i.id = v.fk_imovel
-        LEFT JOIN arquivos AS a ON i.id = a.fk_imovel
-        LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id 
-        WHERE i.id = :id";
+    public function getImoveisById(int $id, array $query = [])
+{
+    $sql = "SELECT i.nome_imovel,
+            i.area_total,
+            i.area_util,
+            i.descricao,
+            e.estado,
+            e.municipio,
+            e.bairro,
+            e.CEP,
+            e.rua,
+            e.numero,
+            v.preco,
+            v.condominio,
+            v.modalidade,
+            c.quarto,
+            c.banheiro,
+            c.sala_de_estar,
+            c.suite,
+            c.garagem,
+            c.cozinha,
+            ti.tipo_imovel
+            FROM imovel AS i 
+            LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id
+            LEFT JOIN comodos AS c ON i.id = c.fk_imovel
+            LEFT JOIN valor AS v ON i.id = v.fk_imovel
+            LEFT JOIN arquivos AS a ON i.id = a.fk_imovel
+            LEFT JOIN tipo_imovel AS ti ON i.fk_tipo_imovel = ti.id
+            LEFT JOIN tipo_destaque AS td ON i.fk_tipo_destaque = td.id";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+    $where = ['i.id = :id'];
+    $params = [':id' => $id];
 
-        return $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+    $this->aplicarFiltros($query, $where, $params);
+
+    $sql .= " WHERE " . implode(' AND ', $where);
+
+    $stmt = $this->conn->prepare($sql);
+
+    foreach ($params as $parametro => $valor) {
+        $stmt->bindValue($parametro, $valor);
     }
 
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
     //====================Buscar Imagens do Imoveis Por ID=================================
     public function getImagesByImovel(int $id): array
     {
