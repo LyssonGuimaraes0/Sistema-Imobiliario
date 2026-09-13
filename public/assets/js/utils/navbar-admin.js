@@ -47,8 +47,7 @@ export function logout() {
                 throw new Error(response?.error);
             }
 
-            window.location.href =
-                "/trabalhos/imobiliaria/admin/login";
+            window.location.href = `${urlBase}/admin/login`;
 
         } catch (error) {
             console.error(error);
