@@ -2,6 +2,7 @@
 .card {
     width: 100%;      /* ou 400px */
     max-width: 390px;
+    flex: 0 0 390px;
     background-color: var(--cor-primaria);
     display: flex;
     flex-direction: column;
