@@ -5,9 +5,18 @@ import {
     GerarPaginacao
 } from "../utils/card.js";
 
+import {
+    filterToSelectOption,
+    filterToInputs
+} from "../utils/filter.js";
+
 let response
 let dadosImovel
 const params = new URLSearchParams(window.location.search);
+
+//Selecionar Inputs de search
+const inputSearh = document.querySelector('[search]');
+const dropdown = document.querySelector('.dropdown-input-element');
 
 //Criação de Cards carrosel
 
@@ -29,12 +38,40 @@ try {
     response = await request(`${urlBase}/api/imoveis/?` + queryParams);
 
     dadosImovel = response.data.data;
+    const listAddress = response.data.address_to_list;
 
     await carregarImoveis(template, containerCarrossel, paginaAtual, dadosImovel);
 
+    filterToSelectOption(inputSearh, dropdown, listAddress)
 } catch (error) {
     console.log(error)
 }
+
+/* ==========================Evento de clique em dropdown===================================== */
+dropdown.addEventListener('click', (event) => {
+
+    const option = event.target.closest('.dropdown-option');
+
+    if (!option) return;
+
+    inputSearh.value = option.textContent
+        .replace(/\s+/g, ' ')
+        .trim();
+
+});
+
+
+//Botão de Busca
+const btnSearch = document.querySelector('.btn-search');
+
+btnSearch.addEventListener('click', (e) => {
+    const inputs = document.querySelectorAll('[data-filter]');
+    let queryFilter = filterToInputs(inputs);
+
+    window.location.href = `${urlBase}/catalog?` + queryFilter;
+
+})
+
 
 //Verifica Botões de movimenta carrosel
 

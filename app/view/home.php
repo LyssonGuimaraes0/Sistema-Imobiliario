@@ -40,29 +40,31 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                                 <input class="search-input"
                                     type="search"
-                                    placeholder="Busque por Localidade ou Tipo de Imovel ">
+                                    placeholder="Busque por Localidade ou Tipo de Imovel" data-filter="bairro" search>
+                                <div class="dropdown-input-element">
+                                </div>
                             </div>
                         </div>
 
                         <div class="item-banner-filter">
                             <label>Categoria</label>
-                            <select class="input-default input-header" name="tipo" id="" data-filter="fk_tipo_destaque">
+                            <select class="input-default input-header"  data-filter="tipo_destaque">
                                 <option value="" selected hidden>Selecione</option>
-                                <option value="1">Nenhum</option>
-                                <option value="2">Destaque</option>
-                                <option value="3">Lançamento</option>
+                                <option value="">Nenhum</option>
+                                <option value="destaque">Destaque</option>
+                                <option value="lancamento">Lançamento</option>
                             </select>
                         </div>
 
                         <div class="item-banner-filter">
                             <label>Tipo do Imovel</label>
-                            <select class="input-default input-header" name="tipo" id="" data-filter="fk_tipo_imovel">
+                            <select class="input-default input-header" data-filter="tipo_imovel">
                                 <option value="" selected hidden>Selecione</option>
                                 <option value="">Nenhum</option>
-                                <option value="1">Residencial</option>
-                                <option value="2">Comercial</option>
-                                <option value="3">Terreno</option>
-                                <option value="4">Especial</option>
+                                <option value="residencial">Residencial</option>
+                                <option value="comercial">Comercial</option>
+                                <option value="terreno">Terreno</option>
+                                <option value="especial">Especial</option>
                             </select>
                         </div>
 
