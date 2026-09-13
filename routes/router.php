@@ -11,6 +11,9 @@ $router = [
         '/catalog' => web('CatalogController', 'index'),
         '/catalog/{id}' => web('CatalogController', 'show'),
 
+        //Página de Imovel
+        '/imoveis/{id}' => web('ImoveisController', 'index'),
+
         //Sessão de Login
         '/admin/login' => web('LoginController','index'),
 

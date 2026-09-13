@@ -279,7 +279,7 @@
 
 .container-imagens-imovel {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 100%;
 }
@@ -295,16 +295,17 @@
 
 /* Lista */
 .container-imagem-segundaria {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
     height: 600px;
-    overflow-y: auto;
 }
 
 .item-imagem {
-    flex: 0 0 300px;
-    height: 300px;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
     border: 2px solid var(--cor-cinza-claro);
     border-radius: 4px;
 }
