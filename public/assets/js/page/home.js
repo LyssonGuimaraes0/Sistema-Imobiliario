@@ -136,3 +136,18 @@ function updateDots() {
     dots[paginaAtual].classList.add('active');
 
 }
+
+//Acesso a card
+containerCarrossel.addEventListener('click', (e) => {
+
+    const btn = e.target;
+
+    const container = btn.closest('[data-card]');
+
+    if (!container) return;
+
+    const id = container.dataset.card;
+    
+    window.location.href = `${urlBase}/imoveis/${id}`
+
+});

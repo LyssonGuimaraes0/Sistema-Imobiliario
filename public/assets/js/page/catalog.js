@@ -275,3 +275,18 @@ containerFiltro.addEventListener('input', (e) => {
 
     }, 500);
 });
+
+//Acesso a card
+containerCatalog.addEventListener('click', (e) => {
+
+    const btn = e.target;
+
+    const container = btn.closest('[data-card]');
+
+    if (!container) return;
+
+    const id = container.dataset.card;
+    
+    window.location.href = `${urlBase}/imoveis/${id}`
+
+});
