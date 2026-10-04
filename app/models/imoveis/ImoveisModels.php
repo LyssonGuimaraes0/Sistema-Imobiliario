@@ -147,7 +147,8 @@ class ImoveisModels
             c.suite,
             c.garagem,
             c.cozinha,
-            ti.tipo_imovel
+            ti.tipo_imovel,
+            td.tipo_destaque AS destaque
             FROM imovel AS i 
             LEFT JOIN endereco_imovel AS e ON i.fk_endereco = e.id
             LEFT JOIN comodos AS c ON i.id = c.fk_imovel

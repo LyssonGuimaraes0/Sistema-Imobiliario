@@ -14,7 +14,7 @@
 @import './login.css';
 @import './dashboard.css';
 @import './imovelAdmin.css';
-@import './imoveis.css';
+@import './imovel.css';
 
 
 /*Configurações Root*/
@@ -126,6 +126,7 @@ textarea {
 .btn-blue {
     color: var(--cor-primaria);
     background-color: var(--cor-secundaria);
+    border: none;
 }
 
 .btn-blue:hover {

@@ -30,6 +30,16 @@ class ImoveisController extends ApiController
         $capa = $imagens[0];
         unset($imagens[0]);
 
-        require_once VIEW_PATH . "/imovel.php";
+        //Separa Atributos de Imoveis
+        $componentes = [
+            'Quarto' => $imovel['quarto'],
+            'Banheiro' => $imovel['banheiro'],
+            'Sala de estar' => $imovel['sala_de_estar'],
+            'Cozinha' => $imovel['cozinha'],
+            'Suite' => $imovel['suite'],
+            'Garagem' => $imovel['garagem'],
+        ];
+
+        require_once VIEW_PATH . "/imovel/imovel.php";
     }
 }

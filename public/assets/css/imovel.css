@@ -1,0 +1,340 @@
+.container-head-imovel {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 30px;
+}
+
+.container-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.title-imovel {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333333;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.location-imovel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #4a4a4a;
+    margin-bottom: 14px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+    max-width: 600px;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1252df;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.icon-blue {
+    width: 20px;
+    height: 20px;
+    fill: #1252df;
+    flex-shrink: 0;
+}
+
+
+/*Side card*/
+
+/* Tag semântica aside para o card lateral */
+.sidebar-card {
+    width: 100%;
+    max-width: 360px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.tag-lancamento {
+    display: inline-block;
+    color: var(--cor-secundaria);
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.card-subtitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cor-secundaria);
+    margin-bottom: 16px;
+}
+
+.cod-text {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.label-price {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.main-price {
+    font-size: 26px;
+    font-weight: 800;
+    color: #16a34a;
+    margin-bottom: 16px;
+}
+
+/* Bloco de Estimativa (Entrada / Parcela) */
+.estimation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background-color: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.estimation-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.estimation-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.estimation-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #16a34a;
+}
+
+/* Tabela de Custos (IPTU, Condomínio...) */
+.cost-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    color: #475569;
+}
+
+.cost-value {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Lista de Vantagens (FGTS / Financiamento) */
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cor-secundaria);
+}
+
+.feature-item svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--cor-secundaria);
+    stroke-width: 2.5;
+    fill: none;
+}
+
+/* Botões de Ação */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-sidebar-imovel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-outline {
+    background-color: #ffffff;
+    color: var(--cor-secundaria);
+    border: 1px solid var(--cor-secundaria);
+}
+
+.btn-outline:hover {
+    background-color: #eff6ff;
+}
+
+/*tab button*/
+
+.container-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-button {
+    padding: 10px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid color-mix(in srgb, white 80%, var(--cor-secundaria) 20%);
+    color: color-mix(in srgb, white 70%, var(--cor-secundaria) 20%);
+    font-size: 18px;
+}
+
+.tab-button.active {
+    font-weight: 600;
+    color: var(--cor-secundaria);
+    border-bottom: 2px solid var(--cor-secundaria);
+}
+
+/* Seção de Localização com Mapa */
+.location-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.location-section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.map-card-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background-color: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    min-height: 220px;
+}
+
+.map-info-side {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+}
+
+.map-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.map-address svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #1e3a8a;
+    stroke-width: 2;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.map-address-text {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1e3a8a;
+    line-height: 1.3;
+}
+
+.map-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #1e3a8a;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    margin-top: 16px;
+}
+
+.map-link-btn:hover {
+    opacity: 0.8;
+}
+
+.map-link-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: #1e3a8a;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+.map-preview {
+    flex: 1;
+    min-height: 220px;
+    position: relative;
+}
+
+.map-preview iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    border: none;
+}
